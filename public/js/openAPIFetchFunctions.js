@@ -80,7 +80,7 @@ async function test(e) {
   let pointsOfInterest = await fetchPointsOfInterestWithinXMetersOfLatLon(latitude, longitude, 2000);
 
   console.log(pointsOfInterest);
-  let pointOfInterestXID = pointsOfInterest[1].xid;
+  let pointOfInterestXID = pointsOfInterest[21].xid;
   console.log(pointOfInterestXID)
   pointOfInterestDetails = await fetchPointOfInterestDetails(pointOfInterestXID);
   console.log(pointOfInterestDetails)
