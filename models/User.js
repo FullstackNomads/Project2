@@ -16,7 +16,11 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    first_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    last_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -35,6 +39,33 @@ User.init(
         len: [8],
       },
     },
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    city_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    country_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    latitude: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    longitude: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    // interests: {
+    //   type: DataTypes.STRING,
+    //   references: {
+    //     model: 'interest',
+    //     key: 'id',
+    //   }
+    // },
   },
   {
     hooks: {
