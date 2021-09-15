@@ -1,17 +1,68 @@
 [
   {
-    "name": "Sal",
-    "email": "sal@hotmail.com",
-    "password": "password12345"
+    "first_name": "David",
+    "last_name": "Rosenkrantz",
+    "email": "dave@hotmail.com",
+    "password": "password12345",
+    "gender": "male",
+    "city_name": "New York",
+    "country_name": "United States of America",
+    "latitude": 42.65258,
+    "longitude": -73.75623
   },
   {
-    "name": "Lernantino",
-    "email": "lernantino@gmail.com",
-    "password": "password12345"
+    "first_name": "Taylor",
+    "last_name": "Davies",
+    "email": "taylor@gmail.com",
+    "password": "password12345",
+    "gender": "female",
+    "city_name": "London",
+    "country_name": "United Kingdom",
+    "latitude": 51.50853,
+    "longitude": -0.12574
   },
   {
-    "name": "Amiko",
-    "email": "amiko2k20@aol.com",
-    "password": "password12345"
+    "first_name": "Shannon",
+    "last_name": "McGee",
+    "email": "4leafclover@hotmail.com",
+    "password": "password12345",
+    "gender": "female",
+    "city_name": "Dublin",
+    "country_name": "Ireland",
+    "latitude": 53.33306,
+    "longitude": -6.24889
+  },
+  {
+    "first_name": "Ishaan",
+    "last_name": "Acharya",
+    "email": "Ishaan@hotmail.com",
+    "password": "password12345",
+    "gender": "male",
+    "city_name": "New Delhi",
+    "country_name": "India",
+    "latitude": 28.63576,
+    "longitude": 77.22445
+  },
+  {
+    "first_name": "Song",
+    "last_name": "Qingling",
+    "email": "song@hotmail.com",
+    "password": "password12345",
+    "gender": "female",
+    "city_name": "Beijing",
+    "country_name": "China",
+    "latitude": 39.9075,
+    "longitude": 116.39723
+  },
+  {
+    "first_name": "Anatoly",
+    "last_name": "Petrov",
+    "email": "anatoly@hotmail.com",
+    "password": "password12345",
+    "gender": "male",
+    "city_name": "Moscow",
+    "country_name": "Russia",
+    "latitude": 39.9075,
+    "longitude": 116.39723
   }
 ]

@@ -3,6 +3,14 @@ module.exports = {
     // Format date as MM/DD/YYYY
     return date.toLocaleDateString();
   },
+  format_date_time: (date) => {
+    // Format date as mmmm dd, yyyy hh:mm {am/pm}
+    let EventDate = new Date(date);
+    return `${new Intl.DateTimeFormat(`en-US`, { month: 'long' }).format(testDate)} ${EventDate.getDate()}, ${EventDate.getFullYear()} ${EventDate.toLocaleTimeString(`en-US`, {
+      hour: '2-digit',
+      minute: '2-digit'
+    })}`
+  },
   format_amount: (amount) => {
     // format large numbers with commas
     return parseInt(amount).toLocaleString();
