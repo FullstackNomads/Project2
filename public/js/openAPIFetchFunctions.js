@@ -23,6 +23,19 @@ async function fetchDataForPlace(place) {
   }
 }
 
+async function fetchCoordForPlace(place) {
+  try {
+    let placeDataURL = `https://api.opentripmap.com/0.1/en/places/geoname?name=${place}&apikey=5ae2e3f221c38a28845f05b67a2c973ea4a2466e011768b41a6fa08b`
+    let placeData = await fetchDataFromAPI(placeDataURL);
+    return {
+      lat: placeData.lat,
+      lon: placeData.lon
+    };
+  } catch (err) {
+    return err;
+  }
+}
+
 async function fetchPointsOfInterestWithinXMetersOfLatLon(lat, lon, meters) {
   try {
     let radiusURL = `https://api.opentripmap.com/0.1/en/places/radius?radius=${meters}&lon=${lon}&lat=${lat}&apikey=5ae2e3f221c38a28845f05b67a2c973ea4a2466e011768b41a6fa08b`
@@ -77,14 +90,48 @@ async function test(e) {
   let longitude = placeData.lon;
   console.log(`LATITUDE: ${latitude}\n\nLONGITUDE: ${longitude}`);
 
-  let pointsOfInterest = await fetchPointsOfInterestWithinXMetersOfLatLon(latitude, longitude, 2000);
+  let pointsOfInterest = await fetchPointsOfInterestWithinXMetersOfLatLon(latitude, longitude, 10000);
 
   console.log(pointsOfInterest);
-  let pointOfInterestXID = pointsOfInterest[21].xid;
+  let pointOfInterestXID = pointsOfInterest[117].xid;
   console.log(pointOfInterestXID)
   pointOfInterestDetails = await fetchPointOfInterestDetails(pointOfInterestXID);
   console.log(pointOfInterestDetails)
 
 }
 
-// test(`rockford`)
+async function searchForPointsOfInterestByCityAndTerm(city, radius, searchTerm, numberOfResults) {
+  let { lat, lon } = await fetchCoordForPlace(city)
+  let url = `https://api.opentripmap.com/0.1/en/places/autosuggest?name=${searchTerm}&radius=${radius}&lon=${lon}&lat=${lat}&limit=${numberOfResults}&apikey=5ae2e3f221c38a28845f05b67a2c973ea4a2466e011768b41a6fa08b`
+  return await fetch(url)
+    .then((results) => results.json())
+    .then((JSONResults) => JSONResults)
+    .then((results) => results.features)
+    .then((features) => {
+      let featuresArray = [];
+      features.forEach((feature) => {
+        featuresArray.push({
+          name: feature.properties.name,
+          xid: feature.properties.xid
+        })
+      })
+      return featuresArray;
+    })
+};
+
+
+searchForPointsOfInterestByCityAndTerm(`London`, 20000, 'museum', 20)
+  .then((results) => { console.log(results) })
+
+
+
+
+fetchPointOfInterestDetails(`Q27084322`)
+  .then((result) => { console.log(result) })
+
+// fetchPointOfInterestDetails(`R6595252`)
+//   .then((result) => { console.log(result) })
+
+// // console.log(ArmourSquarePark)
+
+// // console.log(results);

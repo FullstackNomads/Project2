@@ -11,7 +11,7 @@ Event.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    event_name: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -21,7 +21,6 @@ Event.init(
     description: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
     city: {
       type: DataTypes.STRING,
@@ -47,6 +46,13 @@ Event.init(
       type: DataTypes.INTEGER,
       references: {
         model: 'interest',
+        key: 'id',
+      },
+    },
+    creator_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'user',
         key: 'id',
       },
     },

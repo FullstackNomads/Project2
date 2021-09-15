@@ -28,6 +28,18 @@ Interest.belongsToMany(User, {
   onDelete: "SET NULL",
 });
 
+Event.belongsTo(Interest, {
+  foreignKey: 'category_id',
+  onUpdate: "CASCADE",
+  onDelete: "CASCADE",
+});
+
+Interest.hasMany(Event, {
+  foreignKey: 'category_id',
+  onUpdate: "CASCADE",
+  onDelete: "CASCADE",
+});
+
 
 
 module.exports = {
