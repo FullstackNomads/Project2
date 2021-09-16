@@ -26,7 +26,7 @@ User.init(
     },
     bio: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      defaultValue: "Coming Soon!"
     },
     age: {
       type: DataTypes.DATEONLY,

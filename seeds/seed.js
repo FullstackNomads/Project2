@@ -1,26 +1,47 @@
 const sequelize = require('../config/connection');
-const { User, Event, Interest } = require('../models');
+const { User, Interest, Event, UserEvent, UserInterest } = require('../models');
 
 const userData = require('./userData.json');
 const interestData = require('./interestData.json');
 const eventData = require('./eventData.json');
+const userEventData = require(`./UserEventData.json`);
+const userInterestData = require(`./userInterestData.json`);
+
+const seedUsers = () => User.bulkCreate(userData, {
+  individualHooks: true,
+  returning: true
+});
+const seedInterests = () => Interest.bulkCreate(interestData);
+const seedEvents = () => Event.bulkCreate(eventData);
+const seedUserEvents = () => UserEvent.bulkCreate(userEventData);
+const seedUserInterests = () => UserInterest.bulkCreate(userInterestData);
+
 
 const seedDatabase = async () => {
-  await sequelize.sync({ force: true });
+  try {
+    await sequelize.sync({ force: true });
+    console.log('\n----- DATABASE SYNCED -----\n');
 
-  const users = await User.bulkCreate(userData, {
-    individualHooks: true,
-    returning: true,
-  });
+    await seedUsers();
+    console.log('\n----- USERS SEEDED -----\n');
 
-  for (const project of projectData) {
-    await Project.create({
-      ...project,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
-    });
+    await seedInterests();
+    console.log('\n----- INTERESTS SEEDED -----\n');
+
+    await seedEvents();
+    console.log('\n----- EVENTS SEEDED -----\n');
+
+    await seedUserEvents();
+    console.log('\n----- USER EVENTS SEEDED -----\n');
+
+    await seedUserInterests();
+    console.log('\n----- USER INTERESTS SEEDED -----\n');
+
+    process.exit(0);
+
+  } catch (err) {
+    console.log(err);
   }
-
-  process.exit(0);
 };
 
 seedDatabase();
