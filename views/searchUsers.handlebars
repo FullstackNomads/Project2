@@ -39,3 +39,25 @@
       <button type="submit" class="btn btn-primary">Search</button>
     </div>
   </form>
+
+
+
+
+  {{#each users as |user| }}
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <a href="/user/{{user.id}}">
+        <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+      </a>
+
+      <h6 class="card-subtitle mb-2 text-muted">{{user.age}}, {{user.gender}}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">{{user.city_name}}, {{user.country_name}} </h6>
+      <p class="card-text">{{user.bio}}
+    </div>
+  </div>
+
+
+
+
+  {{/each}}

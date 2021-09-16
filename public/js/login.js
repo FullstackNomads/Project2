@@ -1,5 +1,7 @@
 const loginFormHandler = async (event) => {
   event.preventDefault();
+  console.log(`loginFormHandler FIRED`);
+
 
   // Collect values from the login form
   const email = document.querySelector('#email-login').value.trim();
@@ -15,7 +17,7 @@ const loginFormHandler = async (event) => {
 
     if (response.ok) {
       // If successful, redirect the browser to the profile page
-      document.location.replace('/profile');
+      // document.location.replace('/profile');
     } else {
       alert(response.statusText);
     }
@@ -24,6 +26,7 @@ const loginFormHandler = async (event) => {
 
 const signupFormHandler = async (event) => {
   event.preventDefault();
+  console.log(`signupFormHandler FIRED`)
 
   const first_name = document.querySelector('#firstName-signup').value.trim();
   const last_name = document.querySelector('#lastName-signup').value.trim();
@@ -48,7 +51,7 @@ const signupFormHandler = async (event) => {
 
   if (first_name && last_name && email && password && age && gender && country && city) {
     const response = await fetch('/createProfile', {
-      method: 'post',
+      method: 'POST',
       body: JSON.stringify({ first_name, last_name, email, password, age, gender, country, city, bio }),
       headers: { 'Content-Type': 'application/json' },
     });

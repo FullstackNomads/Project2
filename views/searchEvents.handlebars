@@ -39,3 +39,21 @@
   </div>
 
 </div>
+
+{{#each events as |event| }}
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <a href="/events/{{event.id}}">
+      <h5 class="card-title">{{event.event_name}}</h5>
+    </a>
+    <h6 class="card-subtitle mb-2 text-muted">{{event.point_of_interest}}</h6>
+    <h6 class="card-subtitle mb-2 text-muted">{{event.date_time}}</h6>
+    <p class="card-text">{{event.description}}
+  </div>
+</div>
+
+
+
+
+{{/each}}

@@ -103,10 +103,39 @@ router.get('/searchEvents', async (req, res) => {
 //   }
 // });
 
+router.get('/createEvent', async (req, res) => {
+  try {
+    res.status(200).render('createEvent');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
+router.get('/searchUsers', async (req, res) => {
+  try {
+    // Get all events and JOIN with user data
+    const userData = await User.findAll({});
+
+    // Serialize data so the template can read it
+    const users = userData.map((user) => user.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render('searchUsers', {
+      users,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 router.get('/createProfile', async (req, res) => {
   console.log(`GET CREATE PROFILE ROUTE SLAPPED`);
   try {
-    res.status(200).render('createProfile');
+    // res.status(200).render('createProfile');
   } catch (err) {
     res.status(500).json(err);
   }
@@ -115,7 +144,7 @@ router.get('/createProfile', async (req, res) => {
 router.post('/createProfile', async (req, res) => {
   console.log(`POST CREATE PROFILE ROUTE SLAPPED`);
   // console.log(req);
-  console.log(req.body);
+  console.log(JSON.parse(req.body));
   try {
     console.log(req.body);
 
