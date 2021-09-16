@@ -41,7 +41,12 @@ Interest.hasMany(Event, {
 });
 
 User.hasMany(Event)
-Event.belongsTo(User, { as: 'creator', constraints: false })
+Event.hasOne(User, {
+  as: 'creator',
+  foreignKey: 'id',
+  sourceKey: 'creator_id',
+  constraints: false
+})
 
 module.exports = {
   User,

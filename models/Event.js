@@ -25,6 +25,7 @@ Event.init(
     },
     date_time: {
       type: DataTypes.DATE,
+      allowNull: false,
     },
     description: {
       type: DataTypes.STRING,
@@ -52,7 +53,7 @@ Event.init(
     },
     state_province: {
       type: DataTypes.STRING,
-      // NOT REQUIRED
+      allowNull: false,
     },
     postal_code: {
       type: DataTypes.INTEGER,
