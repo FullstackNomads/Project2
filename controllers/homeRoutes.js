@@ -28,7 +28,33 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/events', async (req, res) => {
+
+
+
+router.get('/events/:id', async (req, res) => {
+  try {
+    const eventData = await Event.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['first_name', 'last_name'],
+        },
+      ],
+    });
+
+    const event = eventData.get({ plain: true });
+
+    res.render('singleEvent', {
+      ...event,
+      logged_in: req.session.logged_in
+    });
+    console.log('Single event successfully loaded')
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/searchEvents', async (req, res) => {
   try {
     // Get all events and JOIN with user data
     const eventData = await Event.findAll({
@@ -55,28 +81,6 @@ router.get('/events', async (req, res) => {
 });
 
 
-router.get('/event/:id', async (req, res) => {
-  try {
-    const eventData = await Event.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['first_name', 'last_name'],
-        },
-      ],
-    });
-
-    const event = eventData.get({ plain: true });
-
-    res.render('singleEvent', {
-      ...event,
-      logged_in: req.session.logged_in
-    });
-    console.log('Single event successfully loaded')
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 // Use withAuth middleware to prevent access to route
 router.get('/createProfile', withAuth, async (req, res) => {
