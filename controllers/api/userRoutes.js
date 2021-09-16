@@ -11,6 +11,7 @@ router.post('/', async (req, res) => {
 
       res.status(200).json(userData);
     });
+    console.log('New user successfully created');
   } catch (err) {
     res.status(400).json(err);
   }
@@ -39,10 +40,10 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-      
+
       res.json({ user: userData, message: 'You are now logged in!' });
     });
-
+    console.log('User log in attempt successful');
   } catch (err) {
     res.status(400).json(err);
   }
@@ -53,6 +54,7 @@ router.post('/logout', (req, res) => {
     req.session.destroy(() => {
       res.status(204).end();
     });
+    console.log('User log out successful');
   } else {
     res.status(404).end();
   }

@@ -4,67 +4,75 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <svg class="bd-placeholder-img img-thumbnail" width="200" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera: 200x200" preserveAspectRatio="xMidYMid slice" focusable="false"><title>A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">200x200</text></svg>
+      <svg class="bd-placeholder-img img-thumbnail" width="200" height="200" xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera: 200x200"
+        preserveAspectRatio="xMidYMid slice" focusable="false">
+        <title>A generic square placeholder image with a white border around it, making it resemble a photograph taken
+          with an old instant camera</title>
+        <rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6"
+          dy=".3em">200x200</text>
+      </svg>
     </div>
     <div class="col">
-        
-        <div class="row">
-            <div class="col">
-            Name:  {{first.name}}  {{last.name}}
-            </div>
+
+      <div class="row">
+        <div class="col">
+          Name: {{first_name}} {{last_name}}
         </div>
-        <div class="row">
-            <div class="col">
-            Age: {{age}}
-            </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Age: {{age}}
         </div>
-        <div class="row">
-            <div class="col">
-            Place of origin: {{city}} {{country}}
-            </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Place of origin: {{city_name}} {{country_name}}
         </div>
-        <div class="row">
-            <div class="col">
-            Interest: {{interest}}
-            </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Interest: {{interest}}
         </div>
-        <div class="row">
-            <div class="col">
-            Bio: {{bio}}
-            </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Bio: {{bio}}
         </div>
-     
+      </div>
+
     </div>
   </div>
 
-{{!-- this is just for an example, will be removed --}}
-<div class="row col-9 m-auto mb-4 project">
-  <div class="col-md-5">
-    <h3>
-      <a href="/event/{{event.id}}">Event name</a>
-    </h3>
+  {{!-- this is just for an example, will be removed --}}
+  <div class="row col-9 m-auto mb-4 project">
+    <div class="col-md-5">
+      <h3>
+        <a href="/event/{{event.id}}">Event name</a>
+      </h3>
+    </div>
+    <div class="col-md-7">
+      <p>
+        bioooo{{event.description}}
+      </p>
+    </div>
   </div>
-  <div class="col-md-7">
-    <p>
-      bioooo{{event.description}}
-    </p>
-  </div>
-</div>
 
 
-<!-- Loop over each object in the events array -->
-{{#each events as |event| }}
-<div class="row mb-4 project">
-  <div class="col-md-5">
-    <h2>
-      <a href="/event/{{event.id}}">{{event.name}}</a>
-    </h2>
+  <!-- Loop over each object in the events array -->
+  {{#each events as |event| }}
+  <div class="row mb-4 project">
+    <div class="col-md-5">
+      <h2>
+        <a href="/event/{{event.id}}">{{event.name}}</a>
+      </h2>
+    </div>
+    <div class="col-md-7">
+      <p>
+        {{event.description}}
+      </p>
+    </div>
   </div>
-  <div class="col-md-7">
-    <p>
-      {{event.description}}
-    </p>
-  </div>
-</div>
-{{/each}}
+  {{/each}}
 </div>

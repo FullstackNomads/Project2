@@ -40,6 +40,8 @@ Interest.hasMany(Event, {
   onDelete: "CASCADE",
 });
 
+User.hasMany(Event)
+Event.belongsTo(User, { as: 'creator', constraints: false })
 
 
 module.exports = {
