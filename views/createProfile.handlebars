@@ -8,14 +8,22 @@
 <div class="row mt-4">
   <div class="col-md-6">
 
-    <form>
-      <div class="mb-3">
-        <label for="first-name" class="form-label">First name</label>
-        <input class="form-control" id="first-name">
+    <form class="signup-form">
+      <div class="form-group">
+        <label for="name-signup">First Name:</label>
+        <input class="form-input" type="text" id="firstName-signup" />
       </div>
-      <div class="mb-3">
-        <label for="last-name" class="form-label">Last name</label>
-        <input class="form-control" id="last-name">
+      <div class="form-group">
+        <label for="name-signup">Last Name:</label>
+        <input class="form-input" type="text" id="lastName-signup" />
+      </div>
+      <div class="form-group">
+        <label for="email-signup">Email:</label>
+        <input class="form-input" type="text" id="email-signup" />
+      </div>
+      <div class="form-group">
+        <label for="password-signup">Password:</label>
+        <input class="form-input" type="password" id="password-signup" />
       </div>
       <div class="mb-3">
         <label for="age" class="form-label">Age</label>
@@ -23,7 +31,7 @@
       </div>
       <div class="mb-3">
         <label for="gender" class="form-label">Gender</label>
-        <select class="form-select">
+        <select class="form-select" id="gender">
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="other">Other</option>
@@ -32,7 +40,7 @@
 
       <div class="mb-3">
         <label for="country" class="form-label">Country</label>
-        <select class="form-select">
+        <select class="form-select" id="country">
           <option value="usa">USA</option>
           <option value="other">Other</option>
         </select>
@@ -41,32 +49,44 @@
       <div class="mb-3">
         <label class="form-label">Interest</label>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <input class="form-check-input" type="checkbox" value="Sports" id="flexCheckDefault">
           <label class="form-check-label" for="flexCheckDefault"> Sports </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <input class="form-check-input" type="checkbox" value="Adventure" id="flexCheckDefault">
           <label class="form-check-label" for="flexCheckDefault"> Adventure </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <input class="form-check-input" type="checkbox" value="Wellness" id="flexCheckDefault">
           <label class="form-check-label" for="flexCheckDefault"> Wellness </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <input class="form-check-input" type="checkbox" value="Nightlife" id="flexCheckDefault">
           <label class="form-check-label" for="flexCheckDefault"> Nightlife </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault"> Food and Drinks </label>
+          <input class="form-check-input" type="checkbox" value="Food" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault"> Food </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Food" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault"> Arts and Museums </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="History" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault"> History </label>
         </div>
       </div>
 
       <div class="input-group mb-3">
         <span class="input-group-text">Bio</span>
-        <textarea class="form-control"></textarea>
+        <textarea class="form-control" id="bio"></textarea>
       </div>
 
+      <div class="input-group mb-3">
+        <span class="input-group-text">city</span>
+        <textarea class="form-control" id="city"></textarea>
+      </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

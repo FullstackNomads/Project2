@@ -83,20 +83,48 @@ router.get('/searchEvents', async (req, res) => {
 
 
 // Use withAuth middleware to prevent access to route
-router.get('/createProfile', withAuth, async (req, res) => {
+// router.get('/createProfile', async (req, res) => {
+//   console.log(`CREATE PROFILE ROUTE SLAPPED`);
+//   try {
+//     // Find the logged in user based on the session ID
+//     const userData = await User.findByPk(req.session.user_id, {
+//       attributes: { exclude: ['password'] },
+//       include: [{ model: Event }],
+//     });
+
+//     const user = userData.get({ plain: true });
+
+//     res.render('createProfile', {
+//       ...user,
+//       logged_in: true
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
+router.get('/createProfile', async (req, res) => {
+  console.log(`GET CREATE PROFILE ROUTE SLAPPED`);
   try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Event }],
-    });
+    res.status(200).render('createProfile');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-    const user = userData.get({ plain: true });
+router.post('/createProfile', async (req, res) => {
+  console.log(`POST CREATE PROFILE ROUTE SLAPPED`);
+  // console.log(req);
+  console.log(req.body);
+  try {
+    console.log(req.body);
 
-    res.render('createProfile', {
-      ...user,
-      logged_in: true
-    });
+    // res.render('createProfile', {
+    //   ...user,
+    //   logged_in: true
+    // });
+
+    res.json({})
   } catch (err) {
     res.status(500).json(err);
   }
