@@ -43,7 +43,6 @@ Interest.hasMany(Event, {
 User.hasMany(Event)
 Event.belongsTo(User, { as: 'creator', constraints: false })
 
-
 module.exports = {
   User,
   Event,
