@@ -3,6 +3,8 @@ const sequelize = require('../config/connection');
 
 class Interest extends Model { }
 
+// THIS MODEL TRACKS ALL CURRENT INTERESTS SAVED IN THE DATABASE
+
 Interest.init(
   {
     id: {

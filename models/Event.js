@@ -3,6 +3,8 @@ const sequelize = require('../config/connection');
 
 class Event extends Model { }
 
+// THIS MODEL TRACKS ALL CURRENT EVENTS SAVED IN THE DATABASE
+
 Event.init(
   {
     id: {

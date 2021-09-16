@@ -8,6 +8,9 @@ class User extends Model {
   }
 }
 
+// THIS MODEL TRACKS ALL CURRENT USERS SAVED IN THE DATABASE, the checkPassword function above is what provides for login validation and is a prototype method accessable to all user instances, called by:
+//  User.checkPassword()
+
 User.init(
   {
     id: {
@@ -29,7 +32,7 @@ User.init(
       defaultValue: "Coming Soon!"
     },
     age: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     email: {
@@ -58,22 +61,7 @@ User.init(
     country_name: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    latitude: {
-      type: DataTypes.DECIMAL,
-      allowNull: false,
-    },
-    longitude: {
-      type: DataTypes.DECIMAL,
-      allowNull: false,
-    },
-    // interests: {
-    //   type: DataTypes.STRING,
-    //   references: {
-    //     model: 'interest',
-    //     key: 'id',
-    //   }
-    // },
+    }
   },
   {
     hooks: {
