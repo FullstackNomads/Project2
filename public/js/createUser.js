@@ -8,18 +8,12 @@ const signupFormHandler = async (event) => {
   const password = document.querySelector('#password-signup').value.trim();
   const age = document.querySelector('#age').value.trim();
   const gender = document.querySelector('#gender').value.trim();
-
-
-
   const country_name = document.querySelector('#country').value.trim();
-
-
-
   const bio = document.querySelector('#bio').value.trim();
   const city_name = document.querySelector('#city').value.trim();
 
-  let checkBoxes = document.querySelectorAll(`.form-check-input`)
   const interests = [];
+  let checkBoxes = document.querySelectorAll(`.form-check-input`)
   for (let i = 0; i < checkBoxes.length; i++) {
     if (checkBoxes[i].checked) {
       interests.push(checkBoxes[i].value)
@@ -27,12 +21,8 @@ const signupFormHandler = async (event) => {
     continue;
   }
 
-  console.log(`\n\n`);
-  console.log(country_name);
-  console.log(`\n\n`);
-
   if (first_name && last_name && email && password && age && gender && country_name && city_name) {
-    const response = await fetch('/createProfile', {
+    const response = await fetch('/api/users', {
       method: 'POST',
       body: JSON.stringify({ first_name, last_name, email, password, age, gender, country_name, city_name, bio, interests: interests }),
       headers: { 'Content-Type': 'application/json' },

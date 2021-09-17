@@ -3,7 +3,7 @@ const { Event, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
-  console.log(`HOMEPAGE ROUTE SLAPPED`)
+  console.log(`HOMEPAGE "/" ROUTE SLAPPED`)
   try {
     // Get all events and JOIN with user data
     const eventData = await Event.findAll({
@@ -83,29 +83,6 @@ router.get('/searchEvents', async (req, res) => {
   }
 });
 
-
-
-// Use withAuth middleware to prevent access to route
-// router.get('/createProfile', async (req, res) => {
-//   console.log(`CREATE PROFILE ROUTE SLAPPED`);
-//   try {
-//     // Find the logged in user based on the session ID
-//     const userData = await User.findByPk(req.session.user_id, {
-//       attributes: { exclude: ['password'] },
-//       include: [{ model: Event }],
-//     });
-
-//     const user = userData.get({ plain: true });
-
-//     res.render('createProfile', {
-//       ...user,
-//       logged_in: true
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
 router.get('/createEvent', async (req, res) => {
   console.log(`GET /createEvent ROUTE SLAPPED`)
   try {
@@ -145,19 +122,6 @@ router.get('/createProfile', async (req, res) => {
   }
 });
 
-router.post('/createProfile', async (req, res) => {
-  console.log(`POST /createProfile ROUTE SLAPPED`);
-  console.log(req.body);
-  User.create(req.body)
-    .then((User) => {
-      console.log(User)
-      res.json({})
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-});
-
 router.get('/profile', withAuth, async (req, res) => {
   console.log(`GET /profile ROUTE SLAPPED`);
   try {
@@ -178,8 +142,10 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
+// THIS ROUTE ONLY RETURNS THE LOGIN PAGE. IT DOES NOT ACTUALLY SEND THE EMAIL AND PASS FOR LOGIN VALIDATION. THAT IS IN THE API ROUTES.
 router.get('/login', (req, res) => {
   console.log(`GET /login ROUTE SLAPPED`);
+  console.log(req.body)
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/profile');
