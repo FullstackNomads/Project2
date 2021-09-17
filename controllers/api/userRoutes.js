@@ -43,6 +43,48 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/search', async (req, res) => {
+  console.log(`GET USER "/search" ROUTE SLAPPED`);
+  try{
+    const parameters = req.query;
+
+    let where = {}
+    if (parameters.gender){
+      where["gender"] = parameters.gender;
+    }
+    if (parameters.city){
+      where["city_name"] = parameters.city;
+    }
+    if (parameters.country){
+      where["country_name"] = parameters.country;
+    }
+
+    // IGNORING interests for now because it's not part of the user model
+    // if (parameters.interests){
+    //   interests=[]
+    //   for(i = 0; i < parameters.interests.length; i++){
+    //     interests.push({"interest": parameters.interests[i]})
+    //   }      
+    // }
+    
+    const usersData = await User.findAll({
+      where: where
+    })
+    .then(usersData => {
+      if(!usersData) {
+          res.status(404).json({message: 'No user found'});
+          return;
+      }
+      res.json(usersData);
+    })
+  
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }  
+});
+
+
 router.post('/login', async (req, res) => {
   console.log(`POST USER "/login" ROUTE SLAPPED`)
   try {
