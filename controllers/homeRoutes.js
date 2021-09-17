@@ -1,47 +1,110 @@
 const router = require('express').Router();
-const { Project, User } = require('../models');
+const { Event, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
+  console.log(`HOMEPAGE "/" ROUTE SLAPPED`)
   try {
-    // Get all projects and JOIN with user data
-    const projectData = await Project.findAll({
+    // Get all events and JOIN with user data
+    const eventData = await Event.findAll({
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['first_name', 'last_name'],
         },
       ],
     });
 
     // Serialize data so the template can read it
-    const projects = projectData.map((project) => project.get({ plain: true }));
+    const events = eventData.map((event) => event.get({ plain: true }));
 
     // Pass serialized data and session flag into template
-    res.render('homepage', { 
-      projects, 
-      logged_in: req.session.logged_in 
+    res.render('homepage', {
+      events,
+      logged_in: req.session.logged_in
     });
+    console.log('Homepage successfully loaded');
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/project/:id', async (req, res) => {
+
+
+
+router.get('/events/:id', async (req, res) => {
+  console.log(`GET /events/:id ROUTE SLAPPED`)
   try {
-    const projectData = await Project.findByPk(req.params.id, {
+    const eventData = await Event.findByPk(req.params.id, {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['first_name', 'last_name'],
         },
       ],
     });
 
-    const project = projectData.get({ plain: true });
+    const event = eventData.get({ plain: true });
 
-    res.render('project', {
-      ...project,
+    res.render('singleEvent', {
+      ...event,
+      logged_in: req.session.logged_in
+    });
+    console.log('Single event successfully loaded')
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/searchEvents', async (req, res) => {
+  console.log(`GET /searchEvents ROUTE SLAPPED`)
+  try {
+    // Get all events and JOIN with user data
+    const eventData = await Event.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['first_name', 'last_name'],
+        },
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const events = eventData.map((event) => event.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render('searchEvents', {
+      events,
+      logged_in: req.session.logged_in
+    });
+    console.log('All events successfully loaded');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/createEvent', async (req, res) => {
+  console.log(`GET /createEvent ROUTE SLAPPED`)
+  try {
+    res.status(200).render('createEvent');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+router.get('/searchUsers', async (req, res) => {
+  console.log(`GET /searchUsers ROUTE SLAPPED`)
+  try {
+    // Get all events and JOIN with user data
+    const userData = await User.findAll({});
+
+    // Serialize data so the template can read it
+    const users = userData.map((user) => user.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render('searchUsers', {
+      users,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -49,32 +112,23 @@ router.get('/project/:id', async (req, res) => {
   }
 });
 
-// Use withAuth middleware to prevent access to route
-router.get('/createProfile', withAuth, async (req, res) => {
+
+router.get('/createProfile', async (req, res) => {
+  console.log(`GET /createProfile ROUTE SLAPPED`);
   try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Project }],
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.render('createProfile', {
-      ...user,
-      logged_in: true
-    });
+    res.status(200).render('createProfile');
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 router.get('/profile', withAuth, async (req, res) => {
+  console.log(`GET /profile ROUTE SLAPPED`);
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Project }],
+      include: [{ model: Event }],
     });
 
     const user = userData.get({ plain: true });
@@ -88,7 +142,10 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
+// THIS ROUTE ONLY RETURNS THE LOGIN PAGE. IT DOES NOT ACTUALLY SEND THE EMAIL AND PASS FOR LOGIN VALIDATION. THAT IS IN THE API ROUTES.
 router.get('/login', (req, res) => {
+  console.log(`GET /login ROUTE SLAPPED`);
+  console.log(req.body)
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/profile');
@@ -96,6 +153,7 @@ router.get('/login', (req, res) => {
   }
 
   res.render('login');
+  console.log('Log in page successfully loaded')
 });
 
 module.exports = router;

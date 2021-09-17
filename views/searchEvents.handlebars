@@ -1,0 +1,58 @@
+<h1>Try new experiences</h1>
+<div class="container">
+
+  <form class="row gy-2 mb-4 gx-3 align-items-center">
+    <div class="col-12">
+      <label for="autoSizingInput">Location</label>
+      <input type="text" class="form-control" id="autoSizingInput" placeholder="City name">
+      <input type="text" class="form-control" id="autoSizingInput" placeholder="Country Name">
+    </div>
+    <div class="col-12">
+      <label for="autoSizingInput">Point of interest</label>
+      <input type="text" class="form-control" id="autoSizingInput" placeholder="Point of interest">
+    </div>
+
+    <div class="col-12">
+      <label for="autoSizingInput">Select your interests</label>
+
+      <select class="form-select" multiple>
+        <option value="sports">Sports</option>
+        <option value="adventure">Adventure</option>
+        <option value="wellness">Wellness</option>
+        <option value="nightlife">Nightlife</option>
+        <option value="artMuseum">Arts and Museums</option>
+        <option value="food">Food and Drinks</option>
+      </select>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+
+
+  <div class="container">
+    <h2>Cannot find what you are looking for?</h2>
+    <button type="button" class="btn btn-primary">Create Your Own Experience!</button>
+
+  </div>
+
+</div>
+
+{{#each events as |event| }}
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <a href="/events/{{event.id}}">
+      <h5 class="card-title">{{event.event_name}}</h5>
+    </a>
+    <h6 class="card-subtitle mb-2 text-muted">{{event.point_of_interest}}</h6>
+    <h6 class="card-subtitle mb-2 text-muted">{{event.date_time}}</h6>
+    <p class="card-text">{{event.description}}
+  </div>
+</div>
+
+
+
+
+{{/each}}

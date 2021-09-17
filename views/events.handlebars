@@ -4,42 +4,63 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <svg class="bd-placeholder-img img-thumbnail" width="200" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera: 200x200" preserveAspectRatio="xMidYMid slice" focusable="false"><title>A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">200x200</text></svg>
+      <svg class="bd-placeholder-img img-thumbnail" width="200" height="200" xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera: 200x200"
+        preserveAspectRatio="xMidYMid slice" focusable="false">
+        <title>A generic square placeholder image with a white border around it, making it resemble a photograph taken
+          with an old instant camera</title>
+        <rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6"
+          dy=".3em">200x200</text>
+      </svg>
+      <div class="row">
+        <div class="col">
+          Name: {{creater}}
+        </div>
+      </div>
     </div>
     <div class="col">
-        
-        <div class="row">
-            <div class="col">
-            Name:  {{event.name}}
-            </div>
+
+      <div class="row">
+        <div class="col">
+          Name: {{event_name}}
         </div>
-        <div class="row">
-            <div class="col">
-            Location: {{event.city}} {{event.country}}
-            </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Location: {{street_number}} {{street_name}}, {{city}} {{country}}, {{postal_code}}
         </div>
-        <div class="row">
-            <div class="col">
-            Point of Interest: {{pointofinterest}}
-            </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Point of Interest: {{point_of_interest}}
         </div>
-        <div class="row">
-            <div class="col">
-            Interest: {{interest}}
-            </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Interest: {{interest}}
         </div>
-        <div class="row">
-            <div class="col">
-            Description: {{description}}
-            </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Interest: {{interest}}
         </div>
-        <div class="row">
-            <div class="col">
-            Date/Time {{event.date}}
-            </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Interest: {{interest}}
         </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Description: {{description}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Date/Time {{date}}
+        </div>
+      </div>
       <button type="submit" class="btn btn-primary">Join Event!</button>
     </div>
   </div>
-
-

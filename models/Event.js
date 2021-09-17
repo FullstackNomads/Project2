@@ -3,6 +3,8 @@ const sequelize = require('../config/connection');
 
 class Event extends Model { }
 
+// THIS MODEL TRACKS ALL CURRENT EVENTS SAVED IN THE DATABASE
+
 Event.init(
   {
     id: {
@@ -11,14 +13,39 @@ Event.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    creator_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'user',
+        key: 'id'
+      }
+    },
+    event_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    date: {
+    date_time: {
       type: DataTypes.DATE,
+      allowNull: false,
     },
     description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    point_of_interest: {
+      type: DataTypes.STRING,
+      // NOT REQUIRED
+    },
+    street_number: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    unit_number: {
+      type: DataTypes.INTEGER,
+      // NOT REQUIRED
+    },
+    street_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -26,36 +53,25 @@ Event.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    country: {
+    state_province: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    latitude: {
-      type: DataTypes.DECIMAL,
-      allowNull: false,
-    },
-    longitude: {
-      type: DataTypes.DECIMAL,
-      allowNull: false,
-    },
-    point_of_interest_xid: {
+    postal_code: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    country: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     interest_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'interest',
-        key: 'id',
-      },
-    },
-    creator_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'user',
-        key: 'id',
-      },
-    },
+        key: 'id'
+      }
+    }
   },
   {
     sequelize,
