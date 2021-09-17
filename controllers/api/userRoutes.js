@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User, UserInterest } = require('../../models');
 
 router.post('/', async (req, res) => {
+  console.log(`POST USER "/" ROUTE SLAPPED`)
   try {
     const userData = await User.create(req.body) //create a new user by just passing the entire req.body
       .then((user) => {
@@ -43,6 +44,7 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+  console.log(`POST USER "/login" ROUTE SLAPPED`)
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
 
@@ -68,13 +70,14 @@ router.post('/login', async (req, res) => {
 
       res.json({ user: userData, message: 'You are now logged in!' });
     });
-    console.log('User log in attempt successful');
+    console.log(`\n\n********** USER ${userData.first_name} ${userData.last_name} LOGIN SUCCESSFUL! **********\n\n`);
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
 router.post('/logout', (req, res) => {
+  console.log(`POST USER "/logout" ROUTE SLAPPED`)
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();
