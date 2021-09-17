@@ -3,6 +3,7 @@ const { Event, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
+  console.log(`HOMEPAGE ROUTE SLAPPED`)
   try {
     // Get all events and JOIN with user data
     const eventData = await Event.findAll({
@@ -32,6 +33,7 @@ router.get('/', async (req, res) => {
 
 
 router.get('/events/:id', async (req, res) => {
+  console.log(`GET /events/:id ROUTE SLAPPED`)
   try {
     const eventData = await Event.findByPk(req.params.id, {
       include: [
@@ -55,6 +57,7 @@ router.get('/events/:id', async (req, res) => {
 });
 
 router.get('/searchEvents', async (req, res) => {
+  console.log(`GET /searchEvents ROUTE SLAPPED`)
   try {
     // Get all events and JOIN with user data
     const eventData = await Event.findAll({
@@ -104,6 +107,7 @@ router.get('/searchEvents', async (req, res) => {
 // });
 
 router.get('/createEvent', async (req, res) => {
+  console.log(`GET /createEvent ROUTE SLAPPED`)
   try {
     res.status(200).render('createEvent');
   } catch (err) {
@@ -112,8 +116,8 @@ router.get('/createEvent', async (req, res) => {
 });
 
 
-
 router.get('/searchUsers', async (req, res) => {
+  console.log(`GET /searchUsers ROUTE SLAPPED`)
   try {
     // Get all events and JOIN with user data
     const userData = await User.findAll({});
@@ -133,33 +137,29 @@ router.get('/searchUsers', async (req, res) => {
 
 
 router.get('/createProfile', async (req, res) => {
-  console.log(`GET CREATE PROFILE ROUTE SLAPPED`);
+  console.log(`GET /createProfile ROUTE SLAPPED`);
   try {
-    // res.status(200).render('createProfile');
+    res.status(200).render('createProfile');
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 router.post('/createProfile', async (req, res) => {
-  console.log(`POST CREATE PROFILE ROUTE SLAPPED`);
-  // console.log(req);
-  console.log(JSON.parse(req.body));
-  try {
-    console.log(req.body);
-
-    // res.render('createProfile', {
-    //   ...user,
-    //   logged_in: true
-    // });
-
-    res.json({})
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  console.log(`POST /createProfile ROUTE SLAPPED`);
+  console.log(req.body);
+  User.create(req.body)
+    .then((User) => {
+      console.log(User)
+      res.json({})
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 });
 
 router.get('/profile', withAuth, async (req, res) => {
+  console.log(`GET /profile ROUTE SLAPPED`);
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
@@ -179,6 +179,7 @@ router.get('/profile', withAuth, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
+  console.log(`GET /login ROUTE SLAPPED`);
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/profile');
