@@ -4,31 +4,23 @@ const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   console.log(`HOMEPAGE "/" ROUTE SLAPPED`)
-  try {
-    // Get all events and JOIN with user data
-    const eventData = await Event.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['first_name', 'last_name'],
-        },
-      ],
+  console.log(req.session.logged_in)
+  if(req.session.logged_in){
+    res.render('userDashboard', {  
+        logged_in: req.session.logged_in
     });
-
-    // Serialize data so the template can read it
-    const events = eventData.map((event) => event.get({ plain: true }));
-
-    // Pass serialized data and session flag into template
+  }else{
     res.render('homepage', {
-      events,
       logged_in: req.session.logged_in
     });
-    console.log('Homepage successfully loaded');
-  } catch (err) {
-    res.status(500).json(err);
   }
 });
 
+
+router.get('/about', async (req, res) => {
+  console.log(`About "/" ROUTE SLAPPED`)
+  res.render('about', {});
+});
 
 
 
