@@ -27,14 +27,19 @@ router.get('/about', async (req, res) => {
 router.get('/user/:id', async (req, res) => {
   console.log(`GET /user/:id ROUTE SLAPPED`)
   try {
-    const profileData = await User.findByPk(req.params.id, {
-  
-    });
+    const profileData = await User.findByPk(req.params.id, {});
 
+    const eventData = await Event.findAll({
+      where: {
+        creator_id: req.params.id
+      }
+    });    
+    const events = eventData.map((event) => event.get({ plain: true }));
+    console.log("eventsss:", events)
     const user = profileData.get({ plain: true });
-    console.log(user)
     res.render('userProfile', {
       ...user,
+      events: events,
       logged_in: req.session.logged_in
     });
     console.log('Single user successfully loaded')
@@ -85,11 +90,9 @@ router.get('/userDashboard', async (req, res) => {
 
 router.get('/createEvent', async (req, res) => {
   console.log(`GET /createEvent ROUTE SLAPPED`)
-  try {
-    res.status(200).render('createEvent');
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  res.render('createEvent', {
+    logged_in: req.session.logged_in
+  });  
 });
 
 

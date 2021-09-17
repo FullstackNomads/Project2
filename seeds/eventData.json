@@ -14,7 +14,7 @@
     "interest_id": 7
   },
   {
-    "creator_id": 2,
+    "creator_id": 1,
     "event_name": "Yoga at Armour Square Park",
     "date_time": "October 23, 2021 09:00:00",
     "description": "I will be doing Yoga at armour square park. Be there to have your chakras aligned.",
@@ -28,7 +28,7 @@
     "interest_id": 7
   },
   {
-    "creator_id": 3,
+    "creator_id": 1,
     "event_name": "Drum circle at Dockweiler State Beach",
     "date_time": "October 11, 2021 20:00:00",
     "description": "I will be near LA and have a bonfire on the beach and will have my bongos. Lets feel the rhythm.",
@@ -42,7 +42,7 @@
     "interest_id": 7
   },
   {
-    "creator_id": 4,
+    "creator_id": 1,
     "event_name": "Touring the Sherlock Holmes Museum",
     "date_time": "October 30, 2021 12:00:00",
     "description": "I will be touring the London Sherlock Holmes museum if you would like to tag along!.",
