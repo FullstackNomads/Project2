@@ -77,7 +77,7 @@ router.get('/searchEvents', async (req, res) => {
       events,
       logged_in: req.session.logged_in
     });
-    console.log('All events successfully loaded');
+    console.log('Search events successfully loaded');
   } catch (err) {
     res.status(500).json(err);
   }
