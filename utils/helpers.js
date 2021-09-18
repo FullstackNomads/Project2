@@ -15,6 +15,11 @@ module.exports = {
     // format large numbers with commas
     return parseInt(amount).toLocaleString();
   },
+
+  getUniqueListBy: (arr, key) => {
+    return [...new Map(arr.map(item => [item[key], item])).values()]
+  },
+
   get_emoji: () => {
     const randomNum = Math.random();
 
