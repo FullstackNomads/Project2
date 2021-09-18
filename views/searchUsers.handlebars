@@ -293,21 +293,24 @@
 
 
 <script id="users-template" type="text/x-handlebars-template">
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <a href="/user/\{{id}}">
-        <h5 class="card-title">\{{first_name}} \{{last_name}}</h5>
-      </a>
+  <div class="col">
+    <div class="card shadow-sm p-4">
 
-      <h6 class="card-subtitle mb-2 text-muted">\{{age}}, \{{gender}}</h6>
-      <h6 class="card-subtitle mb-2 text-muted">\{{city_name}}, \{{country_name}} </h6>
-      <p class="card-text">\{{bio}}</p>
+      <div class="card-body">
+          <a href="/user/\{{id}}"><h5 class="card-title">\{{first_name}} \{{last_name}}</h5></a>
+          <h6 class="card-subtitle mb-2 text-muted">\{{age}} years old</h6>
+          <h6 class="card-subtitle mb-2 text-muted">\{{gender}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">From {{city_name}},\{{country_name}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">\{{interest}}</h6>
+          <p class="card-text">\{{bio}}.</p>
+      </div>
     </div>
   </div>
 </script>
 
-<div id="results">
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="results">
 </div>
 
 
-  <script src="/js/searchUsers.js"></script>
+<script src="/js/searchUsers.js"></script>

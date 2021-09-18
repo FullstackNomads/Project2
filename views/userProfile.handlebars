@@ -33,7 +33,10 @@
             {{country_name}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">{{interest}}</h6>
           <p class="card-text">{{bio}}.</p>
-          <p class="card-text"><small class="text-muted">This user has created {{events.length}} events.</small></p>
+          <p class="card-text"><small class="text-muted">
+            
+            This user has created {{#if events}} {{events.length}} {{else}} 0 {{/if}} events.
+            </small></p>
           <a href="#" class="btn btn-primary">Message</a>
         </div>
       </div>
@@ -43,7 +46,7 @@
 
   <h5 class="display-5 mb-5">Events by {{first_name}}</h5>
   {{#unless events}}
-  <p class="lead">This user has not created any events yet</p>
+  <p class="lead mb-5">This user has not created any events yet</p>
   {{/unless}}
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
