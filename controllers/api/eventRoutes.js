@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const session = require('express-session');
 const { Event, UserEvent } = require('../../models');
 const withAuth = require('../../utils/auth');
 
@@ -15,17 +16,17 @@ const withAuth = require('../../utils/auth');
 //   }
 // });
 
-router.post('/', async (req, res) => {
-  console.log(`CREATE EVENT "/" ROUTE SLAPPED`)
-  console.log(req.body);
-  console.log(req.session);
+router.post('/', withAuth, async (req, res) => {
+  console.log(`POST EVENT "/" ROUTE SLAPPED`)
+  req.body.creator_id = req.session.user_id;
   try {
     const newEvent = await Event.create({
       ...req.body,
     });
     res.status(200).json(newEvent);
-    console.log('New event successfully created');
+    console.log('\n\n*****NEW EVENT SUCCESSFULLY CREATED*****\n\n');
   } catch (err) {
+    console.log(err)
     res.status(400).json(err);
   }
 });
