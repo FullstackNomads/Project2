@@ -13,11 +13,11 @@ function getUniqueListBy(arr, key) {
 router.get('/', async (req, res) => {
   console.log(`HOMEPAGE "/" ROUTE SLAPPED`)
   console.log(req.session.logged_in)
-  if(req.session.logged_in){
-    res.render('userDashboard', {  
-        logged_in: req.session.logged_in
+  if (req.session.logged_in) {
+    res.render('userDashboard', {
+      logged_in: req.session.logged_in
     });
-  }else{
+  } else {
     res.render('homepage', {
       logged_in: req.session.logged_in
     });
@@ -41,7 +41,7 @@ router.get('/user/:id', async (req, res) => {
       where: {
         creator_id: req.params.id
       }
-    });    
+    });
     const events = eventData.map((event) => event.get({ plain: true }));
     const user = profileData.get({ plain: true });
 
@@ -84,9 +84,9 @@ router.get('/events/:id', async (req, res) => {
 
 router.get('/searchEvents', async (req, res) => {
   console.log(`GET /searchEvents ROUTE SLAPPED`)
-    res.render('searchEvents', {
-      logged_in: req.session.logged_in
-    });  
+  res.render('searchEvents', {
+    logged_in: req.session.logged_in
+  });
 });
 
 router.get('/userDashboard', async (req, res) => {
@@ -201,7 +201,7 @@ router.get('/createEvent', async (req, res) => {
   console.log(`GET /createEvent ROUTE SLAPPED`)
   res.render('createEvent', {
     logged_in: req.session.logged_in
-  });  
+  });
 });
 
 
@@ -241,9 +241,9 @@ router.get('/user', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      // include: [{ model: Event }],
+      include: [{ model: Event }],
     });
-    console.log("myuserdata",req.session.user_id,  userData)
+    console.log("myuserdata", req.session.user_id, userData)
     const user = userData.get({ plain: true });
 
     res.render('userProfile', {

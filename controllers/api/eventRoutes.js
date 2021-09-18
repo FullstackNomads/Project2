@@ -16,6 +16,9 @@ const withAuth = require('../../utils/auth');
 // });
 
 router.post('/', async (req, res) => {
+  console.log(`CREATE EVENT "/" ROUTE SLAPPED`)
+  console.log(req.body);
+  console.log(req.session);
   try {
     const newEvent = await Event.create({
       ...req.body,
@@ -30,37 +33,37 @@ router.post('/', async (req, res) => {
 
 router.get('/search', async (req, res) => {
   console.log(`GET EVENT "/search" ROUTE SLAPPED`);
-  
-  try{
+
+  try {
     const parameters = req.query;
     let where = {}
 
-    if (parameters.pointofinterest){
+    if (parameters.pointofinterest) {
       where["point_of_interest"] = parameters.pointofinterest;
     }
-    if (parameters.city){
+    if (parameters.city) {
       where["city"] = parameters.city;
     }
-    if (parameters.country){
+    if (parameters.country) {
       where["country"] = parameters.country;
     }
 
     const eventsData = await Event.findAll({
       where: where
     })
-    .then(eventsData => {
-      if(!eventsData) {
-          res.status(404).json({message: 'No event found'});
+      .then(eventsData => {
+        if (!eventsData) {
+          res.status(404).json({ message: 'No event found' });
           return;
-      }
-      const events = eventsData.map((event) => event.get({ plain: true }));
-      console.log(events);
-      res.json(events);
-    })  
+        }
+        const events = eventsData.map((event) => event.get({ plain: true }));
+        console.log(events);
+        res.json(events);
+      })
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
-  }  
+  }
 });
 
 // router.delete('/:id', withAuth, async (req, res) => {

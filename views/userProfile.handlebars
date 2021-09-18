@@ -55,7 +55,7 @@
 
     <!-- Loop over each object in the events array -->
     {{#each events as |event|}}
-      <div class="col">
+      <div class="col event-list">
         <div class="card shadow-sm p-4">
 
           <div class="card-body">
@@ -68,6 +68,7 @@
             <div class="d-flex justify-content-between align-items-center">
               <small class="text-muted">{{event.date_time}}</small>
             </div>
+            <button class="btn btn-sm btn-danger" data-id="{{event.id}}">DELETE</button>
           </div>
         </div>
       </div>
@@ -76,3 +77,5 @@
   </div>
 
 </div>
+
+<script src="./js/deleteEvent.js"></script>
