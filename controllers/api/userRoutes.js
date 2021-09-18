@@ -3,6 +3,7 @@ const { User, UserInterest } = require('../../models');
 
 router.post('/', async (req, res) => {
   console.log(`POST USER "/" ROUTE SLAPPED`)
+  console.log(req.body)
   try {
     const userData = await User.create(req.body) //create a new user by just passing the entire req.body
       .then((user) => {
@@ -28,7 +29,6 @@ router.post('/', async (req, res) => {
         console.log(err);
         res.status(400).json(err);
       })
-
     // commented out the below as we need to decide if we want a new user to be automatically logged in to their new profile after it is created OR if we want to auto redirect them to the login page
     // req.session.save(() => {
     //   req.session.user_id = userData.id;
@@ -45,17 +45,17 @@ router.post('/', async (req, res) => {
 
 router.get('/search', async (req, res) => {
   console.log(`GET USER "/search" ROUTE SLAPPED`);
-  try{
+  try {
     const parameters = req.query;
 
     let where = {}
-    if (parameters.gender){
+    if (parameters.gender) {
       where["gender"] = parameters.gender;
     }
-    if (parameters.city){
+    if (parameters.city) {
       where["city_name"] = parameters.city;
     }
-    if (parameters.country){
+    if (parameters.country) {
       where["country_name"] = parameters.country;
     }
 
@@ -66,22 +66,22 @@ router.get('/search', async (req, res) => {
     //     interests.push({"interest": parameters.interests[i]})
     //   }      
     // }
-    
+
     const usersData = await User.findAll({
       where: where
     })
-    .then(usersData => {
-      if(!usersData) {
-          res.status(404).json({message: 'No user found'});
+      .then(usersData => {
+        if (!usersData) {
+          res.status(404).json({ message: 'No user found' });
           return;
-      }
-      res.json(usersData);
-    })
-  
+        }
+        res.json(usersData);
+      })
+
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
-  }  
+  }
 });
 
 

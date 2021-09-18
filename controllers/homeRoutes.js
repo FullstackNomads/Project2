@@ -5,11 +5,11 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
   console.log(`HOMEPAGE "/" ROUTE SLAPPED`)
   console.log(req.session.logged_in)
-  if(req.session.logged_in){
-    res.render('userDashboard', {  
-        logged_in: req.session.logged_in
+  if (req.session.logged_in) {
+    res.render('userDashboard', {
+      logged_in: req.session.logged_in
     });
-  }else{
+  } else {
     res.render('homepage', {
       logged_in: req.session.logged_in
     });
@@ -33,7 +33,7 @@ router.get('/user/:id', async (req, res) => {
       where: {
         creator_id: req.params.id
       }
-    });    
+    });
     const events = eventData.map((event) => event.get({ plain: true }));
     console.log("eventsss:", events)
     const user = profileData.get({ plain: true });
@@ -75,21 +75,16 @@ router.get('/events/:id', async (req, res) => {
 
 router.get('/searchEvents', async (req, res) => {
   console.log(`GET /searchEvents ROUTE SLAPPED`)
-    res.render('searchEvents', {
-      logged_in: req.session.logged_in
-    });  
+  res.render('searchEvents', {
+    logged_in: req.session.logged_in
+  });
 });
 
 router.get('/userDashboard', async (req, res) => {
   console.log(`GET /userDashboard ROUTE SLAPPED`)
-    res.render('userDashboard', {
-      logged_in: req.session.logged_in
-    });  
-    });
-    console.log('Search events successfully loaded');
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  res.render('userDashboard', {
+    logged_in: req.session.logged_in
+  })
 });
 
 
@@ -97,7 +92,7 @@ router.get('/createEvent', async (req, res) => {
   console.log(`GET /createEvent ROUTE SLAPPED`)
   res.render('createEvent', {
     logged_in: req.session.logged_in
-  });  
+  });
 });
 
 
@@ -138,7 +133,7 @@ router.get('/user', withAuth, async (req, res) => {
       attributes: { exclude: ['password'] },
       // include: [{ model: Event }],
     });
-    console.log("myuserdata",req.session.user_id,  userData)
+    console.log("myuserdata", req.session.user_id, userData)
     const user = userData.get({ plain: true });
 
     res.render('userProfile', {

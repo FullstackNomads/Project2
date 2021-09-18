@@ -13,7 +13,7 @@ const signupFormHandler = async (event) => {
   const city_name = document.querySelector('#city').value.trim();
 
   const interests = [];
-  let checkBoxes = document.querySelectorAll(`.form-check-input`)
+  let checkBoxes = document.querySelectorAll(`.interest`)
   for (let i = 0; i < checkBoxes.length; i++) {
     if (checkBoxes[i].checked) {
       interests.push(checkBoxes[i].value)
