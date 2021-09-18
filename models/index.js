@@ -3,6 +3,8 @@ const Event = require('./Event');
 const Interest = require('./Interest');
 const UserEvent = require('./UserEvent');
 const UserInterest = require('./UserInterest');
+const Message = require('./Message');
+const UserMessage = require('./UserMessage');
 
 // DECLARES THE MANY TO MANY RELATIONSHIP BETWEEN USERS ATTENDING EVENTS
 User.belongsToMany(Event, {
@@ -16,6 +18,19 @@ Event.belongsToMany(User, {
   onUpdate: "CASCADE",
   onDelete: "SET NULL",
 });
+
+Message.belongsToMany(User, {
+  through: UserMessage,
+  onUpdate: "CASCADE",
+  onDelete: "SET NULL",
+});
+
+User.belongsToMany(Message, {
+  through: UserMessage,
+  onUpdate: "CASCADE",
+  onDelete: "SET NULL",
+});
+
 
 
 // DECLARES THE MANY TO MANY RELATIONSHIP BETWEEN USERS AND THEIR INTERESTS
@@ -66,4 +81,6 @@ module.exports = {
   Interest,
   UserEvent,
   UserInterest,
+  Message,
+  UserMessage
 };
