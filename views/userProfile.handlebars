@@ -1,78 +1,76 @@
-<h1>USER PROFILE</h1>
-
-
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <svg class="bd-placeholder-img img-thumbnail" width="200" height="200" xmlns="http://www.w3.org/2000/svg"
-        role="img"
-        aria-label="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera: 200x200"
-        preserveAspectRatio="xMidYMid slice" focusable="false">
-        <title>A generic square placeholder image with a white border around it, making it resemble a photograph taken
-          with an old instant camera</title>
-        <rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6"
-          dy=".3em">200x200</text>
-      </svg>
-    </div>
-    <div class="col">
 
-      <div class="row">
-        <div class="col">
-          Name: {{first_name}} {{last_name}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          Age: {{age}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          Place of origin: {{city_name}} {{country_name}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          Interest: {{interest}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          Bio: {{bio}}
-        </div>
-      </div>
+  <div class="card mb-5 border-0">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <svg
+          class="bd-placeholder-img img-fluid rounded-start"
+          width="100%"
+          height="250"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="Placeholder: Image"
+          preserveAspectRatio="xMidYMid slice"
+          focusable="false"
+        ><title>Placeholder</title><rect
+            width="100%"
+            height="100%"
+            fill="#868e96"
+          ></rect><text
+            x="50%"
+            y="50%"
+            fill="#dee2e6"
+            dy=".3em"
+          >Image</text></svg>
 
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title display-5">{{first_name}} {{last_name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{age}} years old</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{gender}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">From {{city_name}},
+            {{country_name}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{interest}}</h6>
+          <p class="card-text">{{bio}}.</p>
+          <p class="card-text"><small class="text-muted">
+            
+            This user has created {{#if events}} {{events.length}} {{else}} 0 {{/if}} events.
+            </small></p>
+          <a href="#" class="btn btn-primary">Message</a>
+        </div>
+      </div>
     </div>
   </div>
+  <hr>
 
-  {{!-- this is just for an example, will be removed --}}
-  <div class="row col-9 m-auto mb-4 project">
-    <div class="col-md-5">
-      <h3>
-        <a href="/event/{{event.id}}">Event name</a>
-      </h3>
-    </div>
-    <div class="col-md-7">
-      <p>
-        bioooo{{event.description}}
-      </p>
-    </div>
+  <h5 class="display-5 mb-5">Events by {{first_name}}</h5>
+  {{#unless events}}
+  <p class="lead mb-5">This user has not created any events yet</p>
+  {{/unless}}
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+    <!-- Loop over each object in the events array -->
+    {{#each events as |event|}}
+      <div class="col">
+        <div class="card shadow-sm p-4">
+
+          <div class="card-body">
+            <h5 class="card-title"><a
+                href="/events/{{event.id}}"
+              >{{event.event_name}}</a></h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{event.city_name}}</h6>
+
+            <p class="card-text">{{event.description}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">{{event.date_time}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+
   </div>
 
-
-  <!-- Loop over each object in the events array -->
-  {{#each events as |event| }}
-  <div class="row mb-4 project">
-    <div class="col-md-5">
-      <h2>
-        <a href="/event/{{event.id}}">{{event.name}}</a>
-      </h2>
-    </div>
-    <div class="col-md-7">
-      <p>
-        {{event.description}}
-      </p>
-    </div>
-  </div>
-  {{/each}}
 </div>

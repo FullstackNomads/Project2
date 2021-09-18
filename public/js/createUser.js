@@ -29,7 +29,7 @@ const signupFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      // document.location.replace('/createProfile'); // WANTING TO RENDER THIS ON THE ROUTE SIDE.
+      document.location.replace('/userDashboard'); // WANTING TO RENDER THIS ON THE ROUTE SIDE.
       console.log(`REQUEST OKAY`);
     } else {
       alert(response.statusText);
