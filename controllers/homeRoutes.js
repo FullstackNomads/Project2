@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 
 
 router.get('/about', async (req, res) => {
-  console.log(`About "/" ROUTE SLAPPED`)
+  console.log(`GET "/about" ROUTE SLAPPED`)
   res.render('about', {});
 });
 
@@ -91,9 +91,9 @@ router.get('/searchEvents', async (req, res) => {
 
 router.get('/userDashboard', async (req, res) => {
   console.log(`GET /userDashboard ROUTE SLAPPED`)
-    res.render('userDashboard', {
-      logged_in: req.session.logged_in
-    });  
+  res.render('userDashboard', {
+    logged_in: req.session.logged_in
+  });
 });
 
 // Route to get all messages 
@@ -115,12 +115,12 @@ router.get('/messages', withAuth, async (req, res) => {
 
 
     // For each message, store the other person id in ["user"]
-    for(i = 0; i < messages.length; i++){
+    for (i = 0; i < messages.length; i++) {
       console.log(messages[i]);
-      if (messages[i].sender_id != req.session.user_id){
+      if (messages[i].sender_id != req.session.user_id) {
         messages[i]["user"] = messages[i].sender_id
       }
-      if (messages[i].receiver_id != req.session.user_id){
+      if (messages[i].receiver_id != req.session.user_id) {
         messages[i]["user"] = messages[i].receiver_id
       }
     }
@@ -161,8 +161,8 @@ router.get('/messages/:id', withAuth, async (req, res) => {
     const messageBetweenData = await Message.findAll({
       where: {
         [Op.or]: [
-          {[Op.and]: [{ sender_id: req.session.user_id }, { receiver_id: req.params.id }] }, 
-          {[Op.and]: [{ sender_id: req.params.id }, { receiver_id: req.session.user_id }] }, 
+          { [Op.and]: [{ sender_id: req.session.user_id }, { receiver_id: req.params.id }] },
+          { [Op.and]: [{ sender_id: req.params.id }, { receiver_id: req.session.user_id }] },
         ]
       },
       order: [['createdAt', 'DESC']]
@@ -170,12 +170,12 @@ router.get('/messages/:id', withAuth, async (req, res) => {
 
     // Serialize data so the template can read it
     let messages = messageData.map((message) => message.get({ plain: true }));
-    for(i = 0; i < messages.length; i++){
+    for (i = 0; i < messages.length; i++) {
       console.log(messages[i]);
-      if (messages[i].sender_id != req.session.user_id){
+      if (messages[i].sender_id != req.session.user_id) {
         messages[i]["user"] = messages[i].sender_id
       }
-      if (messages[i].receiver_id != req.session.user_id){
+      if (messages[i].receiver_id != req.session.user_id) {
         messages[i]["user"] = messages[i].receiver_id
       }
     }
