@@ -1,46 +1,46 @@
-<div class="row">
 
-  <div class="col-auto">
-    <h2>Create your profile, {{first_name}}!</h2>
-  </div>
-</div>
-
-<div class="row mt-4">
-  <div class="col-md-6">
+<div class="row mt-4 justify-content-center">
+  <div class="col-md-8">
+    <h1 class="display-1">Create your profile</h1>
 
     <form class="signup-form" id="create-profile">
       <div class="form-group">
-        <label for="name-signup">First Name:</label>
-        <input class="form-input" type="text" id="firstName-signup" />
+        <label for="firstName-signup">First Name:</label>
+        <input class="form-control" type="text" id="firstName-signup" required/>
       </div>
       <div class="form-group">
-        <label for="name-signup">Last Name:</label>
-        <input class="form-input" type="text" id="lastName-signup" />
+        <label for="lastName-signup">Last Name:</label>
+        <input class="form-control" type="text" id="lastName-signup" required/>
       </div>
       <div class="form-group">
         <label for="email-signup">Email:</label>
-        <input class="form-input" type="text" id="email-signup" />
+        <input class="form-control" type="text" id="email-signup" required/>
       </div>
       <div class="form-group">
         <label for="password-signup">Password:</label>
-        <input class="form-input" type="password" id="password-signup" />
+        <input class="form-control" type="password" id="password-signup" required/>
       </div>
       <div class="mb-3">
         <label for="age" class="form-label">Age</label>
-        <input type="number" class="form-control" min="18" max="100" id="age">
+        <input type="number" class="form-control" min="18" max="100" id="age" required>
       </div>
       <div class="mb-3">
         <label for="gender" class="form-label">Gender</label>
-        <select class="form-select" id="gender">
+        <select class="form-select" id="gender" required>
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="other">Other</option>
         </select>
       </div>
 
+      <div class="form-group">
+              <label for="city">City:</label>
+              <input class="form-control" type="text" id="city" required/>
+      </div>
+       
       <div class="mb-3">
         <label for="country" class="form-label">Country</label>
-        <select class="form-select" id="country">
+        <select class="form-select" id="country" required>
           <option value="Afganistan">Afghanistan</option>
           <option value="Albania">Albania</option>
           <option value="Algeria">Algeria</option>
@@ -322,19 +322,52 @@
         </div>
       </div>
 
-      <div class="input-group mb-3">
-        <span class="input-group-text">Bio</span>
+      <div class="form-group mb-3">
+        <label for="bio">Your bio</label>
         <textarea class="form-control" id="bio"></textarea>
       </div>
 
-      <div class="input-group mb-3">
-        <span class="input-group-text">city</span>
-        <textarea class="form-control" id="city"></textarea>
-      </div>
 
+    <div class="input-group mb-3">
+     <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+      <label class="form-check-label" for="invalidCheck">
+        I agree to the responsiblity agreement: 
+
+      <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">
+        Click here
+      </a>
+
+      </label>
+
+      
+
+    </div>
+
+     
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
+</div>
+</div>
+
+
+<!-- termsModal -->
+<div class="modal fade" id="termsModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Responsiblity Agreement</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p> <b>BE AUTHENTIC:</b> use your actual name and photos, and provide information that is true.</p>
+        <p> <b>BE SAFE:</b>  be mindful of the information that you give out.  </p>
+        <p> <b>BE CAUTIOUS:</b> report any suspicous acts on the app.</p>
+      </div>
+      
+    </div>
   </div>
+</div>
+
 
   <script src="/js/createUser.js"></script>
