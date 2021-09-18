@@ -85,6 +85,11 @@ router.get('/userDashboard', async (req, res) => {
     res.render('userDashboard', {
       logged_in: req.session.logged_in
     });  
+    });
+    console.log('Search events successfully loaded');
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 
