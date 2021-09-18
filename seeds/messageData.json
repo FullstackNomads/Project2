@@ -1,0 +1,37 @@
+[
+    {
+        "sender_id": 1,
+        "receiver_id": 2,
+        "message": "Hello, you said you will pay for dinner?"
+    },
+    {
+        "sender_id": 1,
+        "receiver_id": 3,
+        "message": "Hello. How are you doing today?"
+    },
+    {
+        "sender_id": 1,
+        "receiver_id": 4,
+        "message": "Hello, Do you want to join my event?"
+    },
+    {
+        "sender_id": 2,
+        "receiver_id": 4,
+        "message": "Hey I'm planning to go Alaska soon, can I join you on your trip?"
+    },
+    {
+        "sender_id": 4,
+        "receiver_id": 2,
+        "message": "I love Alaska, but I'm going to NYC. Do you want to join?"
+    },
+    {
+        "sender_id": 2,
+        "receiver_id": 4,
+        "message": "Yes, NYC sounds good. I have been there before and I love it."
+    },
+    {
+        "sender_id": 1,
+        "receiver_id": 2,
+        "message": "Hello, I'll be in your town soon, do you want to eat vegan food?"
+    }
+]

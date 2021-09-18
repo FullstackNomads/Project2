@@ -37,7 +37,9 @@
             
             This user has created {{#if events}} {{events.length}} {{else}} 0 {{/if}} events.
             </small></p>
-          <a href="#" class="btn btn-primary">Message</a>
+            {{#unless sameUser}}
+            <a href="/messages/{{id}}" class="btn btn-primary">Message</a>
+            {{/unless}}
         </div>
       </div>
     </div>

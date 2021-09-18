@@ -1,6 +1,14 @@
 const router = require('express').Router();
-const { Event, User } = require('../models');
+const { Event, User, Message } = require('../models');
 const withAuth = require('../utils/auth');
+// needed to make findAll more specific to what we need for messages
+const Op = require('Sequelize').Op
+
+
+function getUniqueListBy(arr, key) {
+  return [...new Map(arr.map(item => [item[key], item])).values()]
+}
+
 
 router.get('/', async (req, res) => {
   console.log(`HOMEPAGE "/" ROUTE SLAPPED`)
@@ -35,11 +43,12 @@ router.get('/user/:id', async (req, res) => {
       }
     });
     const events = eventData.map((event) => event.get({ plain: true }));
-    console.log("eventsss:", events)
     const user = profileData.get({ plain: true });
+
     res.render('userProfile', {
       ...user,
       events: events,
+      sameUser: req.params.id == req.session.user_id,
       logged_in: req.session.logged_in
     });
     console.log('Single user successfully loaded')
@@ -82,9 +91,109 @@ router.get('/searchEvents', async (req, res) => {
 
 router.get('/userDashboard', async (req, res) => {
   console.log(`GET /userDashboard ROUTE SLAPPED`)
-  res.render('userDashboard', {
-    logged_in: req.session.logged_in
-  })
+    res.render('userDashboard', {
+      logged_in: req.session.logged_in
+    });  
+});
+
+// Route to get all messages 
+router.get('/messages', withAuth, async (req, res) => {
+  console.log(`GET /messages ROUTE SLAPPED`)
+  try {
+    // Get all messages where i am the sender or receiver 
+    const messageData = await Message.findAll({
+      where: {
+        [Op.or]: [
+          { sender_id: req.session.user_id }, { receiver_id: req.session.user_id }
+        ]
+      }
+    });
+
+
+    // Serialize data so the template can read it
+    let messages = messageData.map((message) => message.get({ plain: true }));
+
+
+    // For each message, store the other person id in ["user"]
+    for(i = 0; i < messages.length; i++){
+      console.log(messages[i]);
+      if (messages[i].sender_id != req.session.user_id){
+        messages[i]["user"] = messages[i].sender_id
+      }
+      if (messages[i].receiver_id != req.session.user_id){
+        messages[i]["user"] = messages[i].receiver_id
+      }
+    }
+    // filter the messages to get only the unique users that has have some sort of communication with me
+    messages = getUniqueListBy(messages, "user")
+
+    // Pass serialized data and session flag into template
+    res.render('message', {
+      messages,
+      userId: req.session.user_id,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/messages/:id', withAuth, async (req, res) => {
+  console.log(`GET /messages ROUTE SLAPPED`)
+  try {
+    // Get all messages
+    const messageData = await Message.findAll({
+      where: {
+        [Op.or]: [
+          { sender_id: req.session.user_id }, { receiver_id: req.session.user_id }
+        ]
+      }
+    });
+
+    // Example:
+    // John (id=1) sends a message to Bill (id=2) with message content: Hello 
+    // Bill(id=2) sends a message to John(id=1) with message content: Hi there
+    // If we want to get all messages between John and bill to display them in the page, 
+    // We need to query our database and ask it for the following:
+    // o	Give me all messages where the sender is 1 and receiver is 2
+    // o	And
+    // o	Give me all messages where the sender is 2 and receiver 1
+    const messageBetweenData = await Message.findAll({
+      where: {
+        [Op.or]: [
+          {[Op.and]: [{ sender_id: req.session.user_id }, { receiver_id: req.params.id }] }, 
+          {[Op.and]: [{ sender_id: req.params.id }, { receiver_id: req.session.user_id }] }, 
+        ]
+      },
+      order: [['createdAt', 'DESC']]
+    })
+
+    // Serialize data so the template can read it
+    let messages = messageData.map((message) => message.get({ plain: true }));
+    for(i = 0; i < messages.length; i++){
+      console.log(messages[i]);
+      if (messages[i].sender_id != req.session.user_id){
+        messages[i]["user"] = messages[i].sender_id
+      }
+      if (messages[i].receiver_id != req.session.user_id){
+        messages[i]["user"] = messages[i].receiver_id
+      }
+    }
+    messages = getUniqueListBy(messages, "user")
+
+
+    const messagesBetween = messageBetweenData.map((message) => message.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render('message', {
+      messages,
+      messagesBetween,
+      userId: req.session.user_id,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 
@@ -125,6 +234,7 @@ router.get('/createProfile', async (req, res) => {
   }
 });
 
+
 router.get('/user', withAuth, async (req, res) => {
   console.log(`GET /user ROUTE SLAPPED`);
   try {
@@ -138,6 +248,7 @@ router.get('/user', withAuth, async (req, res) => {
 
     res.render('userProfile', {
       ...user,
+      sameUser: true,
       logged_in: true
     });
   } catch (err) {
