@@ -250,6 +250,7 @@ router.get('/user', withAuth, async (req, res) => {
     });
     const events = eventData.map((event) => event.get({ plain: true }));
     const user = userData.get({ plain: true });
+    const events = eventData.map((event) => event.get({ plain: true }));
 
     res.render('userProfile', {
       ...user,
