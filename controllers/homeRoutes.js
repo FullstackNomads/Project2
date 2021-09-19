@@ -239,15 +239,16 @@ router.get('/user', withAuth, async (req, res) => {
   console.log(`GET /user ROUTE SLAPPED`);
   try {
     // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {});
-
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      // include: [{ model: Event }],
+    });
     const eventData = await Event.findAll({
       where: {
         creator_id: req.session.user_id
       }
     });
-
-    console.log("myuserdata", req.session.user_id, userData)
+    const events = eventData.map((event) => event.get({ plain: true }));
     const user = userData.get({ plain: true });
     const events = eventData.map((event) => event.get({ plain: true }));
 
@@ -261,6 +262,7 @@ router.get('/user', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 // THIS ROUTE ONLY RETURNS THE LOGIN PAGE. IT DOES NOT ACTUALLY SEND THE EMAIL AND PASS FOR LOGIN VALIDATION. THAT IS IN THE API ROUTES.
 router.get('/login', (req, res) => {
