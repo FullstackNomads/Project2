@@ -79,6 +79,7 @@ const createEventFormHandler = async (event) => {
     if (response.ok) {
       console.log(`REQUEST OKAY`);
       const results = await response.json();
+      console.log(results);
       document.location.replace('/events/'+ results.id); 
     } else {
       alert(response.statusText);
