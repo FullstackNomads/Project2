@@ -138,6 +138,9 @@ router.delete('/:id', async (req, res) => {
       },
     });
     console.log('User successfully deleted');
+    req.session.destroy(() => {
+      res.status(204).end();
+    })
     if (!userData) {
       res.status(404).json({ message: 'No user found with this id!' });
       return;

@@ -28,6 +28,9 @@
           {{#unless sameUser}}
           <a href="/messages/{{id}}" class="btn btn-primary">Message</a>
           {{/unless}}
+          {{#if sameUser}}
+          <button type="button" class="btn btn-danger" id="deleteAccountButton" data-id="{{id}}">Delete Account</button>
+          {{/if}}
         </div>
       </div>
     </div>
@@ -65,3 +68,4 @@
 </div>
 
 <script src="/js/deleteEvent.js"></script>
+<script src="/js/deleteUser.js"></script>
