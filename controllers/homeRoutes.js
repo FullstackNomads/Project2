@@ -165,7 +165,7 @@ router.get('/messages/:id', withAuth, async (req, res) => {
           { [Op.and]: [{ sender_id: req.params.id }, { receiver_id: req.session.user_id }] },
         ]
       },
-      order: [['createdAt', 'DESC']]
+      order: [['createdAt', 'ASC']]
     })
 
     // Serialize data so the template can read it
@@ -183,11 +183,12 @@ router.get('/messages/:id', withAuth, async (req, res) => {
 
 
     const messagesBetween = messageBetweenData.map((message) => message.get({ plain: true }));
-
+    
     // Pass serialized data and session flag into template
     res.render('message', {
       messages,
       messagesBetween,
+      specific_user: true,
       userId: req.session.user_id,
       logged_in: req.session.logged_in
     });
