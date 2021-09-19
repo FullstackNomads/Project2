@@ -34,6 +34,12 @@ router.get('/about', async (req, res) => {
 
 router.get('/user/:id', async (req, res) => {
   console.log(`GET /user/${req.params.id} ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   try {
     const profileData = await User.findByPk(req.params.id, {});
 
@@ -60,6 +66,12 @@ router.get('/user/:id', async (req, res) => {
 
 router.get('/events/:id', async (req, res) => {
   console.log(`\n\nGET /events/${req.params.id} ROUTE SLAPPED\n\n`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   try {
     const eventData = await Event.findByPk(req.params.id, {
       include: [
@@ -86,6 +98,12 @@ router.get('/events/:id', async (req, res) => {
 
 router.get('/searchEvents', async (req, res) => {
   console.log(`GET /searchEvents ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   res.render('searchEvents', {
     logged_in: req.session.logged_in
   });
@@ -93,6 +111,12 @@ router.get('/searchEvents', async (req, res) => {
 
 router.get('/userDashboard', async (req, res) => {
   console.log(`GET /userDashboard ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   res.render('userDashboard', {
     logged_in: req.session.logged_in
   });
@@ -101,6 +125,12 @@ router.get('/userDashboard', async (req, res) => {
 // Route to get all messages 
 router.get('/messages', withAuth, async (req, res) => {
   console.log(`GET /messages ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   try {
     // Get all messages where i am the sender or receiver 
     const messageData = await Message.findAll({
@@ -142,6 +172,12 @@ router.get('/messages', withAuth, async (req, res) => {
 
 router.get('/messages/:id', withAuth, async (req, res) => {
   console.log(`GET /messages ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   try {
     // Get all messages
     const messageData = await Message.findAll({
@@ -200,8 +236,14 @@ router.get('/messages/:id', withAuth, async (req, res) => {
 });
 
 
-router.get('/createEvent', async (req, res) => {
+router.get('/createEvent', withAuth ,async (req, res) => {
   console.log(`GET /createEvent ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   res.render('createEvent', {
     logged_in: req.session.logged_in
   });
@@ -210,6 +252,12 @@ router.get('/createEvent', async (req, res) => {
 
 router.get('/searchUsers', async (req, res) => {
   console.log(`GET /searchUsers ROUTE SLAPPED`)
+  
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+  
   try {
     // Get all events and JOIN with user data
     const userData = await User.findAll({});
@@ -240,6 +288,12 @@ router.get('/createProfile', async (req, res) => {
 
 router.get('/user', withAuth, async (req, res) => {
   console.log(`GET /user ROUTE SLAPPED`);
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
