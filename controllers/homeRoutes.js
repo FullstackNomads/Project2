@@ -77,7 +77,8 @@ router.get('/events/:id', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['first_name', 'last_name'],
+          attributes: ['first_name', 'last_name']//,
+          // as: "User"
         },
       ],
     });
@@ -85,6 +86,7 @@ router.get('/events/:id', async (req, res) => {
     const creatorData = await User.findByPk(eventData.creator_id)
 
     const event = eventData.get({ plain: true });
+    console.log(event);
     res.render('singleEvent', {
       ...event,
       logged_in: req.session.logged_in,
