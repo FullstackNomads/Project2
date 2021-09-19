@@ -21,13 +21,17 @@ router.post('/', withAuth, async (req, res) => {
 
 router.post('/joinEvent', withAuth, async (req, res) => {
   console.log(`\n\nPOST EVENT "/joinEvent" ROUTE SLAPPED\n\n`)
-  console.log(req.body)
+  // console.log(req.body)
+  req.session.user_id = parseInt(req.session.user_id);
+  console.log(req.session.user_id)
   try {
+    req.body.user_id = req.session.user_id;
+    console.log(req.body);
     const newEvent = await UserEvent.create({
       ...req.body,
     });
-    res.status(200).json({ "id": newEvent.id });
-    console.log('\n\n*****NEW EVENT SUCCESSFULLY CREATED*****\n\n');
+    res.status(200).json({ messsage: `You have been signed up to join this event!` });
+    console.log('\n\n*****USER HAS BEEN ADDED TO EVENT*****\n\n');
   } catch (err) {
     console.log(err)
     res.status(400).json(err);
