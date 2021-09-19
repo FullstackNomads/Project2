@@ -75,9 +75,16 @@ router.get('/search', async (req, res) => {
 //   }
 // });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
   console.log(`\nEVENT DELETE "/" ROUTE SLAPPED\n`)
-  console.log(req.session)
+  // console.log(req.session)
+  console.log(req.session.user_id)
+  let eventToBeDeleted = await Event.findByPk(req.params.id, {});
+  // console.log(eventToBeDeleted);
+  console.log(eventToBeDeleted.creator_id);
+  if (req.session.user_id !== eventToBeDeleted.creator_id) {
+    return res.status(405).json('You may only delete events that you have created.')
+  }
   try {
     const eventData = await Event.destroy({
       where: {
