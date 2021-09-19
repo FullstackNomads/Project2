@@ -1,3 +1,50 @@
+var searchInput = 'search_input';
+var options = {
+  types: ['(cities)'],
+ };
+
+$(document).ready(function () {
+ var autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), options);
+  
+ google.maps.event.addListener(autocomplete, 'place_changed', function () {
+  var near_place = autocomplete.getPlace();
+  var latitude = near_place.geometry.location.lat();
+  var longitude = near_place.geometry.location.lng();
+  var latlng = new google.maps.LatLng(latitude, longitude);
+  var geocoder = geocoder = new google.maps.Geocoder();
+
+  geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+        
+        var country = null;
+        var city = null;
+        console.log(results);
+        results.forEach(function(element){
+          element.address_components.forEach(function(element2){
+            element2.types.forEach(function(element3){
+              switch(element3){
+                case 'country':
+                  country = element2.long_name;
+                  break;
+                case 'locality':
+                  city = element2.long_name;
+                  break;
+                case 'city':
+                  city = element2.long_name;
+                  break;
+              }
+            })
+          });
+        });    
+        
+        document.getElementById('city').value = city;
+        document.getElementById('country').value = country;
+        
+    }
+  });
+ });
+});
+
 
 const searchEventsFormHandler = async (event) => {
     event.preventDefault();

@@ -23,7 +23,7 @@ router.post('/', withAuth, async (req, res) => {
     const newEvent = await Event.create({
       ...req.body,
     });
-    res.status(200).json(newEvent);
+    res.status(200).json({"id": newEvent.id});
     console.log('\n\n*****NEW EVENT SUCCESSFULLY CREATED*****\n\n');
   } catch (err) {
     console.log(err)
