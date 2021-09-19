@@ -11,7 +11,7 @@ router.post('/', withAuth, async (req, res) => {
     const newEvent = await Event.create({
       ...req.body,
     });
-    res.status(200).json({"id": newEvent.id});
+    res.status(200).json({ "id": newEvent.id });
     console.log('\n\n*****NEW EVENT SUCCESSFULLY CREATED*****\n\n');
   } catch (err) {
     console.log(err)
@@ -55,35 +55,15 @@ router.get('/search', async (req, res) => {
   }
 });
 
-// router.delete('/:id', withAuth, async (req, res) => {
-//   try {
-//     const eventData = await Event.destroy({
-//       where: {
-//         id: req.params.id,
-//         creator: req.session.creator,
-//       },
-//     });
-//     console.log('Event successfully deleted');
-//     if (!eventData) {
-//       res.status(404).json({ message: 'No event found with this id!' });
-//       return;
-//     }
-
-//     res.status(200).json(eventData);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 router.delete('/:id', withAuth, async (req, res) => {
   console.log(`\nEVENT DELETE "/" ROUTE SLAPPED\n`)
-  // console.log(req.session)
-  console.log(req.session.user_id)
+  console.log(`THE CURRENTLY LOGGED IN USER_ID IS:\n`, req.session.user_id)
   let eventToBeDeleted = await Event.findByPk(req.params.id, {});
-  // console.log(eventToBeDeleted);
-  console.log(eventToBeDeleted.creator_id);
+  console.log(`THE ID OF THE EVENT THE USER IS TRYING TO DELETE IS:\n`, eventToBeDeleted.creator_id);
+
   if (req.session.user_id !== eventToBeDeleted.creator_id) {
-    return res.status(405).json('You may only delete events that you have created.')
+    return res.status(405).json({ message: 'You may only delete events that you have created.' })
   }
   try {
     const eventData = await Event.destroy({

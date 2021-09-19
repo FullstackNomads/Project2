@@ -33,7 +33,7 @@ router.get('/about', async (req, res) => {
 
 
 router.get('/user/:id', async (req, res) => {
-  console.log(`GET /user/:id ROUTE SLAPPED`)
+  console.log(`GET /user/${req.params.id} ROUTE SLAPPED`)
   try {
     const profileData = await User.findByPk(req.params.id, {});
 
@@ -59,7 +59,7 @@ router.get('/user/:id', async (req, res) => {
 
 
 router.get('/events/:id', async (req, res) => {
-  console.log(`GET /events/:id ROUTE SLAPPED`)
+  console.log(`\n\nGET /events/${req.params.id} ROUTE SLAPPED\n\n`)
   try {
     const eventData = await Event.findByPk(req.params.id, {
       include: [
@@ -70,11 +70,13 @@ router.get('/events/:id', async (req, res) => {
       ],
     });
 
-    const event = eventData.get({ plain: true });
+    const creatorData = await User.findByPk(eventData.creator_id)
 
+    const event = eventData.get({ plain: true });
     res.render('singleEvent', {
       ...event,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      creatorName: `${creatorData.first_name} ${creatorData.last_name}`
     });
     console.log('Single event successfully loaded')
   } catch (err) {
@@ -183,7 +185,7 @@ router.get('/messages/:id', withAuth, async (req, res) => {
 
 
     const messagesBetween = messageBetweenData.map((message) => message.get({ plain: true }));
-    
+
     // Pass serialized data and session flag into template
     res.render('message', {
       messages,
@@ -249,7 +251,7 @@ router.get('/user', withAuth, async (req, res) => {
         creator_id: req.session.user_id
       }
     });
-    const events = eventData.map((event) => event.get({ plain: true }));
+    // const events = eventData.map((event) => event.get({ plain: true }));
     const user = userData.get({ plain: true });
     const events = eventData.map((event) => event.get({ plain: true }));
 
