@@ -3,18 +3,6 @@ const session = require('express-session');
 const { Event, UserEvent } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-// router.post('/', withAuth, async (req, res) => {
-//   try {
-//     const newEvent = await Event.create({
-//       ...req.body,
-//       creator: req.session.creator,
-//     });
-//     res.status(200).json(newEvent);
-//     console.log('New event successfully created');
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
 
 router.post('/', withAuth, async (req, res) => {
   console.log(`POST EVENT "/" ROUTE SLAPPED`)
@@ -88,6 +76,8 @@ router.get('/search', async (req, res) => {
 // });
 
 router.delete('/:id', async (req, res) => {
+  console.log(`\nEVENT DELETE "/" ROUTE SLAPPED\n`)
+  console.log(req.session)
   try {
     const eventData = await Event.destroy({
       where: {
