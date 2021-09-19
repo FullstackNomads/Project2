@@ -239,15 +239,21 @@ router.get('/user', withAuth, async (req, res) => {
   console.log(`GET /user ROUTE SLAPPED`);
   try {
     // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Event }],
+    const userData = await User.findByPk(req.session.user_id, {});
+
+    const eventData = await Event.findAll({
+      where: {
+        creator_id: req.session.user_id
+      }
     });
+
     console.log("myuserdata", req.session.user_id, userData)
     const user = userData.get({ plain: true });
+    const events = eventData.map((event) => event.get({ plain: true }));
 
     res.render('userProfile', {
       ...user,
+      events: events,
       sameUser: true,
       logged_in: true
     });
