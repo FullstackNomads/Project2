@@ -17,22 +17,21 @@
     </div>
     <div class="col-8">
         <div class="container">
-            {{#if messagesBetween}}
+            {{#if specific_user }}
                 {{#each messagesBetween as |message|}}
                     <p class="m-0">From: {{message.sender_id}}: {{message.message}}</p>
                     <small class="m-0 text-muted">{{message.createdAt}}</small>
                 {{/each}}
 
             <hr>
-            <form>
+            <form id="create-message">
                 <div class="row my-3">
                     <div class="col-sm-10">
-                    <input class="form-control" id="inputMessage" placeholder="Message" required>
+                    <input class="form-control" id="message" autocomplete="off" placeholder="Message" required>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm">Send</button>
             </form>
-
 
             {{else}}
             <p class="lead">Please click on a user to see your messages</p>
@@ -41,3 +40,6 @@
         </div>
     </div>
 </div>
+
+
+<script src="/js/createMessage.js"></script>
