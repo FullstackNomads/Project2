@@ -19,6 +19,21 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+router.post('/joinEvent', withAuth, async (req, res) => {
+  console.log(`\n\nPOST EVENT "/joinEvent" ROUTE SLAPPED\n\n`)
+  console.log(req.body)
+  try {
+    const newEvent = await UserEvent.create({
+      ...req.body,
+    });
+    res.status(200).json({ "id": newEvent.id });
+    console.log('\n\n*****NEW EVENT SUCCESSFULLY CREATED*****\n\n');
+  } catch (err) {
+    console.log(err)
+    res.status(400).json(err);
+  }
+});
+
 
 router.get('/search', async (req, res) => {
   console.log(`GET EVENT "/search" ROUTE SLAPPED`);
@@ -60,7 +75,7 @@ router.delete('/:id', withAuth, async (req, res) => {
   console.log(`\nEVENT DELETE "/" ROUTE SLAPPED\n`)
   console.log(`THE CURRENTLY LOGGED IN USER_ID IS:\n`, req.session.user_id)
   let eventToBeDeleted = await Event.findByPk(req.params.id, {});
-  console.log(`THE ID OF THE EVENT THE USER IS TRYING TO DELETE IS:\n`, eventToBeDeleted.creator_id);
+  console.log(`THE CREATOR_ID OF THE EVENT THE USER IS TRYING TO DELETE IS:\n`, eventToBeDeleted.creator_id);
 
   if (req.session.user_id !== eventToBeDeleted.creator_id) {
     return res.status(405).json({ message: 'You may only delete events that you have created.' })
