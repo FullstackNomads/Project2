@@ -69,6 +69,7 @@ router.get('/search', withAuth, async (req, res) => {
           res.status(404).json({ message: 'No user found' });
           return;
         }
+        console.log(usersData); // ADDED THIS FOR DIAGNOSTIC PURPOSES
         res.json(usersData);
       })
 
@@ -77,49 +78,6 @@ router.get('/search', withAuth, async (req, res) => {
     res.status(400).json(err);
   }
 });
-
-
-
-
-
-router.get(`/attendees/:id`, withAuth, async (req, res) => {
-  console.log(`\n\nGET "/api/users/attendees/${req.params.id}" ROUTE SLAPPED\n\n`);
-  try {
-    // find all entries in the UserEvent table where the event_id equals the event in question
-    const attendeeData = await UserEvent.findAll({
-      where: { event_id: req.params.id }
-    })
-
-    // convert results into an array javascript objects
-    const attendees = attendeeData.map((attendee) => attendee.get({ plain: true }));
-
-    // filter out just the user ids from those entries
-    const attendeeUserIds = attendees.map((attendee) => attendee.user_id);
-
-    // Get the profiles for each user that is attending 
-    const attendeeProfiles = await User.findAll({
-      where: {
-        id: {
-          [Op.or]: [attendeeUserIds]
-        }
-      }
-    });
-
-    // convert results into an array javascript objects
-    const attendeeProfileObjects = attendeeProfiles.map((attendee) => attendee.get({ plain: true }));
-
-    console.log(attendeeProfileObjects);
-    // console.log(attendeeUserIds)
-    // console.log(attendeeProfileObjects)
-    res.status(200).json(attendeeProfileObjects);
-  } catch (err) {
-    console.log(err);
-    res.status(404).json(err);
-  }
-});
-
-
-
 
 
 
