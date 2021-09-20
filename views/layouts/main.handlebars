@@ -13,6 +13,8 @@
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSI3QJPlSZa7cnOXdAios8bW8QWUcClno&libraries=places&callback=initMap"></script>
 
@@ -23,14 +25,15 @@
 
 <body>
 
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler">
-        <span class="navbar-toggler-icon">💸</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler">
+        <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="/">Travel Companion</a>
       <div class="collapse navbar-collapse" id="navbarToggler">
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <!-- Conditionally render login or logout links -->
             {{#if logged_in}}
