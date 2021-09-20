@@ -4,35 +4,34 @@
     <div class="col-2 p-0">
         <div class="list-group">
 
-            
+
             {{#each messages as |message|}}
-                <a href="/messages/{{message.user}}" class="border-0 list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
+            <a href="/messages/{{message.user}}" class="border-0 list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{message.first_name}} {{message.last_name}}</h5>
-                    </div>
-                </a>
+                </div>
+            </a>
             {{/each}}
-            
+
         </div>
     </div>
     <div class="col-8">
         <div class="container">
             {{#if specific_user }}
-                {{#each messagesBetween as |message|}}
-                    <p class="m-0"><b>{{message.sender_first_name}}</b>: {{message.message}}</p>
-                    <small class="m-0 text-muted">{{message.createdAt}}</small>
-                {{/each}}
+            {{#each messagesBetween as |message|}}
+            <p class="m-0"><b>{{message.sender_first_name}}</b>: {{message.message}}</p>
+            <small class="m-0 text-muted">{{message.createdAt}}</small>
+            {{/each}}
 
             <hr>
             <form id="create-message">
                 <div class="row my-3">
                     <div class="col-sm-10">
-                    <input class="form-control" id="message" placeholder="Message" required>
+                        <input class="form-control" id="message" placeholder="Message" required>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm">Send</button>
             </form>
-
 
             {{else}}
             <p class="lead">Please click on a user to see your messages</p>

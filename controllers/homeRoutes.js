@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Event, User, UserEvent, Message } = require('../models');
 const withAuth = require('../utils/auth');
 // needed to make findAll more specific to what we need for messages
-const Op = require('Sequelize').Op
+const Op = require('sequelize').Op
 
 
 function getUniqueListBy(arr, key) {
