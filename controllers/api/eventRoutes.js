@@ -102,4 +102,23 @@ router.delete('/:id', withAuth, async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  try {
+    const event = await Event.update(
+      {
+        event_name: req.body.event_name,
+        date_time: req.body.date_time,
+        description: req.body.description,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      });
+    res.status(200).json(event);
+  } catch (err) {
+    res.status(500).json(err);
+  };
+});
+
 module.exports = router;
