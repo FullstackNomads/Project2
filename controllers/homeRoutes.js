@@ -77,8 +77,7 @@ router.get('/events/:id', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['first_name', 'last_name']//,
-          // as: "User"
+          attributes: ['first_name', 'last_name']
         },
       ],
     });
@@ -86,7 +85,6 @@ router.get('/events/:id', async (req, res) => {
     const creatorData = await User.findByPk(eventData.creator_id)
 
     const event = eventData.get({ plain: true });
-    console.log(event);
     res.render('singleEvent', {
       ...event,
       logged_in: req.session.logged_in,
@@ -161,6 +159,15 @@ router.get('/messages', withAuth, async (req, res) => {
     // filter the messages to get only the unique users that has have some sort of communication with me
     messages = getUniqueListBy(messages, "user")
 
+    for(let i = 0; i < messages.length; i ++){
+        let item = messages[i];
+        let u = item.user;
+        const u_details = await User.findByPk(u)
+        item["first_name"] = u_details.first_name;
+        item["last_name"] = u_details.last_name;
+    }
+
+    console.log(messages)
     // Pass serialized data and session flag into template
     res.render('message', {
       messages,
@@ -220,9 +227,24 @@ router.get('/messages/:id', withAuth, async (req, res) => {
       }
     }
     messages = getUniqueListBy(messages, "user")
-
+    for(let i = 0; i < messages.length; i ++){
+      let item = messages[i];
+      let u = item.user; // the user id
+      const u_details = await User.findByPk(u)
+      item["first_name"] = u_details.first_name;
+      item["last_name"] = u_details.last_name;
+    }
 
     const messagesBetween = messageBetweenData.map((message) => message.get({ plain: true }));
+
+    for(let i = 0; i < messagesBetween.length; i ++){
+      let item = messagesBetween[i];
+      let u = item.sender_id;
+      const u_details = await User.findByPk(u)
+      item["sender_first_name"] = u_details.first_name;
+      item["sender_last_name"] = u_details.last_name;
+    }
+
 
     // Pass serialized data and session flag into template
     res.render('message', {
