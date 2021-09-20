@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Event, User, UserEvent, Message } = require('../models');
 const withAuth = require('../utils/auth');
+
 // needed to make findAll more specific to what we need for messages
 const Op = require('sequelize').Op
 
@@ -37,6 +38,12 @@ router.get('/user/:id', async (req, res) => {
 
   if (!req.session.logged_in) {
     res.redirect('/login');
+    return;
+  }
+
+  // if user attempts to view their own page, redirect to their dashboard so that delete buttons appear on the events
+  if (req.session.user_id === req.params.id) {
+    res.redirect('/user')
     return;
   }
 
@@ -184,12 +191,12 @@ router.get('/messages', withAuth, async (req, res) => {
     // filter the messages to get only the unique users that has have some sort of communication with me
     messages = getUniqueListBy(messages, "user")
 
-    for(let i = 0; i < messages.length; i ++){
-        let item = messages[i];
-        let u = item.user;
-        const u_details = await User.findByPk(u)
-        item["first_name"] = u_details.first_name;
-        item["last_name"] = u_details.last_name;
+    for (let i = 0; i < messages.length; i++) {
+      let item = messages[i];
+      let u = item.user;
+      const u_details = await User.findByPk(u)
+      item["first_name"] = u_details.first_name;
+      item["last_name"] = u_details.last_name;
     }
 
     console.log(messages)
@@ -252,7 +259,7 @@ router.get('/messages/:id', withAuth, async (req, res) => {
       }
     }
     messages = getUniqueListBy(messages, "user")
-    for(let i = 0; i < messages.length; i ++){
+    for (let i = 0; i < messages.length; i++) {
       let item = messages[i];
       let u = item.user; // the user id
       const u_details = await User.findByPk(u)
@@ -262,7 +269,7 @@ router.get('/messages/:id', withAuth, async (req, res) => {
 
     const messagesBetween = messageBetweenData.map((message) => message.get({ plain: true }));
 
-    for(let i = 0; i < messagesBetween.length; i ++){
+    for (let i = 0; i < messagesBetween.length; i++) {
       let item = messagesBetween[i];
       let u = item.sender_id;
       const u_details = await User.findByPk(u)
