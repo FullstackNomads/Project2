@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Event, User, Message } = require('../models');
+const { Event, User, UserEvent, Message } = require('../models');
 const withAuth = require('../utils/auth');
 // needed to make findAll more specific to what we need for messages
 const Op = require('sequelize').Op
@@ -26,14 +26,20 @@ router.get('/', async (req, res) => {
 
 
 router.get('/about', async (req, res) => {
-  console.log(`About "/" ROUTE SLAPPED`)
+  console.log(`GET "/about" ROUTE SLAPPED`)
   res.render('about', {});
 });
 
 
 
 router.get('/user/:id', async (req, res) => {
-  console.log(`GET /user/:id ROUTE SLAPPED`)
+  console.log(`GET /user/${req.params.id} ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   try {
     const profileData = await User.findByPk(req.params.id, {});
 
@@ -59,22 +65,55 @@ router.get('/user/:id', async (req, res) => {
 
 
 router.get('/events/:id', async (req, res) => {
-  console.log(`GET /events/:id ROUTE SLAPPED`)
+  console.log(`\n\nGET /events/${req.params.id} ROUTE SLAPPED\n\n`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   try {
     const eventData = await Event.findByPk(req.params.id, {
       include: [
         {
           model: User,
-          attributes: ['first_name', 'last_name'],
+          attributes: ['first_name', 'last_name']
         },
       ],
     });
 
+    const creatorData = await User.findByPk(eventData.creator_id)
+
     const event = eventData.get({ plain: true });
+
+
+    const attendeeData = await UserEvent.findAll({
+      where: { event_id: req.params.id }
+    });
+
+    // convert results into an array javascript objects
+    const attendees = attendeeData.map((attendee) => attendee.get({ plain: true }));
+
+    // filter out just the user ids from those entries
+    const attendeeUserIds = attendees.map((attendee) => attendee.user_id);
+
+    // Get the profiles for each user that is attending 
+    const attendeeProfiles = await User.findAll({
+      where: {
+        id: {
+          [Op.or]: [attendeeUserIds]
+        }
+      }
+    });
+
+    // convert results into an array javascript objects
+    const attendeeProfileObjects = attendeeProfiles.map((attendee) => attendee.get({ plain: true }));
 
     res.render('singleEvent', {
       ...event,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      creatorName: `${creatorData.first_name} ${creatorData.last_name}`,
+      attendees: attendeeProfileObjects
     });
     console.log('Single event successfully loaded')
   } catch (err) {
@@ -84,6 +123,12 @@ router.get('/events/:id', async (req, res) => {
 
 router.get('/searchEvents', async (req, res) => {
   console.log(`GET /searchEvents ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   res.render('searchEvents', {
     logged_in: req.session.logged_in
   });
@@ -91,14 +136,26 @@ router.get('/searchEvents', async (req, res) => {
 
 router.get('/userDashboard', async (req, res) => {
   console.log(`GET /userDashboard ROUTE SLAPPED`)
-    res.render('userDashboard', {
-      logged_in: req.session.logged_in
-    });  
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
+  res.render('userDashboard', {
+    logged_in: req.session.logged_in
+  });
 });
 
 // Route to get all messages 
 router.get('/messages', withAuth, async (req, res) => {
   console.log(`GET /messages ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   try {
     // Get all messages where i am the sender or receiver 
     const messageData = await Message.findAll({
@@ -115,18 +172,27 @@ router.get('/messages', withAuth, async (req, res) => {
 
 
     // For each message, store the other person id in ["user"]
-    for(i = 0; i < messages.length; i++){
+    for (i = 0; i < messages.length; i++) {
       console.log(messages[i]);
-      if (messages[i].sender_id != req.session.user_id){
+      if (messages[i].sender_id != req.session.user_id) {
         messages[i]["user"] = messages[i].sender_id
       }
-      if (messages[i].receiver_id != req.session.user_id){
+      if (messages[i].receiver_id != req.session.user_id) {
         messages[i]["user"] = messages[i].receiver_id
       }
     }
     // filter the messages to get only the unique users that has have some sort of communication with me
     messages = getUniqueListBy(messages, "user")
 
+    for(let i = 0; i < messages.length; i ++){
+        let item = messages[i];
+        let u = item.user;
+        const u_details = await User.findByPk(u)
+        item["first_name"] = u_details.first_name;
+        item["last_name"] = u_details.last_name;
+    }
+
+    console.log(messages)
     // Pass serialized data and session flag into template
     res.render('message', {
       messages,
@@ -140,6 +206,12 @@ router.get('/messages', withAuth, async (req, res) => {
 
 router.get('/messages/:id', withAuth, async (req, res) => {
   console.log(`GET /messages ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   try {
     // Get all messages
     const messageData = await Message.findAll({
@@ -161,33 +233,49 @@ router.get('/messages/:id', withAuth, async (req, res) => {
     const messageBetweenData = await Message.findAll({
       where: {
         [Op.or]: [
-          {[Op.and]: [{ sender_id: req.session.user_id }, { receiver_id: req.params.id }] }, 
-          {[Op.and]: [{ sender_id: req.params.id }, { receiver_id: req.session.user_id }] }, 
+          { [Op.and]: [{ sender_id: req.session.user_id }, { receiver_id: req.params.id }] },
+          { [Op.and]: [{ sender_id: req.params.id }, { receiver_id: req.session.user_id }] },
         ]
       },
-      order: [['createdAt', 'DESC']]
+      order: [['createdAt', 'ASC']]
     })
 
     // Serialize data so the template can read it
     let messages = messageData.map((message) => message.get({ plain: true }));
-    for(i = 0; i < messages.length; i++){
+    for (i = 0; i < messages.length; i++) {
       console.log(messages[i]);
-      if (messages[i].sender_id != req.session.user_id){
+      if (messages[i].sender_id != req.session.user_id) {
         messages[i]["user"] = messages[i].sender_id
       }
-      if (messages[i].receiver_id != req.session.user_id){
+      if (messages[i].receiver_id != req.session.user_id) {
         messages[i]["user"] = messages[i].receiver_id
       }
     }
     messages = getUniqueListBy(messages, "user")
-
+    for(let i = 0; i < messages.length; i ++){
+      let item = messages[i];
+      let u = item.user; // the user id
+      const u_details = await User.findByPk(u)
+      item["first_name"] = u_details.first_name;
+      item["last_name"] = u_details.last_name;
+    }
 
     const messagesBetween = messageBetweenData.map((message) => message.get({ plain: true }));
+
+    for(let i = 0; i < messagesBetween.length; i ++){
+      let item = messagesBetween[i];
+      let u = item.sender_id;
+      const u_details = await User.findByPk(u)
+      item["sender_first_name"] = u_details.first_name;
+      item["sender_last_name"] = u_details.last_name;
+    }
+
 
     // Pass serialized data and session flag into template
     res.render('message', {
       messages,
       messagesBetween,
+      specific_user: true,
       userId: req.session.user_id,
       logged_in: req.session.logged_in
     });
@@ -197,8 +285,14 @@ router.get('/messages/:id', withAuth, async (req, res) => {
 });
 
 
-router.get('/createEvent', async (req, res) => {
+router.get('/createEvent', withAuth, async (req, res) => {
   console.log(`GET /createEvent ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   res.render('createEvent', {
     logged_in: req.session.logged_in
   });
@@ -207,6 +301,12 @@ router.get('/createEvent', async (req, res) => {
 
 router.get('/searchUsers', async (req, res) => {
   console.log(`GET /searchUsers ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   try {
     // Get all events and JOIN with user data
     const userData = await User.findAll({});
@@ -237,17 +337,30 @@ router.get('/createProfile', async (req, res) => {
 
 router.get('/user', withAuth, async (req, res) => {
   console.log(`GET /user ROUTE SLAPPED`);
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Event }],
+      // include: [{ model: Event }],
     });
-    console.log("myuserdata", req.session.user_id, userData)
+    const eventData = await Event.findAll({
+      where: {
+        creator_id: req.session.user_id
+      }
+    });
+    // const events = eventData.map((event) => event.get({ plain: true }));
     const user = userData.get({ plain: true });
+    const events = eventData.map((event) => event.get({ plain: true }));
 
     res.render('userProfile', {
       ...user,
+      events: events,
       sameUser: true,
       logged_in: true
     });
@@ -255,6 +368,7 @@ router.get('/user', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 // THIS ROUTE ONLY RETURNS THE LOGIN PAGE. IT DOES NOT ACTUALLY SEND THE EMAIL AND PASS FOR LOGIN VALIDATION. THAT IS IN THE API ROUTES.
 router.get('/login', (req, res) => {

@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const { User, UserInterest } = require('../../models');
+const { User, UserInterest, UserEvent } = require('../../models');
+const withAuth = require('../../utils/auth');
+const { Op } = require(`sequelize`)
 
 router.post('/', async (req, res) => {
   console.log(`POST USER "/" ROUTE SLAPPED`)
@@ -43,7 +45,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/search', async (req, res) => {
+router.get('/search', withAuth, async (req, res) => {
   console.log(`GET USER "/search" ROUTE SLAPPED`);
   try {
     const parameters = req.query;
@@ -59,14 +61,6 @@ router.get('/search', async (req, res) => {
       where["country_name"] = parameters.country;
     }
 
-    // IGNORING interests for now because it's not part of the user model
-    // if (parameters.interests){
-    //   interests=[]
-    //   for(i = 0; i < parameters.interests.length; i++){
-    //     interests.push({"interest": parameters.interests[i]})
-    //   }      
-    // }
-
     const usersData = await User.findAll({
       where: where
     })
@@ -75,6 +69,7 @@ router.get('/search', async (req, res) => {
           res.status(404).json({ message: 'No user found' });
           return;
         }
+        console.log(usersData); // ADDED THIS FOR DIAGNOSTIC PURPOSES
         res.json(usersData);
       })
 
@@ -83,6 +78,7 @@ router.get('/search', async (req, res) => {
     res.status(400).json(err);
   }
 });
+
 
 
 router.post('/login', async (req, res) => {
@@ -138,6 +134,9 @@ router.delete('/:id', async (req, res) => {
       },
     });
     console.log('User successfully deleted');
+    req.session.destroy(() => {
+      res.status(204).end();
+    })
     if (!userData) {
       res.status(404).json({ message: 'No user found with this id!' });
       return;
