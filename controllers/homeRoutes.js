@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Event, User, Message } = require('../models');
+const { Event, User, UserEvent, Message } = require('../models');
 const withAuth = require('../utils/auth');
 // needed to make findAll more specific to what we need for messages
 const Op = require('Sequelize').Op
@@ -85,10 +85,35 @@ router.get('/events/:id', async (req, res) => {
     const creatorData = await User.findByPk(eventData.creator_id)
 
     const event = eventData.get({ plain: true });
+
+
+    const attendeeData = await UserEvent.findAll({
+      where: { event_id: req.params.id }
+    });
+
+    // convert results into an array javascript objects
+    const attendees = attendeeData.map((attendee) => attendee.get({ plain: true }));
+
+    // filter out just the user ids from those entries
+    const attendeeUserIds = attendees.map((attendee) => attendee.user_id);
+
+    // Get the profiles for each user that is attending 
+    const attendeeProfiles = await User.findAll({
+      where: {
+        id: {
+          [Op.or]: [attendeeUserIds]
+        }
+      }
+    });
+
+    // convert results into an array javascript objects
+    const attendeeProfileObjects = attendeeProfiles.map((attendee) => attendee.get({ plain: true }));
+
     res.render('singleEvent', {
       ...event,
       logged_in: req.session.logged_in,
-      creatorName: `${creatorData.first_name} ${creatorData.last_name}`
+      creatorName: `${creatorData.first_name} ${creatorData.last_name}`,
+      attendees: attendeeProfileObjects
     });
     console.log('Single event successfully loaded')
   } catch (err) {
@@ -260,7 +285,7 @@ router.get('/messages/:id', withAuth, async (req, res) => {
 });
 
 
-router.get('/createEvent', withAuth ,async (req, res) => {
+router.get('/createEvent', withAuth, async (req, res) => {
   console.log(`GET /createEvent ROUTE SLAPPED`)
 
   if (!req.session.logged_in) {
@@ -276,12 +301,12 @@ router.get('/createEvent', withAuth ,async (req, res) => {
 
 router.get('/searchUsers', async (req, res) => {
   console.log(`GET /searchUsers ROUTE SLAPPED`)
-  
+
   if (!req.session.logged_in) {
     res.redirect('/login');
     return;
   }
-  
+
   try {
     // Get all events and JOIN with user data
     const userData = await User.findAll({});

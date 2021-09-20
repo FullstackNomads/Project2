@@ -11,13 +11,22 @@ const joinEventHandler = async (event) => {
   })
     .then((response) => {
       console.log(response.body);
-      alert(response.body.message)
+      alert(`Event Joined`)
     })
     .catch((err) => {
       alert(`Failed to join Event.`)
       console.log(err)
     })
 };
+
+const renderAttendees = async () => {
+  console.log(`RENDER ATTENDEES HANDLER FIRED`)
+  let event_id = joinEventButton.getAttribute('data-event_id');
+  let attendeeProfiles = await fetch(`/api/users/attendees/${event_id}`)
+  console.log(attendeeProfiles);
+}
+
+document.addEventListener(`DOMContentLoaded`, renderAttendees)
 
 
 joinEventButton.addEventListener(`click`, joinEventHandler)

@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const { User, UserInterest } = require('../../models');
+const { User, UserInterest, UserEvent } = require('../../models');
+const withAuth = require('../../utils/auth');
+const { Op } = require(`sequelize`)
 
 router.post('/', async (req, res) => {
   console.log(`POST USER "/" ROUTE SLAPPED`)
@@ -43,7 +45,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/search', async (req, res) => {
+router.get('/search', withAuth, async (req, res) => {
   console.log(`GET USER "/search" ROUTE SLAPPED`);
   try {
     const parameters = req.query;
@@ -58,14 +60,6 @@ router.get('/search', async (req, res) => {
     if (parameters.country) {
       where["country_name"] = parameters.country;
     }
-
-    // IGNORING interests for now because it's not part of the user model
-    // if (parameters.interests){
-    //   interests=[]
-    //   for(i = 0; i < parameters.interests.length; i++){
-    //     interests.push({"interest": parameters.interests[i]})
-    //   }      
-    // }
 
     const usersData = await User.findAll({
       where: where
@@ -83,6 +77,50 @@ router.get('/search', async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+
+
+
+
+router.get(`/attendees/:id`, withAuth, async (req, res) => {
+  console.log(`\n\nGET "/api/users/attendees/${req.params.id}" ROUTE SLAPPED\n\n`);
+  try {
+    // find all entries in the UserEvent table where the event_id equals the event in question
+    const attendeeData = await UserEvent.findAll({
+      where: { event_id: req.params.id }
+    })
+
+    // convert results into an array javascript objects
+    const attendees = attendeeData.map((attendee) => attendee.get({ plain: true }));
+
+    // filter out just the user ids from those entries
+    const attendeeUserIds = attendees.map((attendee) => attendee.user_id);
+
+    // Get the profiles for each user that is attending 
+    const attendeeProfiles = await User.findAll({
+      where: {
+        id: {
+          [Op.or]: [attendeeUserIds]
+        }
+      }
+    });
+
+    // convert results into an array javascript objects
+    const attendeeProfileObjects = attendeeProfiles.map((attendee) => attendee.get({ plain: true }));
+
+    console.log(attendeeProfileObjects);
+    // console.log(attendeeUserIds)
+    // console.log(attendeeProfileObjects)
+    res.status(200).json(attendeeProfileObjects);
+  } catch (err) {
+    console.log(err);
+    res.status(404).json(err);
+  }
+});
+
+
+
+
 
 
 router.post('/login', async (req, res) => {

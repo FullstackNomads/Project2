@@ -1,6 +1,5 @@
 <h1>{{event_name}}</h1>
 
-
 <div class="container">
   <div class="row">
     <div class="col">
@@ -37,4 +36,28 @@
       <button type="button" class="btn btn-primary" id="join-event" data-event_id="{{id}}">Join Event!</button>
     </div>
   </div>
-  <script src="/js/joinEvent.js"></script>
+
+  <hr>
+
+  <h5 class="display-5 mb-5">People attending {{event_name}}</h5>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+    <!-- Loop over each object in the events array -->
+    {{#each attendees as |attendee|}}
+    <div class="col event-list">
+      <div class="card shadow-sm p-4">
+
+        <div class="card-body">
+          <h5 class="card-title"><a href="/user/{{attendee.id}}">{{attendee.first_name}} {{attendee.last_name}}</a></h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{attendee.gender}}</h6>
+          <p class="card-text">{{attendee.bio}}</p>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+
+  </div>
+
+</div>
+<script src="/js/joinEvent.js"></script>
