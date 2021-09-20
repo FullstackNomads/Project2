@@ -37,28 +37,12 @@ Event.init(
       type: DataTypes.STRING,
       // NOT REQUIRED
     },
-    street_number: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    unit_number: {
-      type: DataTypes.INTEGER,
-      // NOT REQUIRED
-    },
-    street_name: {
+    location: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // NOT REQUIRED
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    state_province: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    postal_code: {
-      type: DataTypes.INTEGER,
       allowNull: false,
     },
     country: {
