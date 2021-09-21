@@ -2,13 +2,12 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Travel Companion</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/jass.css">
-
+  
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -17,50 +16,105 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+
+    
+
+
+    <style>
+      html,
+      body {
+        background-image: url("https://www.state.gov/wp-content/uploads/2020/11/shutterstock_186964970-scaled.jpg");
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+
+      .form-signin {
+        width: 100%;
+        max-width: 430px;
+        padding: 15px;
+        margin: auto;
+      }
+
+      .form-signin .checkbox {
+        font-weight: 400;
+      }
+
+      .form-signin .form-floating:focus-within {
+        z-index: 2;
+      }
+
+      .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
   </head>
   <body class="text-center">
     
-<main class="form-signin m-auto w-100">
-   <div class="container">
-    <div class="card shadow-lg">
-    <div class = "card-body">
-        <div class="row">
-			<div class="col-md-6 mx-auto">
-					 <div class="logo mb-3">
-						 <div class="col-md-12 text-center">
-							<h1>Login</h1>
-						 </div>
-					</div>
-            <form action="" class="form login-form" method="post" name="login">
-              <div class="form-group">
-                <label for="email-login">Email address</label>
-                <input type="form-input" name="email"  class="form-control" id="email-login" placeholder="Enter email">
-              </div>
-              <div class="form-group">
-                <label for="password-login">Password</label>
-                <input type="password" name="password" id="password-login"  class="form-control" placeholder="Enter Password">
-              </div>
-              <div class="col-md-12 text-center ">
-                <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
-              </div>
-              
-              <div class="form-group">
-                <p class="text-center">Don't have account? <a href="/createProfile" id="createAccount">Sign up here</a></p>
-              </div>
-           </form>
-				</div>
-			</div>
+<main class="form-signin">
+  
+  <div class="card p-3">
+    <div class="card-body">
+      
+  <form action="" class="form login-form" method="post" name="login">
+    <h1 class="h3 mb-3 fw-normal">Login</h1>
 
-      </div> 
+    <div class="form-floatingk">
+      <label for="email-login">Email address</label>
+      <input type="form-input" name="email"  class="form-control" id="email-login" placeholder="Enter email">
+    </div>
+    <div class="form-floafting">
+      <label for="password-login">Password</label>
+      <input type="password" name="password" id="password-login"  class="form-control" placeholder="Enter Password">
+    </div>
 
-</div>
-</div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+    <p class="text-center">Don't have account? <a href="/createProfile" id="createAccount">Sign up here</a></p>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
 
 
+
+
+  </form>
+  </div>
+  </div>
 </main>
 
 
+
     <script src="/js/login.js"></script>
+
   </body>
 </html>
 
@@ -69,27 +123,5 @@
 
 
 
-{{!-- <div class="row justify-content-center">
-  <div class="col-md-6 ">
-    <h1 class="display-1">Login</h1>
 
-    <form class="form login-form">
-      <div class="form-group">
-        <label for="email-login">email:</label>
-        <input class="form-input" type="text" id="email-login" />
-      </div>
-      <div class="form-group">
-        <label for="password-login">password:</label>
-        <input class="form-input" type="password" id="password-login" />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">login</button>
-      </div>
-      <h4>Dont have an account? Signup</h4>
-      <div class="form-group">
-        <a href="/createProfile" class="btn btn-primary" id="createAccount">Create Account</a>
-      </div>
-    </form>
-  </div>
-</div> --}}
 
