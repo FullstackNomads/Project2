@@ -1,6 +1,5 @@
 const disableAccountButtonHandler = async (user) => {
     console.log(`DISABLE ACCOUNT BUTTON HANDLER FIRED`)
-    if (user.target.hasAttribute('data-id')) {
         const id = user.target.getAttribute('data-id');
 
         const response = await fetch(`/api/users/${id}`, {
@@ -12,7 +11,6 @@ const disableAccountButtonHandler = async (user) => {
         } else {
             alert('Failed to disable user');
         }
-    }
 };
 
 document

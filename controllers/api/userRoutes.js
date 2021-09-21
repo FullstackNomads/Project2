@@ -127,10 +127,11 @@ router.post('/logout', (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
+  console.log(`PUT USER ROUTE SLAPPED`)
   try {
     const user = await User.update(
       {
-        is_active: 0,
+        is_active: 0
       },
       {
         where: {
@@ -138,10 +139,10 @@ router.put('/:id', async (req, res) => {
         },
       });
       req.session.destroy(() => {
-        res.redirect('/login');
+        res.status(204).end();
       })
-    } catch (err) {
-        res.status(500).json(err);
+  } catch (err) {
+    res.status(500).json(err);
   };
 });
 
