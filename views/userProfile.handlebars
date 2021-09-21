@@ -46,9 +46,8 @@
 
     <!-- Loop over each object in the events array -->
     {{#each events as |event|}}
-    <div class="col event-list">
-      <div class="card shadow-sm p-4">
-
+    <div class="col event-list" data-id="{{event.id}}">
+      <div class="card shadow-sm p-4 event-card">
         <div class="card-body">
           <h5 class="card-title"><a href="/events/{{event.id}}">{{event.event_name}}</a></h5>
           <h6 class="card-subtitle mb-2 text-muted">{{event.city_name}}</h6>
@@ -57,8 +56,8 @@
           <div class="d-flex justify-content-between align-items-center">
             <small class="text-muted">{{event.date_time}}</small>
           </div>
-          <button class="btn btn-sm btn-danger" data-id="{{event.id}}">DELETE</button>
         </div>
+        {{!-- <button class="btn btn-sm btn-danger delete">DELETE</button> --}}
       </div>
     </div>
     {{/each}}
@@ -67,5 +66,7 @@
 
 </div>
 
+{{#if sameUser}}
 <script src="/js/deleteEvent.js"></script>
 <script src="/js/deleteUser.js"></script>
+{{/if}}
