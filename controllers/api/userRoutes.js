@@ -102,6 +102,13 @@ router.post('/login', async (req, res) => {
       return;
     }
 
+    if (!userData.is_active) {
+      res
+        .status(400)
+        .json({ message: 'This account is currently disabled' });
+      return;
+    }
+
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
