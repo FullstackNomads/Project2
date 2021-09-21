@@ -3,7 +3,7 @@
 
   <form class="row gy-2 mb-4 gx-3 align-items-center" id="search-events">
     <div class="row">
-        <div class="col-lg-12">
+      <div class="col-lg-12">
         <div class="form-group">
           <label>Location:</label>
           <input type="text" class="form-control" id="search_input" placeholder="Type city..." />
@@ -60,6 +60,13 @@
       <h6 class="card-subtitle mb-2 text-muted">\{{date_time}}</h6>
       <p class="card-text">\{{description}}
     </div>
+  </div>
+</script>
+
+
+<script id="noevents-template" type="text/x-handlebars-template">
+  <div class="container">
+    <h4>No events found</h4>
   </div>
 </script>
 
