@@ -39,15 +39,17 @@ Event.init(
     },
     location: {
       type: DataTypes.STRING,
-      // NOT REQUIRED
+      // grab from google.api
     },
     city: {
       type: DataTypes.STRING,
       allowNull: false,
+      // grab from google.api
     },
     country: {
       type: DataTypes.STRING,
       allowNull: false,
+      // grab from google.api
     },
     interest_id: {
       type: DataTypes.INTEGER,

@@ -8,8 +8,8 @@
           <label>Location:</label>
           <input type="text" class="form-control" id="search_input" placeholder="Type city..." />
         </div>
-        
-     </div>
+
+      </div>
 
       <div class="form-group">
         <label for="city"> City: </label>
@@ -21,30 +21,72 @@
         <input class="form-control" type="text" id="country" disabled required placeholder="Please fill in location" />
       </div>
 
+      <div class="mb-3">
+        <label class="form-label" for="filterInterests">Filter interests</label>
+        <div class="card p-2" id="filterInterests">
+          <div class="form-check">
+            <input class="form-check-input interest" type="checkbox" value="1" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault"> Adventure </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input interest" type="checkbox" value="2" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault"> Sports </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input interest" type="checkbox" value="3" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault"> Food </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input interest" type="checkbox" value="4" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault"> Arts and Museums </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input interest" type="checkbox" value="5" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault"> History </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input interest" type="checkbox" value="6" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault"> Nightlife </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input interest" type="checkbox" value="7" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault"> Wellness </label>
+          </div>
+        </div>
+      </div>
 
-    <div class="col-12">
-      <label for="autoSizingInput">Select your interests</label>
+      {{!-- <div class="col-12">
+        <label for="autoSizingInput">Select your interests</label>
 
-      <select class="form-select" multiple>
-        <option value="sports">Sports</option>
-        <option value="adventure">Adventure</option>
-        <option value="wellness">Wellness</option>
-        <option value="nightlife">Nightlife</option>
-        <option value="artMuseum">Arts and Museums</option>
-        <option value="food">Food and Drinks</option>
-      </select>
-    </div>
+        <select class="form-select" multiple>
+          <option value="sports">Sports</option>
+          <option value="adventure">Adventure</option>
+          <option value="wellness">Wellness</option>
+          <option value="nightlife">Nightlife</option>
+          <option value="artMuseum">Arts and Museums</option>
+          <option value="food">Food and Drinks</option>
+        </select>
+      </div> --}}
 
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary">Search</button>
-    </div>
+      {{!-- <div class="col-sm-12 col-md-4 col-lg-3">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-3">
+        <button type="reset" class="btn btn-danger">Reset Form</button>
+      </div> --}}
+      <div class="container-fluid pb-4">
+        <button type="submit" class="btn btn-primary m-1 pb-2 col-sm-7 col-lg-3">Search</button>
+        <button type="reset" class="btn btn-danger m-1 col-sm-7 col-lg-3">Reset Form</button>
+      </div>
   </form>
 
+  <hr>
 
-  <div class="container">
-    <h2>Cannot find what you are looking for?</h2>
-    <a href="/createEvent" type="button" class="btn btn-primary">Create Your Own Experience!</a>
-
+  <div class="p-2">
+    <h2 class="mb-3">Can't find what you're looking for?</h2>
+    <div class="col-sm-12 col-md-6">
+      <a href="/createEvent" type="button" class="btn btn-primary">Create Your Own Experience!</a>
+    </div>
   </div>
 
 </div>
