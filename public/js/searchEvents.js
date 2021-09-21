@@ -90,7 +90,15 @@ const searchEventsFormHandler = async (event) => {
     $.each(results, function(idx, val){
         event = template(val);
         resultsdiv.append(event);
-    });   
+    });
+    
+    if(results.length == 0){
+      source = $("#noevents-template").html();
+      template = Handlebars.compile(source);
+     
+      resultsdiv.append(template({}))
+    }
+
   };
 
   

@@ -1,3 +1,46 @@
+var searchInput = 'search_input';
+ 
+$(document).ready(function () {
+ var autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {});
+  
+ google.maps.event.addListener(autocomplete, 'place_changed', function () {
+  var near_place = autocomplete.getPlace();
+  var latitude = near_place.geometry.location.lat();
+  var longitude = near_place.geometry.location.lng();
+  var latlng = new google.maps.LatLng(latitude, longitude);
+  var geocoder = geocoder = new google.maps.Geocoder();
+
+  geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+        
+        var country = null;
+        var city = null;
+        results.forEach(function(element){
+          element.address_components.forEach(function(element2){
+            element2.types.forEach(function(element3){
+              switch(element3){
+                case 'country':
+                  country = element2.long_name;
+                  break;
+                case 'locality':
+                  city = element2.long_name;
+                  break;
+                case 'city':
+                  city = element2.long_name;
+                  break;
+              }
+            })
+          });
+        });      
+        
+        document.getElementById('city').value = city;
+        document.getElementById('country').value = country;
+        
+    }
+  });
+ });
+});
+
 const searchUsersFormHandler = async (event) => {
     event.preventDefault();
     console.log(`searchUsersFormHandler FIRED`)
@@ -39,10 +82,18 @@ const searchUsersFormHandler = async (event) => {
     var template = Handlebars.compile(source);
     var resultsdiv = $("#results");
     resultsdiv.empty();
+    console.log(results);
     $.each(results, function(idx, val){
-        event = template(val);
-        resultsdiv.append(event);
+      event = template(val);
+      resultsdiv.append(event);
     });   
+    
+    if(results.length == 0){
+      source = $("#nousers-template").html();
+      template = Handlebars.compile(source);
+     
+      resultsdiv.append(template({}))
+    }
 
   };
   
