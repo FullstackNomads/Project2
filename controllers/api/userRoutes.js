@@ -82,35 +82,51 @@ router.get('/search', withAuth, async (req, res) => {
       });
 
       let usersWithInterestsProfiles = usersWithInterestsProfilesData.map((user) => user.get({ plain: true }));
+
+
       console.log(usersWithInterestsProfiles);
+
+
       if (parameters.gender) {
         console.log(`\n\nGENDER INCLUDED\n\n`);
-
-        usersWithInterestsProfiles.forEach((user, index) => {
-          if (user.gender !== parameters.gender) {
-            usersWithInterestsProfiles.splice(index, 1)
+        for (let i = usersWithInterestsProfiles.length - 1; i >= 0; i--) {
+          console.log('\n', usersWithInterestsProfiles[i].first_name)
+          console.log("CURRENT USER ITERATION GENDER: ", usersWithInterestsProfiles[i].gender);
+          console.log("GENDER PARAMETER PASSED BY USER: ", parameters.gender);
+          console.log(usersWithInterestsProfiles[i].gender === parameters.gender)
+          if (usersWithInterestsProfiles[i].gender !== parameters.gender) {
+            console.log(usersWithInterestsProfiles[i].first_name, "REMOVED")
+            usersWithInterestsProfiles.splice(i, 1)
           }
-        })
+        }
       };
 
       if (parameters.city) {
         console.log(`\n\nCITY INCLUDED\n\n`);
-
-        usersWithInterestsProfiles.forEach((user, index) => {
-          if (user.city_name !== parameters.city) {
-            usersWithInterestsProfiles.splice(index, 1)
+        for (let i = usersWithInterestsProfiles.length - 1; i >= 0; i--) {
+          console.log('\n', usersWithInterestsProfiles[i].first_name)
+          console.log("CURRENT USER ITERATION CITY: ", usersWithInterestsProfiles[i].city_name);
+          console.log("CITY PARAMETER PASSED BY USER: ", parameters.city);
+          console.log(usersWithInterestsProfiles[i].city_name === parameters.city)
+          if (usersWithInterestsProfiles[i].city_name !== parameters.city) {
+            console.log(usersWithInterestsProfiles[i].first_name, "REMOVED")
+            usersWithInterestsProfiles.splice(i, 1)
           }
-        })
+        }
       };
 
       if (parameters.country) {
         console.log(`\n\nCOUNTRY INCLUDED\n\n`);
-
-        usersWithInterestsProfiles.forEach((user, index) => {
-          if (user.country_name !== parameters.country) {
-            usersWithInterestsProfiles.splice(index, 1)
+        for (let i = usersWithInterestsProfiles.length - 1; i >= 0; i--) {
+          console.log('\n', usersWithInterestsProfiles[i].first_name)
+          console.log("CURRENT USER ITERATION COUNTRY: ", usersWithInterestsProfiles[i].country_name);
+          console.log("COUNTRY PARAMETER PASSED BY USER: ", parameters.country);
+          console.log(usersWithInterestsProfiles[i].country === parameters.country)
+          if (usersWithInterestsProfiles[i].country_name !== parameters.country) {
+            console.log(usersWithInterestsProfiles[i].first_name, "REMOVED")
+            usersWithInterestsProfiles.splice(i, 1)
           }
-        })
+        }
       };
 
       if (!userInterestsData.length) {
