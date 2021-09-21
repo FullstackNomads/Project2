@@ -100,6 +100,8 @@ const searchUsersFormHandler = async (event) => {
     resultsdiv.append(event);
   });
 
+  document.querySelector(`hr`).scrollIntoView({ behavior: "smooth" })
+
   if (results.length == 0) {
     source = $("#nousers-template").html();
     template = Handlebars.compile(source);

@@ -21,20 +21,6 @@
     </div>
 
 
-    {{!-- <div class="col-12">
-      <label for="autoSizingInput">Their interests</label>
-
-      <select class="form-select" id="interests" multiple>
-        <option value="1">Adventure</option>
-        <option value="2">Sports</option>
-        <option value="3">Food</option>
-        <option value="4">Arts and Museums</option>
-        <option value="5">History</option>
-        <option value="6">Nightlife</option>
-        <option value="7">Wellness</option>
-      </select>
-    </div> --}}
-
     <div class="mb-3">
       <label class="form-label" for="filterInterests">Filter interests</label>
       <div class="card p-2" id="filterInterests">
@@ -73,21 +59,24 @@
       <label for="autoSizingInput">Gender</label>
 
       <select class="form-select" id="gender">
-        <option disabled selected value> Select an option</option>
+        <option selected value> Select an option</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
         <option value="other">Other</option>
-
       </select>
     </div>
 
-    <div class="col-12">
+    <div class="col-sm-12 col-md-4 col-lg-3">
       <button type="submit" class="btn btn-primary">Search</button>
     </div>
+    <div class="col-sm-12 col-md-4 col-lg-3">
+      <button type="reset" class="btn btn-danger">Reset Form</button>
+    </div>
+
   </form>
 
-
-
+  <hr>
+  <br>
   <script id="users-template" type="text/x-handlebars-template">
   <div class="col">
     <div class="card shadow-sm p-4">
