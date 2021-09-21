@@ -29,7 +29,7 @@
           <a href="/messages/{{id}}" class="btn btn-primary">Message</a>
           {{/unless}}
           {{#if sameUser}}
-          <button type="button" class="btn btn-danger" id="deleteAccountButton" data-id="{{id}}">Delete Account</button>
+          <button type="button" class="btn btn-danger" id="disableAccountButton" data-id="{{id}}">Disable Account</button>
           {{/if}}
         </div>
       </div>
@@ -68,5 +68,5 @@
 
 {{#if sameUser}}
 <script src="/js/deleteEvent.js"></script>
-<script src="/js/deleteUser.js"></script>
+<script src="/js/disableUser.js"></script>
 {{/if}}

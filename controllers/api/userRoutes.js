@@ -126,6 +126,25 @@ router.post('/logout', (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  try {
+    const user = await User.update(
+      {
+        is_active: 0,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      });
+      req.session.destroy(() => {
+        res.redirect('/login');
+      })
+    } catch (err) {
+        res.status(500).json(err);
+  };
+});
+
 router.delete('/:id', async (req, res) => {
   try {
     const userData = await User.destroy({
