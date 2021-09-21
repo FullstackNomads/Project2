@@ -388,7 +388,7 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login');
+  res.render('login', {layout: false});
   console.log('Log in page successfully loaded')
 });
 

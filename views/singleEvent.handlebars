@@ -20,7 +20,7 @@
       <div class="row">
         <div class="col">
           Location:
-          {{location}}
+          {{city}}, {{country}}
         </div>
       </div>
       <div class="row">
@@ -39,22 +39,29 @@
 
   <hr>
 
-  <h5 class="display-5 mb-5">People attending {{event_name}}</h5>
+  <h3 class="mb-5">People attending {{event_name}}</h3>
+
+
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
     <!-- Loop over each object in the events array -->
     {{#each attendees as |attendee|}}
-    <div class="col event-list">
-      <div class="card shadow-sm p-4">
 
-        <div class="card-body">
-          <h5 class="card-title"><a href="/user/{{attendee.id}}">{{attendee.first_name}} {{attendee.last_name}}</a></h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{attendee.gender}}</h6>
-          <p class="card-text">{{attendee.bio}}</p>
+      <div class="col justify-content-center mx-auto">
+          <div class="card  text-center shadow-sm p-4 rounded justify-content-center">
+            <div class="center-text border-bottom py-4">
+              <img class="card-img-top border-bottom rounded-circle" style="width: 13rem;" src="https://i.imgur.com/ZSkeqnd.jpg" width="100">
+            </div>
+            <div class="card-body">
+                <a href="/user/{{attendee.id}}"><h5 class="card-title">{{attendee.first_name}} {{attendee.last_name}}</h5></a>
+                <h6 class="card-subtitle mb-2 text-muted">{{attendee.age}} years old</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{attendee.gender}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">From {{city_name}}, {{country_name}}</h6>
+            </div>
+          </div> 
         </div>
-      </div>
-    </div>
+
     {{/each}}
 
   </div>

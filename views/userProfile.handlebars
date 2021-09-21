@@ -1,5 +1,41 @@
-<div class="container">
+  <div class="container">
+  <div class="row">
+    <div class="col-md-6 img justify-content-center text-center">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvzOpl3-kqfNbPcA_u_qEZcSuvu5Je4Ce_FkTMMjxhB-J1wWin-Q"  alt="" class="img-rounded">
 
+      {{#unless sameUser}}
+        <div class="row mt-3">
+          <div class="col-12">
+              <a href="/messages/{{id}}" class="btn btn-primary">Message</a>
+          </div>
+        </div>        
+      {{/unless}}
+
+            {{#if sameUser}}
+
+        <div class="row mt-3">
+          <div class="col-12">
+              <button type="button" class="btn btn-danger" id="deleteAccountButton" data-id="{{id}}">Delete Account</button>
+          </div>
+        </div>        
+
+      {{/if}}
+
+    </div>
+    <div class="col-md-6 details">
+      <blockquote>
+        <h2>{{first_name}} {{last_name}}</h2>
+        <small><cite title="Source Title">From {{city_name}}, {{country_name}} <i class="icon-map-marker"></i></cite></small>
+      </blockquote>
+      <h6 class="card-subtitle mb-2 ">{{age}} years old</h6>
+      <h6 class="card-subtitle mb-2 text-capitalize">{{gender}}</h6>
+      <h6 class="card-subtitle mb-2 ">{{interest}}</h6>
+      <p class="card-text">{{bio}}</p>
+      <p class="card-text"><small class="text-muted"> This user has created {{#if events}} {{events.length}} {{else}} 0 {{/if}} events. </small></p>
+    </div>
+  </div>
+</div>
+{{!-- 
   <div class="card mb-5 border-0">
     <div class="row g-0">
       <div class="col-md-4">
@@ -24,20 +60,18 @@
           <p class="card-text"><small class="text-muted">
 
               This user has created {{#if events}} {{events.length}} {{else}} 0 {{/if}} events.
-            </small></p>
-          {{#unless sameUser}}
-          <a href="/messages/{{id}}" class="btn btn-primary">Message</a>
-          {{/unless}}
-          {{#if sameUser}}
-          <button type="button" class="btn btn-danger" id="deleteAccountButton" data-id="{{id}}">Delete Account</button>
-          {{/if}}
+            </small></p> --}}
+          
+          
         </div>
       </div>
     </div>
   </div>
   <hr>
 
-  <h5 class="display-5 mb-5">Events by {{first_name}}</h5>
+<div class="container">
+  <h5 class="display-6 mb-5">Events by {{first_name}}</h5>
+
   {{#unless events}}
   <p class="lead mb-5">This user has not created any events yet.</p>
   {{/unless}}
@@ -62,6 +96,7 @@
     </div>
     {{/each}}
 
+  </div>
   </div>
 
 </div>
