@@ -49,7 +49,6 @@ const searchUsersFormHandler = async (event) => {
   const country = $('#country').val();
   const gender = $("#gender").val();
 
-  // const interests = $('#interests').val();
   const interests = [];
   let checkBoxes = document.querySelectorAll(`.interest`)
   for (let i = 0; i < checkBoxes.length; i++) {

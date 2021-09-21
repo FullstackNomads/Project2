@@ -45,6 +45,8 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+
 router.get('/search', withAuth, async (req, res) => {
   console.log(`GET USER "/search" ROUTE SLAPPED`);
   try {
@@ -63,18 +65,18 @@ router.get('/search', withAuth, async (req, res) => {
             [Op.or]: [...parameters.interests]
           }
         }
-      })
+      });
       if (!userInterestsData.length) {
         res.status(404).json({ message: 'No user found' });
         return;
-      }
+      };
 
-      let UserInterests = userInterestsData.map((userInterest) => userInterest.get({ plain: true }));
-      let UsersIdsWithInterests = UserInterests.map((entry) => entry.user_id)
+      let userInterests = userInterestsData.map((userInterest) => userInterest.get({ plain: true }));
+      let userIdsWithInterests = userInterests.map((entry) => entry.user_id)
       let usersWithInterestsProfilesData = await User.findAll({
         where: {
           id: {
-            [Op.or]: [...UsersIdsWithInterests]
+            [Op.or]: [...userIdsWithInterests]
           }
         }
       });
@@ -119,7 +121,6 @@ router.get('/search', withAuth, async (req, res) => {
       res.json(usersWithInterestsProfiles);
       return;
     };
-
 
     // IF THERE ARE NO INTEREST FILTERS SELECTED, GO THIS ROUTE***
     console.log(`NO INTERESTS SELECTED`)
