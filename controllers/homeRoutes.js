@@ -116,7 +116,8 @@ router.get('/events/:id', async (req, res) => {
       ],
     });
     const event = eventData.get({ plain: true });
-
+    // FORMAT DATE
+    event.date_time = format_date_long(event.date_time);
     const creatorData = await User.findByPk(eventData.creator_id);
 
     const interestData = await Interest.findByPk(eventData.interest_id);
