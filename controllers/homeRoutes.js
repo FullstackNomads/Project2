@@ -279,6 +279,9 @@ router.get('/messages/:id', withAuth, async (req, res) => {
 
     // Serialize data so the template can read it
     let messages = messageData.map((message) => message.get({ plain: true }));
+
+
+
     for (i = 0; i < messages.length; i++) {
       console.log(messages[i]);
       if (messages[i].sender_id != req.session.user_id) {
@@ -295,7 +298,10 @@ router.get('/messages/:id', withAuth, async (req, res) => {
       const u_details = await User.findByPk(u)
       item["first_name"] = u_details.first_name;
       item["last_name"] = u_details.last_name;
+      messages[i].createdAt = format_date_time(messages[i].createdAt);
     }
+
+
 
     const messagesBetween = messageBetweenData.map((message) => message.get({ plain: true }));
 
@@ -305,6 +311,7 @@ router.get('/messages/:id', withAuth, async (req, res) => {
       const u_details = await User.findByPk(u)
       item["sender_first_name"] = u_details.first_name;
       item["sender_last_name"] = u_details.last_name;
+      messagesBetween[i].createdAt = format_date_time(messagesBetween[i].createdAt)
     }
 
 
