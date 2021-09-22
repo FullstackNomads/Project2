@@ -37,16 +37,17 @@ Event.init(
       type: DataTypes.STRING,
       // NOT REQUIRED
     },
-    location: {
-      type: DataTypes.STRING,
-      // grab from google.api
-    },
     city: {
       type: DataTypes.STRING,
       allowNull: false,
       // grab from google.api
     },
     country: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      // grab from google.api
+    },
+    location: {
       type: DataTypes.STRING,
       allowNull: false,
       // grab from google.api

@@ -10,7 +10,8 @@
     "city_name": "New York",
     "country_name": "United States",
     "latitude": 42.65258,
-    "longitude": -73.75623
+    "longitude": -73.75623,
+    "is_active": true
   },
   {
     "first_name": "Taylor",
@@ -23,7 +24,8 @@
     "city_name": "London",
     "country_name": "United Kingdom",
     "latitude": 51.50853,
-    "longitude": -0.12574
+    "longitude": -0.12574,
+    "is_active": true
   },
   {
     "first_name": "Shannon",
@@ -36,7 +38,8 @@
     "city_name": "Dublin",
     "country_name": "Ireland",
     "latitude": 53.33306,
-    "longitude": -6.24889
+    "longitude": -6.24889,
+    "is_active": true
   },
   {
     "first_name": "Ishaan",
@@ -49,7 +52,8 @@
     "city_name": "New Delhi",
     "country_name": "India",
     "latitude": 28.63576,
-    "longitude": 77.22445
+    "longitude": 77.22445,
+    "is_active": true
   },
   {
     "first_name": "Song",
@@ -62,7 +66,8 @@
     "city_name": "Beijing",
     "country_name": "China",
     "latitude": 39.9075,
-    "longitude": 116.39723
+    "longitude": 116.39723,
+    "is_active": true
   },
   {
     "first_name": "Anatoly",
@@ -75,7 +80,8 @@
     "city_name": "Moscow",
     "country_name": "Russia",
     "latitude": 39.9075,
-    "longitude": 116.39723
+    "longitude": 116.39723,
+    "is_active": true
   },
   {
     "first_name": "Anatoly1",
@@ -88,7 +94,8 @@
     "city_name": "Kabul",
     "country_name": "Afghanistan",
     "latitude": 39.9075,
-    "longitude": 116.39723
+    "longitude": 116.39723,
+    "is_active": false
   },
   {
     "first_name": "Anatoly2",
@@ -101,7 +108,8 @@
     "city_name": "Kabul",
     "country_name": "Afghanistan",
     "latitude": 39.9075,
-    "longitude": 116.39723
+    "longitude": 116.39723,
+    "is_active": false
   },
   {
     "first_name": "Anatoly3",
@@ -114,6 +122,7 @@
     "city_name": "Kabul",
     "country_name": "Afghanistan",
     "latitude": 39.9075,
-    "longitude": 116.39723
+    "longitude": 116.39723,
+    "is_active": false
   }
 ]
