@@ -49,7 +49,7 @@ $(document).ready(function () {
 const searchEventsFormHandler = async (event) => {
   event.preventDefault();
   console.log(`searchEventsFormHandler FIRED`)
-
+  // Added this try catch block because if the response has a length of 0 and nothing is returned, then it throws an exception and goes to the catch block which will render the no results found on the page and allow continued responsiveness of the app.
   try {
     const city = document.querySelector('#city').value.trim();
     const country = $('#country').val();
