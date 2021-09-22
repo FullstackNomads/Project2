@@ -5,12 +5,9 @@
     "date_time": "October 20, 2021 07:00:00",
     "description": "I will be going on a hike the morning of October 20th at Boca Raton Military Trails for some exercise.",
     "point_of_interest": "Military Trail Natural Area",
-    "street_number": 4600,
-    "street_name": "NW 9th Ave",
     "city": "Lighthouse Point",
-    "state_province": "Florida",
-    "postal_code": 33064,
-    "country": "United States of America",
+    "country": "United States",
+    "location": "Lighthouse Point, FL, USA",
     "interest_id": 7
   },
   {
@@ -19,12 +16,9 @@
     "date_time": "October 23, 2021 09:00:00",
     "description": "I will be doing Yoga at armour square park. Be there to have your chakras aligned.",
     "point_of_interest": "Armour Square Park",
-    "street_number": 3309,
-    "street_name": "S Shields Ave",
     "city": "Chicago",
-    "state_province": "Illinois",
-    "postal_code": 60616,
-    "country": "United States of America",
+    "country": "United States",
+    "location": "3309 S Shields Ave, Chicago, IL 60616",
     "interest_id": 7
   },
   {
@@ -33,13 +27,10 @@
     "date_time": "October 11, 2021 20:00:00",
     "description": "I will be near LA and have a bonfire on the beach and will have my bongos. Lets feel the rhythm.",
     "point_of_interest": "Dockweiler State Beach",
-    "street_number": 12000,
-    "street_name": "Vista Del Mar",
     "city": "Playa Del Rey",
-    "state_province": "California",
-    "postal_code": 90293,
-    "country": "United States of America",
-    "interest_id": 7
+    "country": "United States",
+    "location": "12000 Vista Del Mar, Playa Del Rey, CA 90293",
+    "interest_id": 6
   },
   {
     "creator_id": 1,
@@ -47,13 +38,10 @@
     "date_time": "October 30, 2021 12:00:00",
     "description": "I will be touring the London Sherlock Holmes museum if you would like to tag along!.",
     "point_of_interest": "Dockweiler State Beach",
-    "street_number": 221,
-    "street_name": "Baker St.",
     "city": "London",
-    "state_province": "Great Britain",
-    "postal_code": 90293,
     "country": "United Kingdom",
-    "interest_id": 7
+    "location": "221b Baker St, London NW1 6XE, United Kingdom",
+    "interest_id": 4
   },
   {
     "creator_id": 5,
@@ -61,13 +49,10 @@
     "date_time": "October 11, 2021 20:00:00",
     "description": "Having some drinks in Beijing.",
     "point_of_interest": "Great Leap Brewing",
-    "street_number": 12,
-    "street_name": "Xinzhong St.",
-    "city": "Dongcheng District",
-    "state_province": "Beijing",
-    "postal_code": 100000,
+    "city": "Beijing",
     "country": "China",
-    "interest_id": 6
+    "location": "China, Beijing, Dongcheng, Xinzhong St, 12",
+    "interest_id": 3
   },
   {
     "creator_id": 6,
@@ -75,12 +60,9 @@
     "date_time": "November 01, 2021 12:00:00",
     "description": "I will be jumping out of an airplane over Athens in honor of the ancient philosophers.",
     "point_of_interest": "Skydive Athens",
-    "street_number": 221,
-    "street_name": "Akrefnia",
     "city": "Athens",
-    "state_province": "Attica",
-    "postal_code": 32200,
     "country": "Greece",
+    "location": "Kopaida Airfield, Kastro Viotias 323 00, Greece",
     "interest_id": 1
   }
 ]

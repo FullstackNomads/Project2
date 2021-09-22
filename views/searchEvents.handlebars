@@ -1,70 +1,124 @@
-<h1>Try new experiences</h1>
-<div class="container">
+<div class="row">
+  <div class="col-12 text-center">
+    <h1 class="display-2"> Try new experiences</h1>
+  </div>
+</div>
 
-  <form class="row gy-2 mb-4 gx-3 align-items-center" id="search-events">
-    <div class="row">
-        <div class="col-lg-12">
-        <div class="form-group">
-          <label>Location:</label>
-          <input type="text" class="form-control" id="search_input" placeholder="Type city..." />
-        </div>
-        
-     </div>
+<div class="container my-5">
+  <div class="card shadow-lg">
+    <div class="card-body">
 
-      <div class="form-group">
-        <label for="city"> City: </label>
-        <input class="form-control" type="text" id="city" disabled required placeholder="Please fill in location" />
+      <form class="row gy-2 p-4 mb-2 gx-3 align-items-center" id="search-events">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label>Location:</label>
+              <input type="text" class="form-control" id="search_input" placeholder="Enter a city" />
+            </div>
+
+
+            <div class="row">
+              <div class='col-md-6'>
+                <div class="mb-3">
+                  {{!-- <label for="city"> City: </label> --}}
+                  <input class="form-control" type="text" id="city" disabled required placeholder="City" />
+                </div>
+              </div>
+              <div class='col-md-6'>
+                <div class="mb-3">
+                  {{!-- <label for="country"> Country: </label> --}}
+                  <input class="form-control" type="text" id="country" disabled required placeholder="Country" />
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="filterInterests">Filter interests</label>
+              <div class="card p-2" id="filterInterests">
+                <div class="form-check">
+                  <input class="form-check-input interest" type="checkbox" value="1" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault"> Adventure </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input interest" type="checkbox" value="2" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault"> Sports </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input interest" type="checkbox" value="3" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault"> Food </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input interest" type="checkbox" value="4" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault"> Arts and Museums </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input interest" type="checkbox" value="5" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault"> History </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input interest" type="checkbox" value="6" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault"> Nightlife </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input interest" type="checkbox" value="7" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault"> Wellness </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="container-fluid pb-4">
+              <button type="submit" class="btn btn-primary m-1 pb-2 col-sm-7 col-lg-3">Search</button>
+              <button type="reset" class="btn btn-danger m-1 col-sm-7 col-lg-3">Reset Form</button>
+            </div>
+      </form>
+
+      <hr>
+
+      <div class="container text-center mb-5">
+        <h4>Cannot find what you are looking for?</h4>
+        <a href="/createEvent" type="button" class="btn btn-primary">Create Your Own Experience!</a>
+
       </div>
-
-      <div class="mb-3">
-        <label for="country"> Country: </label>
-        <input class="form-control" type="text" id="country" disabled required placeholder="Please fill in location" />
-      </div>
-
-
-    <div class="col-12">
-      <label for="autoSizingInput">Select your interests</label>
-
-      <select class="form-select" multiple>
-        <option value="sports">Sports</option>
-        <option value="adventure">Adventure</option>
-        <option value="wellness">Wellness</option>
-        <option value="nightlife">Nightlife</option>
-        <option value="artMuseum">Arts and Museums</option>
-        <option value="food">Food and Drinks</option>
-      </select>
     </div>
 
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary">Search</button>
-    </div>
-  </form>
 
-
-  <div class="container">
-    <h2>Cannot find what you are looking for?</h2>
-    <a href="/createEvent" type="button" class="btn btn-primary">Create Your Own Experience!</a>
 
   </div>
 
-</div>
 
 
-<script id="events-template" type="text/x-handlebars-template">
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <a href="/events/\{{id}}">
-        <h5 class="card-title">\{{event_name}}</h5>
-      </a>
-      <h6 class="card-subtitle mb-2 text-muted">\{{point_of_interest}}</h6>
-      <h6 class="card-subtitle mb-2 text-muted">\{{date_time}}</h6>
-      <p class="card-text">\{{description}}
+  <script id="events-template" type="text/x-handlebars-template">
+
+ <div class="col event-list" data-id="{{event.id}}">
+      <div class="card shadow-sm p-4 event-card">
+        <div class="card-body">
+          <h5 class="card-title"><a href="/events/\{{id}}">\{{event_name}}</a></h5>
+          <h6 class="card-subtitle mb-2 text-muted">\{{city}}, \{{country}}</h6>
+
+          <p class="card-text">\{{description}}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted">\{{date_time}}</small>
+          </div>
+        </div>
+      </div>
     </div>
+
+
+  
+</script>
+
+
+  <script id="noevents-template" type="text/x-handlebars-template">
+  <div class="container text-center mt-4">
+    <h2>Sorry, no events found!</h2>
+    <p class="text-muted">Please try a different location or interest.</p>
   </div>
 </script>
 
-<div id="results">
-</div>
+  <div class="container mt-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="results">
+    </div>
+  </div>
 
 
-<script src="/js/searchEvents.js"></script>
+  <script src="/js/searchEvents.js"></script>
