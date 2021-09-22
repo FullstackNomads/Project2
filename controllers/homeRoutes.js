@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Event, User, UserEvent, Message } = require('../models');
+const { Event, User, UserEvent, UserInterest, Message, Interest } = require('../models');
 const withAuth = require('../utils/auth');
 
 // needed to make findAll more specific to what we need for messages
@@ -88,11 +88,12 @@ router.get('/events/:id', async (req, res) => {
         },
       ],
     });
-
-    const creatorData = await User.findByPk(eventData.creator_id)
-
     const event = eventData.get({ plain: true });
 
+    const creatorData = await User.findByPk(eventData.creator_id);
+
+    const interestData = await Interest.findByPk(eventData.interest_id);
+    const interest = interestData.get({ plain: true }).name;
 
     const attendeeData = await UserEvent.findAll({
       where: { event_id: req.params.id }
@@ -120,7 +121,8 @@ router.get('/events/:id', async (req, res) => {
       ...event,
       logged_in: req.session.logged_in,
       creatorName: `${creatorData.first_name} ${creatorData.last_name}`,
-      attendees: attendeeProfileObjects
+      attendees: attendeeProfileObjects,
+      interest: interest
     });
     console.log('Single event successfully loaded')
   } catch (err) {
@@ -361,15 +363,39 @@ router.get('/user', withAuth, async (req, res) => {
         creator_id: req.session.user_id
       }
     });
-    // const events = eventData.map((event) => event.get({ plain: true }));
+
+
     const user = userData.get({ plain: true });
     const events = eventData.map((event) => event.get({ plain: true }));
+
+    const userInterestData = await UserInterest.findAll({
+      where: {
+        user_id: user.id
+      }
+    })
+
+    const userInterestEntries = userInterestData.map((userInterest) => userInterest.get({ plain: true }));
+    const userInterestIds = userInterestEntries.map((userInterestEntry) => userInterestEntry.interest_id);
+    const interestsData = await Interest.findAll({
+      attributes: ['name'],
+      where: {
+        id: {
+          [Op.or]: [userInterestIds]
+        }
+      }
+    });
+    const interestEntries = interestsData.map((interest) => interest.get({ plain: true }));
+
+    const interests = interestEntries.map((interest) => interest.name)
+    const interestString = interests.join(', ')
+    console.log(interestString)
 
     res.render('userProfile', {
       ...user,
       events: events,
       sameUser: true,
-      logged_in: true
+      logged_in: true,
+      interests: interestString
     });
   } catch (err) {
     res.status(500).json(err);
@@ -388,7 +414,7 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login', {layout: false});
+  res.render('login', { layout: false });
   console.log('Log in page successfully loaded')
 });
 

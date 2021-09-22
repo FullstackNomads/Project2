@@ -49,59 +49,70 @@ $(document).ready(function () {
 const searchEventsFormHandler = async (event) => {
   event.preventDefault();
   console.log(`searchEventsFormHandler FIRED`)
+  // Added this try catch block because if the response has a length of 0 and nothing is returned, then it throws an exception and goes to the catch block which will render the no results found on the page and allow continued responsiveness of the app.
+  try {
+    const city = document.querySelector('#city').value.trim();
+    const country = $('#country').val();
 
-  const city = document.querySelector('#city').value.trim();
-  const country = $('#country').val();
-
-  const interests = [];
-  let checkBoxes = document.querySelectorAll(`.interest`)
-  for (let i = 0; i < checkBoxes.length; i++) {
-    if (checkBoxes[i].checked) {
-      interests.push(checkBoxes[i].value)
+    const interests = [];
+    let checkBoxes = document.querySelectorAll(`.interest`)
+    for (let i = 0; i < checkBoxes.length; i++) {
+      if (checkBoxes[i].checked) {
+        interests.push(checkBoxes[i].value)
+      }
+      continue;
     }
-    continue;
-  }
 
-  console.log(city, country);
-  console.log(interests);
+    console.log(city, country);
+    console.log(interests);
 
-  api_url = "/api/events/search?"
+    api_url = "/api/events/search?"
 
-  if (interests.length) {
-    for (i = 0; i < interests.length; i++) {
-      api_url += "&interests=" + interests[i];
+    if (interests.length) {
+      for (i = 0; i < interests.length; i++) {
+        api_url += "&interests=" + interests[i];
+      }
     }
-  }
 
-  if (country) {
-    api_url += "&country=" + country;
-  }
+    if (country) {
+      api_url += "&country=" + country;
+    }
 
-  if (city) {
-    api_url += "&city=" + city;
-  }
+    if (city) {
+      api_url += "&city=" + city;
+    }
 
-  const response = await fetch(api_url, {
-    method: 'GET'
-  });
-  const results = await response.json();
+    const response = await fetch(api_url, {
+      method: 'GET'
+    });
+    const results = await response.json();
+    console.log(`\n********RESULTS********\n`)
+    console.log(results)
+    console.log(`LENGTH OF RESULTS IS: ${results.length}`)
 
-  var source = $("#events-template").html();
-  var template = Handlebars.compile(source);
-  var resultsdiv = $("#results");
-  resultsdiv.empty();
-  $.each(results, function (idx, val) {
-    event = template(val);
-    resultsdiv.append(event);
-  });
+    var source = $("#events-template").html();
+    var template = Handlebars.compile(source);
+    var resultsdiv = $("#results");
+    resultsdiv.empty();
+    $.each(results, function (idx, val) {
+      event = template(val);
+      resultsdiv.append(event);
+    });
 
-  if (results.length == 0) {
+    if (!results.length) {
+      source = $("#noevents-template").html();
+      template = Handlebars.compile(source);
+
+      resultsdiv.append(template({}))
+    }
+  } catch (err) {
+    var resultsdiv = $("#results");
+    resultsdiv.empty();
     source = $("#noevents-template").html();
     template = Handlebars.compile(source);
 
     resultsdiv.append(template({}))
   }
-
 };
 
 
