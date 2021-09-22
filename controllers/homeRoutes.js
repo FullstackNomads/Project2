@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Event, User, UserEvent, Message } = require('../models');
+const { Event, User, UserEvent, Message, Interest } = require('../models');
 const withAuth = require('../utils/auth');
 
 // needed to make findAll more specific to what we need for messages
@@ -88,11 +88,12 @@ router.get('/events/:id', async (req, res) => {
         },
       ],
     });
-
-    const creatorData = await User.findByPk(eventData.creator_id)
-
     const event = eventData.get({ plain: true });
 
+    const creatorData = await User.findByPk(eventData.creator_id);
+
+    const interestData = await Interest.findByPk(eventData.interest_id);
+    const interest = interestData.get({ plain: true }).name;
 
     const attendeeData = await UserEvent.findAll({
       where: { event_id: req.params.id }
@@ -120,7 +121,8 @@ router.get('/events/:id', async (req, res) => {
       ...event,
       logged_in: req.session.logged_in,
       creatorName: `${creatorData.first_name} ${creatorData.last_name}`,
-      attendees: attendeeProfileObjects
+      attendees: attendeeProfileObjects,
+      interest: interest
     });
     console.log('Single event successfully loaded')
   } catch (err) {
@@ -388,7 +390,7 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login', {layout: false});
+  res.render('login', { layout: false });
   console.log('Log in page successfully loaded')
 });
 
