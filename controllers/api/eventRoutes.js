@@ -2,6 +2,7 @@ const router = require('express').Router();
 const session = require('express-session');
 const { Event, UserEvent } = require('../../models');
 const withAuth = require('../../utils/auth');
+const { format_date_long } = require(`../../utils/helpers`)
 const { Op } = require(`sequelize`)
 
 
@@ -66,7 +67,9 @@ router.get('/search', async (req, res) => {
         return;
       };
 
-      console.log(eventsWithInterest);
+      //FORMAT DATES IN RESULTS
+      eventsWithInterest.forEach((event) => event.date_time = format_date_long(event.date_time));
+
 
       if (parameters.city) {
         console.log(`\n\nCITY INCLUDED\n\n`);
@@ -129,6 +132,8 @@ router.get('/search', async (req, res) => {
         }
         console.log(`LINE 130 END REQ`);
         const events = eventsData.map((event) => event.get({ plain: true }));
+        // FORMAT DATES
+        events.forEach((event) => event.date_time = format_date_long(event.date_time));
         console.log(events);
         res.json(events);
       })
