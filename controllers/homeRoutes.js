@@ -58,11 +58,34 @@ router.get('/user/:id', async (req, res) => {
     const events = eventData.map((event) => event.get({ plain: true }));
     const user = profileData.get({ plain: true });
 
+    const userInterestData = await UserInterest.findAll({
+      where: {
+        user_id: user.id
+      }
+    })
+
+    const userInterestEntries = userInterestData.map((userInterest) => userInterest.get({ plain: true }));
+    const userInterestIds = userInterestEntries.map((userInterestEntry) => userInterestEntry.interest_id);
+    const interestsData = await Interest.findAll({
+      attributes: ['name'],
+      where: {
+        id: {
+          [Op.or]: [userInterestIds]
+        }
+      }
+    });
+    const interestEntries = interestsData.map((interest) => interest.get({ plain: true }));
+
+    const interests = interestEntries.map((interest) => interest.name)
+    const interestString = interests.join(', ')
+    console.log(interestString)
+
     res.render('userProfile', {
       ...user,
       events: events,
       sameUser: req.params.id == req.session.user_id,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      interests: interestString
     });
     console.log('Single user successfully loaded')
   } catch (err) {
