@@ -198,6 +198,13 @@ router.post('/login', async (req, res) => {
       return;
     }
 
+    if (!userData.is_active) {
+      res
+        .status(400)
+        .json({ message: 'This account is currently disabled' });
+      return;
+    }
+
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
@@ -220,6 +227,26 @@ router.post('/logout', (req, res) => {
   } else {
     res.status(404).end();
   }
+});
+
+router.put('/:id', async (req, res) => {
+  console.log(`PUT USER ROUTE SLAPPED`)
+  try {
+    const user = await User.update(
+      {
+        is_active: 0
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      });
+      req.session.destroy(() => {
+        res.status(204).end();
+      })
+  } catch (err) {
+    res.status(500).json(err);
+  };
 });
 
 router.delete('/:id', async (req, res) => {
