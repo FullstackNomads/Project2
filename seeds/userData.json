@@ -8,7 +8,7 @@
     "password": "password12345",
     "gender": "male",
     "city_name": "New York",
-    "country_name": "United States of America",
+    "country_name": "United States",
     "latitude": 42.65258,
     "longitude": -73.75623
   },
@@ -86,7 +86,7 @@
     "password": "password12345",
     "gender": "male",
     "city_name": "Kabul",
-    "country_name": "Afganistan",
+    "country_name": "Afghanistan",
     "latitude": 39.9075,
     "longitude": 116.39723
   },
@@ -99,7 +99,7 @@
     "password": "password12345",
     "gender": "male",
     "city_name": "Kabul",
-    "country_name": "Afganistan",
+    "country_name": "Afghanistan",
     "latitude": 39.9075,
     "longitude": 116.39723
   },
@@ -112,7 +112,7 @@
     "password": "password12345",
     "gender": "male",
     "city_name": "Kabul",
-    "country_name": "Afganistan",
+    "country_name": "Afghanistan",
     "latitude": 39.9075,
     "longitude": 116.39723
   }

@@ -45,31 +45,127 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+
 router.get('/search', withAuth, async (req, res) => {
   console.log(`GET USER "/search" ROUTE SLAPPED`);
   try {
     const parameters = req.query;
+    console.log(`\n\n`)
+    console.log(parameters)
+    console.log(`\n\n`)
+
+
+    // IF THERE ARE INTEREST FILTERS SELECTED, GO THIS ROUTE
+    if (parameters.hasOwnProperty(`interests`)) {
+      console.log(`\n\nINTERESTS SELECTED\n\n`)
+      let userInterestsData = await UserInterest.findAll({
+        where: {
+          interest_id: {
+            [Op.or]: [...parameters.interests]
+          }
+        }
+      });
+      if (!userInterestsData.length) {
+        res.status(404).json({ message: 'No user found' });
+        return;
+      };
+
+      let userInterests = userInterestsData.map((userInterest) => userInterest.get({ plain: true }));
+      let userIdsWithInterests = userInterests.map((entry) => entry.user_id)
+      let usersWithInterestsProfilesData = await User.findAll({
+        where: {
+          id: {
+            [Op.or]: [...userIdsWithInterests]
+          }
+        }
+      });
+
+      let usersWithInterestsProfiles = usersWithInterestsProfilesData.map((user) => user.get({ plain: true }));
+
+
+      console.log(usersWithInterestsProfiles);
+
+
+      if (parameters.gender) {
+        console.log(`\n\nGENDER INCLUDED\n\n`);
+        for (let i = usersWithInterestsProfiles.length - 1; i >= 0; i--) {
+          console.log('\n', usersWithInterestsProfiles[i].first_name)
+          console.log("CURRENT USER ITERATION GENDER: ", usersWithInterestsProfiles[i].gender);
+          console.log("GENDER PARAMETER PASSED BY USER: ", parameters.gender);
+          console.log(usersWithInterestsProfiles[i].gender === parameters.gender)
+          if (usersWithInterestsProfiles[i].gender !== parameters.gender) {
+            console.log(usersWithInterestsProfiles[i].first_name, "REMOVED")
+            usersWithInterestsProfiles.splice(i, 1)
+          }
+        }
+      };
+
+      if (parameters.city) {
+        console.log(`\n\nCITY INCLUDED\n\n`);
+        for (let i = usersWithInterestsProfiles.length - 1; i >= 0; i--) {
+          console.log('\n', usersWithInterestsProfiles[i].first_name)
+          console.log("CURRENT USER ITERATION CITY: ", usersWithInterestsProfiles[i].city_name);
+          console.log("CITY PARAMETER PASSED BY USER: ", parameters.city);
+          console.log(usersWithInterestsProfiles[i].city_name === parameters.city)
+          if (usersWithInterestsProfiles[i].city_name !== parameters.city) {
+            console.log(usersWithInterestsProfiles[i].first_name, "REMOVED")
+            usersWithInterestsProfiles.splice(i, 1)
+          }
+        }
+      };
+
+      if (parameters.country) {
+        console.log(`\n\nCOUNTRY INCLUDED\n\n`);
+        for (let i = usersWithInterestsProfiles.length - 1; i >= 0; i--) {
+          console.log('\n', usersWithInterestsProfiles[i].first_name)
+          console.log("CURRENT USER ITERATION COUNTRY: ", usersWithInterestsProfiles[i].country_name);
+          console.log("COUNTRY PARAMETER PASSED BY USER: ", parameters.country);
+          console.log(usersWithInterestsProfiles[i].country === parameters.country)
+          if (usersWithInterestsProfiles[i].country_name !== parameters.country) {
+            console.log(usersWithInterestsProfiles[i].first_name, "REMOVED")
+            usersWithInterestsProfiles.splice(i, 1)
+          }
+        }
+      };
+
+      if (!userInterestsData.length) {
+        res.status(404).json({ message: 'No user found' });
+        return;
+      }
+
+      res.json(usersWithInterestsProfiles);
+      return;
+    };
+
+    // IF THERE ARE NO INTEREST FILTERS SELECTED, GO THIS ROUTE***
+    console.log(`NO INTERESTS SELECTED`)
 
     let where = {}
     if (parameters.gender) {
       where["gender"] = parameters.gender;
-    }
+    };
+
     if (parameters.city) {
       where["city_name"] = parameters.city;
-    }
+    };
+
     if (parameters.country) {
       where["country_name"] = parameters.country;
-    }
+    };
 
-    const usersData = await User.findAll({
+    console.log(where)
+
+    await User.findAll({
       where: where
     })
       .then(usersData => {
+        // console.log(usersData);
         if (!usersData) {
           res.status(404).json({ message: 'No user found' });
           return;
         }
-        console.log(usersData); // ADDED THIS FOR DIAGNOSTIC PURPOSES
+        // console.log(usersData); // ADDED THIS FOR DIAGNOSTIC PURPOSES
         res.json(usersData);
       })
 
