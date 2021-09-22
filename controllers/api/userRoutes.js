@@ -235,9 +235,13 @@ router.put('/:id', async (req, res) => {
           id: req.params.id,
         },
       });
-      req.session.destroy(() => {
-        res.status(204).end();
-      })
+      req.session.save(() => {
+        req.session.user_id = req.params.id;
+        req.session.logged_in = true;
+        req.session.is_active = false;
+  
+        res.json({ message: 'Your account has been disabled' });
+      });
   } catch (err) {
     res.status(500).json(err);
   };
@@ -255,9 +259,13 @@ router.put('/reactivate/:id', async (req, res) => {
           id: req.params.id,
         },
       });
-      req.session.destroy(() => {
-        res.status(204).end();
-      })
+      req.session.save(() => {
+        req.session.user_id = req.params.id;
+        req.session.logged_in = true;
+        req.session.is_active = true;
+  
+        res.json({ message: 'Your account has been reactivated' });
+      });
   } catch (err) {
     res.status(500).json(err);
   };

@@ -7,7 +7,7 @@ const reactivateAccountButtonHandler = async (user) => {
         });
 
         if (response.ok) {
-            document.location.replace('/user');
+            document.location.replace('/');
         } else {
             alert('Failed to reactivate account');
         }
