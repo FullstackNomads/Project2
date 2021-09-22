@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Event, User, UserEvent, UserInterest, Message, Interest } = require('../models');
 const withAuth = require('../utils/auth');
+const { format_date_long, format_date_time } = require(`../utils/helpers`);
 
 // needed to make findAll more specific to what we need for messages
 const Op = require('sequelize').Op
@@ -56,6 +57,9 @@ router.get('/user/:id', async (req, res) => {
       }
     });
     const events = eventData.map((event) => event.get({ plain: true }));
+    // Format event dates
+    events.forEach((event) => event.date_time = format_date_long(event.date_time));
+
     const user = profileData.get({ plain: true });
 
     const userInterestData = await UserInterest.findAll({
@@ -391,6 +395,13 @@ router.get('/user', withAuth, async (req, res) => {
     const user = userData.get({ plain: true });
     const events = eventData.map((event) => event.get({ plain: true }));
 
+    // Format dates
+    events.forEach((event) => event.date_time = format_date_long(event.date_time));
+
+
+
+
+
     const userInterestData = await UserInterest.findAll({
       where: {
         user_id: user.id
@@ -421,6 +432,7 @@ router.get('/user', withAuth, async (req, res) => {
       interests: interestString
     });
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 });
