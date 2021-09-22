@@ -198,16 +198,10 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    if (!userData.is_active) {
-      res
-        .status(400)
-        .json({ message: 'This account is currently disabled' });
-      return;
-    }
-
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
+      req.session.is_active = userData.is_active;
 
       res.json({ user: userData, message: 'You are now logged in!' });
     });
@@ -230,7 +224,7 @@ router.post('/logout', (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  console.log(`PUT USER ROUTE SLAPPED`)
+  console.log(`DISABLE USER ROUTE SLAPPED`)
   try {
     const user = await User.update(
       {
@@ -241,9 +235,37 @@ router.put('/:id', async (req, res) => {
           id: req.params.id,
         },
       });
-      req.session.destroy(() => {
-        res.status(204).end();
-      })
+      req.session.save(() => {
+        req.session.user_id = req.params.id;
+        req.session.logged_in = true;
+        req.session.is_active = false;
+  
+        res.json({ message: 'Your account has been disabled' });
+      });
+  } catch (err) {
+    res.status(500).json(err);
+  };
+});
+
+router.put('/reactivate/:id', async (req, res) => {
+  console.log(`REACTIVATE USER ROUTE SLAPPED`)
+  try {
+    const user = await User.update(
+      {
+        is_active: 1
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      });
+      req.session.save(() => {
+        req.session.user_id = req.params.id;
+        req.session.logged_in = true;
+        req.session.is_active = true;
+  
+        res.json({ message: 'Your account has been reactivated' });
+      });
   } catch (err) {
     res.status(500).json(err);
   };

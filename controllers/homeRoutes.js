@@ -461,4 +461,28 @@ router.get('/login', (req, res) => {
   console.log('Log in page successfully loaded')
 });
 
+router.get('/reactivateAccount', async (req, res) => {
+  console.log(`GET /reactivateAccount ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+    });
+
+    const user = userData.get({ plain: true });
+
+  res.render('reactivateAccount', {
+    ...user,
+    logged_in: req.session.logged_in
+  });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
