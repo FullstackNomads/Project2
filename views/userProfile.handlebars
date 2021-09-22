@@ -1,43 +1,91 @@
 <div class="container">
+  <div class="row">
+    <div class="col-md-6 img justify-content-center text-center">
+      <img src="https://via.placeholder.com/150
 
-  <div class="card mb-5 border-0">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="250"
-          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image"
-          preserveAspectRatio="xMidYMid slice" focusable="false">
-          <title>Placeholder</title>
-          <rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6"
-            dy=".3em">Image</text>
-        </svg>
+C/O https://placeholder.com/" alt="" class="img-rounded">
 
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title display-5">{{first_name}} {{last_name}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{age}} years old</h6>
-          <h6 class="card-subtitle mb-2 text-muted">{{gender}}</h6>
-          <h6 class="card-subtitle mb-2 text-muted">From {{city_name}},
-            {{country_name}}</h6>
-          <h6 class="card-subtitle mb-2 text-muted">{{interest}}</h6>
-          <p class="card-text">{{bio}}.</p>
-          <p class="card-text"><small class="text-muted">
-
-              This user has created {{#if events}} {{events.length}} {{else}} 0 {{/if}} events.
-            </small></p>
-          {{#unless sameUser}}
+      {{#unless sameUser}}
+      <div class="row mt-3">
+        <div class="col-12">
           <a href="/messages/{{id}}" class="btn btn-primary">Message</a>
-          {{/unless}}
-          {{#if sameUser}}
-          <button type="button" class="btn btn-danger" id="deleteAccountButton" data-id="{{id}}">Delete Account</button>
-          {{/if}}
         </div>
+      </div>
+      {{/unless}}
+
+      {{#if sameUser}}
+
+      <div class="row mt-3">
+        <div class="col-12">
+          <button type="button" class="btn btn-danger" id="disableAccountButton" data-id="{{id}}">Disable
+            Account</button>
+        </div>
+      </div>
+
+      {{/if}}
+
+    </div>
+    <div class="col-md-6 details">
+      <blockquote>
+        <h2>{{first_name}} {{last_name}}</h2>
+        <small><cite title="Source Title">From {{city_name}}, {{country_name}} <i
+              class="icon-map-marker"></i></cite></small>
+      </blockquote>
+      <h6 class="card-subtitle mb-2 ">{{age}} years old</h6>
+      <h6 class="card-subtitle mb-2 text-capitalize">{{gender}}</h6>
+      <h6 class="card-subtitle mb-2 ">{{interest}}</h6>
+      <p class="card-text">{{bio}}</p>
+      <p class="card-text"><small class="text-muted"> This user has created {{#if events}} {{events.length}} {{else}} 0
+          {{/if}} events. </small></p>
+    </div>
+  </div>
+</div>
+{{!--
+<div class="card mb-5 border-0">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="250"
+        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image"
+        preserveAspectRatio="xMidYMid slice" focusable="false">
+        <title>Placeholder</title>
+        <rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6"
+          dy=".3em">Image</text>
+      </svg>
+
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title display-5">{{first_name}} {{last_name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{age}} years old</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{gender}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">From {{city_name}},
+          {{country_name}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{interest}}</h6>
+        <p class="card-text">{{bio}}.</p>
+        <p class="card-text"><small class="text-muted">
+
+            This user has created {{#if events}} {{events.length}} {{else}} 0 {{/if}} events.
+            <<<<<<< HEAD </small>
+        </p>
+        {{#unless sameUser}}
+        <a href="/messages/{{id}}" class="btn btn-primary">Message</a>
+        {{/unless}}
+        {{#if sameUser}}
+        <button type="button" class="btn btn-danger" id="disableAccountButton" data-id="{{id}}">Disable Account</button>
+        {{/if}}
+        </small></p> --}}
+
+
+
       </div>
     </div>
   </div>
-  <hr>
+</div>
+<hr>
 
-  <h5 class="display-5 mb-5">Events by {{first_name}}</h5>
+<div class="container">
+  <h5 class="display-6 mb-5">Events by {{first_name}}</h5>
+
   {{#unless events}}
   <p class="lead mb-5">This user has not created any events yet.</p>
   {{/unless}}
@@ -63,10 +111,11 @@
     {{/each}}
 
   </div>
+</div>
 
 </div>
 
 {{#if sameUser}}
 <script src="/js/deleteEvent.js"></script>
-<script src="/js/deleteUser.js"></script>
+<script src="/js/disableUser.js"></script>
 {{/if}}

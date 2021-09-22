@@ -1,3 +1,131 @@
+<div class="container">
+  <div class="card shadow-lg">
+    <div class = "card-body">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+
+      <div id="second">
+        <div class="myform form ">
+          <div class="logo mb-3 mt-4">
+            <div class="col-md-12 text-center">
+              <h1>Create Your Profile</h1>
+            </div>
+          </div>
+          <form class="signup-form" name="registration" id="create-profile">
+            <div class="row">
+              <div class='col-md-6'>
+                <div class="form-group">
+                  <label for="firstName-signup">First Name</label>
+                  <input type="text" name="firstname" class="form-control" id="firstName-signup" aria-describedby="emailHelp"
+                    placeholder="Enter First name" required>
+                </div>
+              </div>
+              <div class='col-md-6'>
+                <div class="form-group">
+                  <label for="lastName-signup">Last Name</label>
+                  <input type="text" name="lastname" class="form-control" id="lastName-signup" aria-describedby="emailHelp"
+                    placeholder="Enter Last name" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email-signup">Email address</label>
+              <input type="email" name="email" class="form-control" id="email-signup" aria-describedby="emailHelp"
+                placeholder="Enter email" required>
+            </div>
+            <div class="form-group">
+              <label for="password-signup">Password</label>
+              <input type="password" name="password" id="password-signup" class="form-control" aria-describedby="emailHelp"
+                placeholder="Enter Password" required>
+            </div>
+            <div class="row">
+              <div class='col-md-6'>
+                <div class="mb-4">
+                  <label for="age" class="form-label">Age</label>
+                  <input type="number" class="form-control" min="18" max="100" id="age" placeholder="Age" required>
+                </div>
+              </div>
+              <div class='col-md-6'>
+                <div class="mb-4">
+                  <label for="gender" class="form-label">Gender</label>
+                  <select class="form-select" id="gender" required>
+                    <option disabled selected value> Select an option</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            
+              <div class="form-group">
+                <label>Location:</label>
+                <input type="text" class="form-control" id="search_input" placeholder="Enter a city" required />
+              </div>
+              
+           
+         <div class="row">
+              <div class='col-md-6'>
+            <div class="mb-3">
+              {{!-- <label for="city"> City: </label> --}}
+              <input class="form-control" type="text" id="city" disabled required
+                placeholder="City" />
+            </div>
+            </div>
+            <div class='col-md-6'>
+            <div class="mb-3">
+              {{!-- <label for="country"> Country: </label> --}}
+              <input class="form-control" type="text" id="country" disabled required
+                placeholder="Country" />
+            </div>
+            </div>
+            </div>
+            <div class="mb-3">
+              <label for="interest" class="form-label">Select Interest:</label>
+              <select class="form-select" id="interest" required>
+                <option value="1"> Adventure </option>
+                <option value="2"> Sports </option>
+                <option value="3"> Food </option>
+                <option value="4"> Arts and Museums </option>
+                <option value="5"> History </option>
+                <option value="6"> Nightlife </option>
+                <option value="7"> Wellness </option>
+              </select>
+            </div>
+           
+            <div class="form-group mb-3">
+              <label for="bio">Your bio</label>
+              <textarea class="form-control" id="bio"></textarea>
+            </div>
+
+            <div class="input-group mb-3">
+              <input class="form-check-input mb-3 p-2" type="checkbox" value="" id="invalidCheck" required>
+              <label class="form-check-label" for="invalidCheck">
+                  I agree to the responsiblity agreement:
+                <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">
+                  Click here
+                </a>
+              </label>
+            </div>
+            <div class="col-md-4 text-center mb-3 ">
+              <button type="submit" class="btn btn-block mybtn btn-primary tx-tfm">Submit</button>
+            </div>
+
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+
+{{!-- 
+
 <div class="row mt-4 justify-content-center">
   <div class="col-md-8">
     <h1 class="display-1">Create your profile</h1>
@@ -19,18 +147,8 @@
         <label for="password-signup">Password:</label>
         <input class="form-control" type="password" id="password-signup" required />
       </div>
-      <div class="mb-3">
-        <label for="age" class="form-label">Age</label>
-        <input type="number" class="form-control" min="18" max="100" id="age" required>
-      </div>
-      <div class="mb-3">
-        <label for="gender" class="form-label">Gender</label>
-        <select class="form-select" id="gender" required>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
+     
+      
 
       <div class="form-group">
         <label for="city">City:</label>
@@ -300,7 +418,7 @@
           <label class="form-check-label" for="flexCheckDefault"> Sports </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="3" id="flexCheckDefault">
+          <input class="form-check-input interest" type="checkbox" value="3" id="flexCheckDefault">
           <label class="form-check-label" for="flexCheckDefault"> Food </label>
         </div>
         <div class="form-check">
@@ -321,27 +439,10 @@
         </div>
       </div>
 
-      <div class="form-group mb-3">
-        <label for="bio">Your bio</label>
-        <textarea class="form-control" id="bio"></textarea>
-      </div>
-
-
-      <div class="input-group mb-3">
-        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-        <label class="form-check-label" for="invalidCheck">
-          I agree to the responsiblity agreement:
-
-          <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">
-            Click here
-          </a>
-        </label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    
 
   </div>
-</div>
+</div> --}}
 
 
 <!-- termsModal -->

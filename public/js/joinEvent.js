@@ -11,7 +11,7 @@ const joinEventHandler = async (event) => {
   })
     .then((response) => {
       console.log(response.body);
-      alert(`Event Joined`)
+      location.reload();
     })
     .catch((err) => {
       alert(`Failed to join Event.`)
