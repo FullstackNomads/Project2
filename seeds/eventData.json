@@ -6,7 +6,8 @@
     "description": "I will be going on a hike the morning of October 20th at Boca Raton Military Trails for some exercise.",
     "point_of_interest": "Military Trail Natural Area",
     "city": "Lighthouse Point",
-    "country": "United States of America",
+    "country": "United States",
+    "location": "Lighthouse Point, FL, USA",
     "interest_id": 7
   },
   {
@@ -16,7 +17,8 @@
     "description": "I will be doing Yoga at armour square park. Be there to have your chakras aligned.",
     "point_of_interest": "Armour Square Park",
     "city": "Chicago",
-    "country": "United States of America",
+    "country": "United States",
+    "location": "3309 S Shields Ave, Chicago, IL 60616",
     "interest_id": 7
   },
   {
@@ -26,7 +28,8 @@
     "description": "I will be near LA and have a bonfire on the beach and will have my bongos. Lets feel the rhythm.",
     "point_of_interest": "Dockweiler State Beach",
     "city": "Playa Del Rey",
-    "country": "United States of America",
+    "country": "United States",
+    "location": "12000 Vista Del Mar, Playa Del Rey, CA 90293",
     "interest_id": 6
   },
   {
@@ -37,6 +40,7 @@
     "point_of_interest": "Dockweiler State Beach",
     "city": "London",
     "country": "United Kingdom",
+    "location": "221b Baker St, London NW1 6XE, United Kingdom",
     "interest_id": 4
   },
   {
@@ -47,6 +51,7 @@
     "point_of_interest": "Great Leap Brewing",
     "city": "Beijing",
     "country": "China",
+    "location": "China, Beijing, Dongcheng, Xinzhong St, 12",
     "interest_id": 3
   },
   {
@@ -57,6 +62,7 @@
     "point_of_interest": "Skydive Athens",
     "city": "Athens",
     "country": "Greece",
+    "location": "Kopaida Airfield, Kastro Viotias 323 00, Greece",
     "interest_id": 1
   }
 ]
