@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Event, User, UserEvent, Message, Interest } = require('../models');
+const { Event, User, UserEvent, UserInterest, Message, Interest } = require('../models');
 const withAuth = require('../utils/auth');
 
 // needed to make findAll more specific to what we need for messages
@@ -363,15 +363,39 @@ router.get('/user', withAuth, async (req, res) => {
         creator_id: req.session.user_id
       }
     });
-    // const events = eventData.map((event) => event.get({ plain: true }));
+
+
     const user = userData.get({ plain: true });
     const events = eventData.map((event) => event.get({ plain: true }));
+
+    const userInterestData = await UserInterest.findAll({
+      where: {
+        user_id: user.id
+      }
+    })
+
+    const userInterestEntries = userInterestData.map((userInterest) => userInterest.get({ plain: true }));
+    const userInterestIds = userInterestEntries.map((userInterestEntry) => userInterestEntry.interest_id);
+    const interestsData = await Interest.findAll({
+      attributes: ['name'],
+      where: {
+        id: {
+          [Op.or]: [userInterestIds]
+        }
+      }
+    });
+    const interestEntries = interestsData.map((interest) => interest.get({ plain: true }));
+
+    const interests = interestEntries.map((interest) => interest.name)
+    const interestString = interests.join(', ')
+    console.log(interestString)
 
     res.render('userProfile', {
       ...user,
       events: events,
       sameUser: true,
-      logged_in: true
+      logged_in: true,
+      interests: interestString
     });
   } catch (err) {
     res.status(500).json(err);
