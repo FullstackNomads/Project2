@@ -3,7 +3,7 @@ header, .project:not(:last-child) {
 }
 
 .no-button {
-  background: none;
+  background: none ;
   border: none;
   padding: 0;
   cursor: pointer;
@@ -26,4 +26,6 @@ header, .project:not(:last-child) {
 .bg-light {
   background-color: white;
 }
+
+
 
