@@ -1706,10 +1706,10 @@ form [type='radio'] {
 
 .homeimg {
   position:absolute;
-  /* width: 50%;
-  height: 70%; */
-  right: -1rem;
-  top: -2rem;
+  width: 45%;
+  height: 75%;
+  right: 5rem;
+  top: 4rem;
   z-index: -10000;
   opacity: 90%;
 }
@@ -1717,4 +1717,10 @@ form [type='radio'] {
 .navbar-brand {
   font-family: 'Crimson Text', serif;
   font-size: 30px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
