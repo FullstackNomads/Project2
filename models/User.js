@@ -69,6 +69,7 @@ User.init(
     },
     profile_picture: {
       type: DataTypes.STRING,
+      allowNull: false,
       defaultValue: `https://fullstacknomadimages.s3.us-east-2.amazonaws.com/1632419515031-defaultProfilePicture.png`
     }
   },

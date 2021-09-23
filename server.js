@@ -7,7 +7,7 @@ const helpers = require('./utils/helpers');
 const multer = require(`multer`);
 const upload = multer({
   limits: {
-    fileSize: 1000000,
+    fileSize: 2000000, //MAX IMAGE SIZE 2MB
     fileFilter: function (req, file, cb) {
       checkFileType(file, cb);
     }
