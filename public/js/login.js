@@ -19,7 +19,9 @@ const loginFormHandler = async (event) => {
       // If successful, redirect the browser to the profile page
       document.location.replace('/userdashboard');
     } else {
-      $('#failedLoginModal').modal('show');
+      $("#errorMsg").removeClass("d-none")
+      console.log("errrr")
+      // $('#failedLoginModal').modal('show');
     }
   }
 };
