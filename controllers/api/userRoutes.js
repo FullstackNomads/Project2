@@ -6,7 +6,19 @@ const { uploadFile } = require(`../../multerS3`)
 
 router.post('/', async (req, res) => {
   console.log(`POST USER "/" ROUTE SLAPPED`)
-  console.log(req.body)
+  console.log(req.file)
+  console.log(req.body.fd.getAll(`first_name`))
+  console.log(fd.getAll(`last_name`))
+  console.log(fd.getAll(`email`))
+  console.log(fd.getAll(`password`))
+  console.log(fd.getAll(`age`))
+  console.log(fd.getAll(`gender`))
+  console.log(fd.getAll(`location`))
+  console.log(fd.getAll(`country_name`))
+  console.log(fd.getAll(`city_name`))
+  console.log(fd.getAll(`bio`))
+  console.log(fd.getAll(`interests`))
+  console.log(fd.getAll(`profile_picture`))
   try {
 
     return;
