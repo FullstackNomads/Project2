@@ -1,8 +1,10 @@
 const router = require('express').Router();
-const { Event, User, UserEvent, Message } = require('../models');
+const { Event, User, UserEvent, UserInterest, Message, Interest } = require('../models');
 const withAuth = require('../utils/auth');
+const { format_date_long, format_date_time } = require(`../utils/helpers`);
+
 // needed to make findAll more specific to what we need for messages
-const Op = require('Sequelize').Op
+const Op = require('sequelize').Op
 
 
 function getUniqueListBy(arr, key) {
@@ -40,6 +42,12 @@ router.get('/user/:id', async (req, res) => {
     return;
   }
 
+  // if user attempts to view their own page, redirect to their dashboard so that delete buttons appear on the events
+  if (req.session.user_id === req.params.id) {
+    res.redirect('/user')
+    return;
+  }
+
   try {
     const profileData = await User.findByPk(req.params.id, {});
 
@@ -49,13 +57,39 @@ router.get('/user/:id', async (req, res) => {
       }
     });
     const events = eventData.map((event) => event.get({ plain: true }));
+    // Format event dates
+    events.forEach((event) => event.date_time = format_date_long(event.date_time));
+
     const user = profileData.get({ plain: true });
+
+    const userInterestData = await UserInterest.findAll({
+      where: {
+        user_id: user.id
+      }
+    })
+
+    const userInterestEntries = userInterestData.map((userInterest) => userInterest.get({ plain: true }));
+    const userInterestIds = userInterestEntries.map((userInterestEntry) => userInterestEntry.interest_id);
+    const interestsData = await Interest.findAll({
+      attributes: ['name'],
+      where: {
+        id: {
+          [Op.or]: [userInterestIds]
+        }
+      }
+    });
+    const interestEntries = interestsData.map((interest) => interest.get({ plain: true }));
+
+    const interests = interestEntries.map((interest) => interest.name)
+    const interestString = interests.join(', ')
+    console.log(interestString)
 
     res.render('userProfile', {
       ...user,
       events: events,
       sameUser: req.params.id == req.session.user_id,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      interests: interestString
     });
     console.log('Single user successfully loaded')
   } catch (err) {
@@ -81,11 +115,13 @@ router.get('/events/:id', async (req, res) => {
         },
       ],
     });
-
-    const creatorData = await User.findByPk(eventData.creator_id)
-
     const event = eventData.get({ plain: true });
+    // FORMAT DATE
+    event.date_time = format_date_long(event.date_time);
+    const creatorData = await User.findByPk(eventData.creator_id);
 
+    const interestData = await Interest.findByPk(eventData.interest_id);
+    const interest = interestData.get({ plain: true }).name;
 
     const attendeeData = await UserEvent.findAll({
       where: { event_id: req.params.id }
@@ -113,7 +149,8 @@ router.get('/events/:id', async (req, res) => {
       ...event,
       logged_in: req.session.logged_in,
       creatorName: `${creatorData.first_name} ${creatorData.last_name}`,
-      attendees: attendeeProfileObjects
+      attendees: attendeeProfileObjects,
+      interest: interest
     });
     console.log('Single event successfully loaded')
   } catch (err) {
@@ -184,12 +221,12 @@ router.get('/messages', withAuth, async (req, res) => {
     // filter the messages to get only the unique users that has have some sort of communication with me
     messages = getUniqueListBy(messages, "user")
 
-    for(let i = 0; i < messages.length; i ++){
-        let item = messages[i];
-        let u = item.user;
-        const u_details = await User.findByPk(u)
-        item["first_name"] = u_details.first_name;
-        item["last_name"] = u_details.last_name;
+    for (let i = 0; i < messages.length; i++) {
+      let item = messages[i];
+      let u = item.user;
+      const u_details = await User.findByPk(u)
+      item["first_name"] = u_details.first_name;
+      item["last_name"] = u_details.last_name;
     }
 
     console.log(messages)
@@ -242,6 +279,9 @@ router.get('/messages/:id', withAuth, async (req, res) => {
 
     // Serialize data so the template can read it
     let messages = messageData.map((message) => message.get({ plain: true }));
+
+
+
     for (i = 0; i < messages.length; i++) {
       console.log(messages[i]);
       if (messages[i].sender_id != req.session.user_id) {
@@ -252,22 +292,26 @@ router.get('/messages/:id', withAuth, async (req, res) => {
       }
     }
     messages = getUniqueListBy(messages, "user")
-    for(let i = 0; i < messages.length; i ++){
+    for (let i = 0; i < messages.length; i++) {
       let item = messages[i];
       let u = item.user; // the user id
       const u_details = await User.findByPk(u)
       item["first_name"] = u_details.first_name;
       item["last_name"] = u_details.last_name;
+      messages[i].createdAt = format_date_time(messages[i].createdAt);
     }
+
+
 
     const messagesBetween = messageBetweenData.map((message) => message.get({ plain: true }));
 
-    for(let i = 0; i < messagesBetween.length; i ++){
+    for (let i = 0; i < messagesBetween.length; i++) {
       let item = messagesBetween[i];
       let u = item.sender_id;
       const u_details = await User.findByPk(u)
       item["sender_first_name"] = u_details.first_name;
       item["sender_last_name"] = u_details.last_name;
+      messagesBetween[i].createdAt = format_date_time(messagesBetween[i].createdAt)
     }
 
 
@@ -354,17 +398,49 @@ router.get('/user', withAuth, async (req, res) => {
         creator_id: req.session.user_id
       }
     });
-    // const events = eventData.map((event) => event.get({ plain: true }));
+
+
     const user = userData.get({ plain: true });
     const events = eventData.map((event) => event.get({ plain: true }));
+
+    // Format dates
+    events.forEach((event) => event.date_time = format_date_long(event.date_time));
+
+
+
+
+
+    const userInterestData = await UserInterest.findAll({
+      where: {
+        user_id: user.id
+      }
+    })
+
+    const userInterestEntries = userInterestData.map((userInterest) => userInterest.get({ plain: true }));
+    const userInterestIds = userInterestEntries.map((userInterestEntry) => userInterestEntry.interest_id);
+    const interestsData = await Interest.findAll({
+      attributes: ['name'],
+      where: {
+        id: {
+          [Op.or]: [userInterestIds]
+        }
+      }
+    });
+    const interestEntries = interestsData.map((interest) => interest.get({ plain: true }));
+
+    const interests = interestEntries.map((interest) => interest.name)
+    const interestString = interests.join(', ')
+    console.log(interestString)
 
     res.render('userProfile', {
       ...user,
       events: events,
       sameUser: true,
-      logged_in: true
+      logged_in: true,
+      interests: interestString
     });
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 });
@@ -381,8 +457,32 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login');
+  res.render('login', { layout: false });
   console.log('Log in page successfully loaded')
+});
+
+router.get('/reactivateAccount', async (req, res) => {
+  console.log(`GET /reactivateAccount ROUTE SLAPPED`)
+
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+    });
+
+    const user = userData.get({ plain: true });
+
+  res.render('reactivateAccount', {
+    ...user,
+    logged_in: req.session.logged_in
+  });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

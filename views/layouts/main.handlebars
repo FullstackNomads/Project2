@@ -17,50 +17,59 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600&display=swap" rel="stylesheet">
 
 
   {{!--
   <link rel="stylesheet" href="/css/style.css"> --}}
+
+  
 </head>
 
-<body>
+<body >
 
+  
+<header>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container-fluid clearfix p-0">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="/">Travel Companion</a>
+      <img src="/images/logo.png" alt="" width="70" height="50" class="d-inline-block align-text-top">
+      <a class="navbar-brand text-decoration-none" href="/"> wandir</a>
+
       <div class="collapse navbar-collapse flex-row-reverse" id="navbarToggler">
         <div id="navbarNav">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav  ml-auto ">
             <!-- Conditionally render login or logout links -->
             {{#if logged_in}}
             <li class="nav-item">
-              <a class="nav-link" href="/searchUsers">People</a>
+              <a class="nav-link text-decoration-none" href="/searchUsers">People</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/searchEvents">Experiences</a>
+              <a class="nav-link text-decoration-none" href="/searchEvents">Experiences</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/messages">Messages</a>
+              <a class="nav-link text-decoration-none" href="/messages">Messages</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/user">Profile</a>
+              <a class="nav-link text-decoration-none" href="/user">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="logout" href="#">Logout</a>
+              <a class="nav-link text-decoration-none" id="logout" href="#">Logout</a>
             </li>
             {{else}}
             <li class="nav-item">
-              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link text-decoration-none" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/about">About</a>
+              <a class="nav-link text-decoration-none" href="/about">About</a>
             </li>
             <li class="nav-item">
-              <a href="/login" class="nav-link">Login</a>
+              <a href="/login" class="nav-link text-decoration-none">Login</a>
             </li>
             {{/if}}
           </ul>
@@ -68,23 +77,25 @@
       </div>
     </div>
   </nav>
+</header>
 
 
-  <main class="container container-fluid mt-5">
+  <main class="mt-5">
     <!-- Render the sub layout -->
     {{{ body }}}
   </main>
 
-  <footer class="footer mt-3" style="background-color: #deded5;">
-    <div class="container p-4">
+  {{!-- <footer class="footer mt-5 small">
+    <div class="p-4">
       <div class="row">
-        <div class="col-lg-9 col-md-12 mb-4">
+        <div class="col-lg-9 col-md-12 mb-4 small">
           <h5 class="mb-3" style="letter-spacing: 2px; color: #818963;">footer content</h5>
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
             molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
             voluptatem veniam, est atque cumque eum delectus sint!
           </p>
+          <p></p>
         </div>
         <div class="col-lg-3 col-md-6 mb-4">
           <h5 class="mb-3" style="letter-spacing: 2px; color: #818963;">links</h5>
@@ -106,13 +117,15 @@
 
       </div>
     </div>
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2021 Copyright:
-      <a class="text-dark" href="/">websitename.com</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
+    
+    
+  </footer> --}}
 
+<footer class="footer mt-auto py-3">
+  <div class="container text-center">
+    <span class="text-muted">© 2021 Wandir. All rights reserved.</span>
+  </div>
+</footer>
 
   <!-- Render script for logged in users only -->
   {{#if logged_in}}

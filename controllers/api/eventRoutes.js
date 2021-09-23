@@ -2,6 +2,8 @@ const router = require('express').Router();
 const session = require('express-session');
 const { Event, UserEvent } = require('../../models');
 const withAuth = require('../../utils/auth');
+const { format_date_long } = require(`../../utils/helpers`)
+const { Op } = require(`sequelize`)
 
 
 router.post('/', withAuth, async (req, res) => {
@@ -41,14 +43,77 @@ router.post('/joinEvent', withAuth, async (req, res) => {
 
 router.get('/search', async (req, res) => {
   console.log(`GET EVENT "/search" ROUTE SLAPPED`);
-
   try {
     const parameters = req.query;
+    console.log(`\n\n`)
+    console.log(parameters)
+    console.log(`\n\n`)
+
+
+    // IF THERE ARE INTEREST FILTERS SELECTED, GO THIS ROUTE
+    if (parameters.hasOwnProperty(`interests`)) {
+      console.log(`\n\nINTERESTS SELECTED\n\n`)
+      let eventsWithInterestData = await Event.findAll({
+        where: {
+          interest_id: {
+            [Op.or]: [...parameters.interests]
+          }
+        }
+      });
+      let eventsWithInterest = eventsWithInterestData.map((event) => event.get({ plain: true }));
+      if (!eventsWithInterest.length) {
+        console.log(`LINE 64 END REQ`);
+        res.status(404).send();
+        return;
+      };
+
+      //FORMAT DATES IN RESULTS
+      eventsWithInterest.forEach((event) => event.date_time = format_date_long(event.date_time));
+
+
+      if (parameters.city) {
+        console.log(`\n\nCITY INCLUDED\n\n`);
+        for (let i = eventsWithInterest.length - 1; i >= 0; i--) {
+          console.log('\n', eventsWithInterest[i].event_name)
+          console.log("CURRENT EVENT ITERATION CITY: ", eventsWithInterest[i].city);
+          console.log("COUNTRY PARAMETER PASSED BY USER: ", parameters.city);
+          console.log(eventsWithInterest[i].city === parameters.city)
+          if (eventsWithInterest[i].country !== parameters.country) {
+            console.log(eventsWithInterest[i].event_name, "REMOVED")
+            eventsWithInterest.splice(i, 1)
+          }
+        }
+      };
+
+      if (parameters.country) {
+        console.log(`\n\nCOUNTRY INCLUDED\n\n`);
+        for (let i = eventsWithInterest.length - 1; i >= 0; i--) {
+          console.log('\n', eventsWithInterest[i].event_name)
+          console.log("CURRENT EVENT ITERATION COUNTRY: ", eventsWithInterest[i].country);
+          console.log("COUNTRY PARAMETER PASSED BY USER: ", parameters.country);
+          console.log(eventsWithInterest[i].country === parameters.country)
+          if (eventsWithInterest[i].country !== parameters.country) {
+            console.log(eventsWithInterest[i].event_name, "REMOVED")
+            eventsWithInterest.splice(i, 1)
+          }
+        }
+      };
+
+      if (!eventsWithInterest.length) {
+        console.log(`LINE 100 END REQ`);
+        res.status(404).json();
+        return;
+      };
+
+      console.log(`LINE 105 END REQ (SUCCESS)`);
+      console.log(eventsWithInterest);
+      res.json(eventsWithInterest);
+      return;
+    };
+
+    // IF THERE ARE NO INTEREST FILTERS SELECTED, GO THIS ROUTE***
     let where = {}
 
-    if (parameters.pointofinterest) {
-      where["point_of_interest"] = parameters.pointofinterest;
-    }
     if (parameters.city) {
       where["city"] = parameters.city;
     }
@@ -61,10 +126,14 @@ router.get('/search', async (req, res) => {
     })
       .then(eventsData => {
         if (!eventsData) {
-          res.status(404).json({ message: 'No event found' });
+          console.log(`LINE 126 END REQ`);
+          res.status(404).json();
           return;
         }
+        console.log(`LINE 130 END REQ`);
         const events = eventsData.map((event) => event.get({ plain: true }));
+        // FORMAT DATES
+        events.forEach((event) => event.date_time = format_date_long(event.date_time));
         console.log(events);
         res.json(events);
       })

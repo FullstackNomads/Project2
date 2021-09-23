@@ -30,24 +30,27 @@ Event.init(
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     point_of_interest: {
       type: DataTypes.STRING,
       // NOT REQUIRED
     },
-    location: {
-      type: DataTypes.STRING,
-      // NOT REQUIRED
-    },
     city: {
       type: DataTypes.STRING,
       allowNull: false,
+      // grab from google.api
     },
     country: {
       type: DataTypes.STRING,
       allowNull: false,
+      // grab from google.api
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      // grab from google.api
     },
     interest_id: {
       type: DataTypes.INTEGER,

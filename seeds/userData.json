@@ -8,9 +8,8 @@
     "password": "password12345",
     "gender": "male",
     "city_name": "New York",
-    "country_name": "United States of America",
-    "latitude": 42.65258,
-    "longitude": -73.75623
+    "country_name": "United States",
+    "is_active": true
   },
   {
     "first_name": "Taylor",
@@ -22,8 +21,7 @@
     "gender": "female",
     "city_name": "London",
     "country_name": "United Kingdom",
-    "latitude": 51.50853,
-    "longitude": -0.12574
+    "is_active": true
   },
   {
     "first_name": "Shannon",
@@ -35,8 +33,7 @@
     "gender": "female",
     "city_name": "Dublin",
     "country_name": "Ireland",
-    "latitude": 53.33306,
-    "longitude": -6.24889
+    "is_active": true
   },
   {
     "first_name": "Ishaan",
@@ -48,8 +45,7 @@
     "gender": "male",
     "city_name": "New Delhi",
     "country_name": "India",
-    "latitude": 28.63576,
-    "longitude": 77.22445
+    "is_active": true
   },
   {
     "first_name": "Song",
@@ -61,8 +57,7 @@
     "gender": "female",
     "city_name": "Beijing",
     "country_name": "China",
-    "latitude": 39.9075,
-    "longitude": 116.39723
+    "is_active": true
   },
   {
     "first_name": "Anatoly",
@@ -74,8 +69,7 @@
     "gender": "male",
     "city_name": "Moscow",
     "country_name": "Russia",
-    "latitude": 39.9075,
-    "longitude": 116.39723
+    "is_active": true
   },
   {
     "first_name": "Anatoly1",
@@ -86,9 +80,8 @@
     "password": "password12345",
     "gender": "male",
     "city_name": "Kabul",
-    "country_name": "Afganistan",
-    "latitude": 39.9075,
-    "longitude": 116.39723
+    "country_name": "Afghanistan",
+    "is_active": false
   },
   {
     "first_name": "Anatoly2",
@@ -99,9 +92,8 @@
     "password": "password12345",
     "gender": "male",
     "city_name": "Kabul",
-    "country_name": "Afganistan",
-    "latitude": 39.9075,
-    "longitude": 116.39723
+    "country_name": "Afghanistan",
+    "is_active": false
   },
   {
     "first_name": "Anatoly3",
@@ -112,8 +104,7 @@
     "password": "password12345",
     "gender": "male",
     "city_name": "Kabul",
-    "country_name": "Afganistan",
-    "latitude": 39.9075,
-    "longitude": 116.39723
+    "country_name": "Afghanistan",
+    "is_active": false
   }
 ]
