@@ -34,16 +34,51 @@
                 </div>
               </div>
 
+<div class="mb-3">
+      <label class="form-label" for="filterInterests">Filter interests</label>
+      <div class="card p-2" id="filterInterests">
+        <div class="form-check">
+          <input class="form-check-input interest" type="checkbox" value="1" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault"> Adventure </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input interest" type="checkbox" value="2" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault"> Sports </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input interest" type="checkbox" value="3" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault"> Food </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input interest" type="checkbox" value="4" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault"> Arts and Museums </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input interest" type="checkbox" value="5" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault"> History </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input interest" type="checkbox" value="6" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault"> Nightlife </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input interest" type="checkbox" value="7" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault"> Wellness </label>
+        </div>
+      </div>
+    </div>
+
 
               <div class="col-12">
-                <label for="autoSizingInput">Interests</label>
+                <label for="filterInterests">Interests</label>
 
-                <select class="form-select" id="interests" multiple>
-                  <option value="sports">Sports</option>
-                  <option value="adventure">Adventure</option>
-                  <option value="wellness">Wellness</option>
-                  <option value="nightlife">Nightlife</option>
-                  <option value="artMuseum">Arts and Museums</option>
+                <select class="form-select" id="filterInterests" multiple>
+                  <option class="adventure interest" value="1">Adventure</option>
+                  <option class="sports" value="2">Sports</option>
+                  <option class="food" value="3">Food</option>
+                  <option value="wellness" value="4">Wellness</option>
+                  <option value="nightlife" value="5">Nightlife</option>
+                  <option value="artMuseum" value="6">Arts and Museums</option>
                   <option value="food">Food and Drinks</option>
 
                 </select>
