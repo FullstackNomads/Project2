@@ -1,89 +1,97 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="./public/css/about.css"/>
-<style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./public/css/about.css" />
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+    }
 
-html {
-  box-sizing: border-box;
-}
+    html {
+      box-sizing: border-box;
+    }
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
 
-.column {
-  float: left;
-  width: 33.3%;
-  margin-bottom: 16px;
-  padding: 0 8px;
-}
+    .column {
+      {{!-- float: left;
+      width: 33.3%; --}}
+      margin-bottom: 16px;
+      padding: 0 8px;
+    }
 
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin: 8px;
-}
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      margin: 8px;
+    }
 
-.about-section {
-  padding: 50px;
-  text-align: center;
-  background-color: #474e5d;
-  color: white;
-}
+    .about-section {
+      padding: 50px;
+      text-align: center;
+      background-color: #474e5d;
+      color: white;
+    }
 
-.container {
-  padding: 0 16px;
-}
+    .container {
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
 
-.container::after, .row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+    .container::after,
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
 
-.title {
-  color: grey;
-}
+    .title {
+      color: grey;
+    }
 
 
-@media screen and (max-width: 650px) {
-  .column {
-    width: 100%;
-    display: block;
-  }
-}
-</style>
+    @media screen and (max-width: 650px) {
+      .column {
+        width: 100%;
+        display: block;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="about-section">
-  <h1>About Us</h1>
-  <p>you made it!</p>
-  <p>You’ve just moved to a new city or town. It’s exciting and maybe a little intimidating at the same time. Aside from
-    locating nearby you, you’re probably wondering about the best ways to meet new friends!</p>
-</div>
+  <div class="about-section">
+    <h1>About Us</h1>
+    <p>you made it!</p>
+    <p>You’ve just moved to a new city or town. It’s exciting and maybe a little intimidating at the same time. Aside
+      from
+      locating nearby you, you’re probably wondering about the best ways to meet new friends!</p>
+  </div>
 
-<h2 style="text-align:center">Our User</h2>
-<div class="row">
-  <div class="row">
+  <h2 style="text-align:center">Our User</h2>
+  <div class="container">
+    <div class="row">
 
-    <div class="column">
-      <div class="card">
-        <img src="/img/01sports.jpeg" alt="sports" style="width:100%">
-        <div class="container">
-          <h2>SPORTS</h2>
-          <p class="title">the best ways to meet new sports friends!</p>
-          <p>Sportsfriends is something like a time capsule of the local multiplayer games that my friends and I were
-            making and playing in and around ...</p>
+      <div class="column">
+        <div class="card">
+          <img src="/img/01sports.jpeg" alt="sports" style="width:100%">
+          <div class="container">
+            <h2>SPORTS</h2>
+            <p class="title">the best ways to meet new sports friends!</p>
+            <p>Sportsfriends is something like a time capsule of the local multiplayer games that my friends and I were
+              making and playing in and around ...</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
     <div class="column">
       <div class="card">
@@ -100,11 +108,10 @@ html {
       <div class="card">
         <img src="/img/03arts.jpeg" alt="arts" style="width:100%">
         <div class="container">
-          <h2>ARTS AND MUSEUM</h2>
+          <h2>ARTS</h2>
           <p class="title">Meet arts buddies nearby anytime</p>
           <p>Museum Friends is an add-on membership that allows members the opportunity to deepen their museum
-            involvement and broaden their horizons with a ...
-          </p>
+            involvement and broaden their horizons with a ...</p>
         </div>
       </div>
     </div>
@@ -115,7 +122,7 @@ html {
         <div class="card">
           <img src="/img/04nihgtlife.jpeg" alt="nightlife" style="width:100%">
           <div class="container">
-            <h2>HISTORY</h2>
+            <h2>NIGHTLIFE</h2>
             <p class="title">you’ve just moved to a new city or town. It’s exciting and maybe a little intimidating at
               the same time. Aside from locating nearby you, you’re probably wondering about the best ways to meet new
               friends!</p>
@@ -140,7 +147,7 @@ html {
         <div class="card">
           <img src="/img/06history.jpeg" alt="history" style="width:100%">
           <div class="container">
-            <h2>NIGHTLIFE</h2>
+            <h2>HISTORY</h2>
             <p class="title">Buying Friends For An Evening</p>
             <p>If your friends don't like to stay at one place, check out areas with many bars and clubs grouped
               together.</p>
