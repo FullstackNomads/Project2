@@ -1713,17 +1713,19 @@ form [type='radio'] {
   opacity: 90%;
 }
 
+.dashimg {
+  position:absolute;
+  width: 30%;
+  right: 10rem;
+  top: 6rem;
+  z-index: -10000;
+  opacity: 85%;
+}
+
 .navbar-brand {
   font-family: 'Crimson Text', serif;
   font-size: 30px;
 }
-
-/* .footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-} */
-
 
 .img-about{
   opacity: 80%;
