@@ -9,7 +9,8 @@
     "gender": "male",
     "city_name": "New York",
     "country_name": "United States",
-    "is_active": true
+    "is_active": true,
+    "profile_picture": "https://fullstacknomadimages.s3.us-east-2.amazonaws.com/davidRosenkrantz.jpg-1632424420623.jpg"
   },
   {
     "first_name": "Taylor",
@@ -21,7 +22,8 @@
     "gender": "female",
     "city_name": "London",
     "country_name": "United Kingdom",
-    "is_active": true
+    "is_active": true,
+    "profile_picture": "https://fullstacknomadimages.s3.us-east-2.amazonaws.com/taylorDavies.jpg-1632424503228.jpg"
   },
   {
     "first_name": "Shannon",
@@ -33,7 +35,8 @@
     "gender": "female",
     "city_name": "Dublin",
     "country_name": "Ireland",
-    "is_active": true
+    "is_active": true,
+    "profile_picture": "https://fullstacknomadimages.s3.us-east-2.amazonaws.com/shannonMcGee.jpg-1632424486826.jpg"
   },
   {
     "first_name": "Ishaan",
@@ -45,7 +48,8 @@
     "gender": "male",
     "city_name": "New Delhi",
     "country_name": "India",
-    "is_active": true
+    "is_active": true,
+    "profile_picture": "https://fullstacknomadimages.s3.us-east-2.amazonaws.com/ishaanAcharya.jpg-1632424478301.jpg"
   },
   {
     "first_name": "Song",
@@ -57,7 +61,8 @@
     "gender": "female",
     "city_name": "Beijing",
     "country_name": "China",
-    "is_active": true
+    "is_active": true,
+    "profile_picture": "https://fullstacknomadimages.s3.us-east-2.amazonaws.com/songQingling.jpg-1632424495831.jpg"
   },
   {
     "first_name": "Anatoly",
@@ -69,7 +74,8 @@
     "gender": "male",
     "city_name": "Moscow",
     "country_name": "Russia",
-    "is_active": true
+    "is_active": true,
+    "profile_picture": "https://fullstacknomadimages.s3.us-east-2.amazonaws.com/anatolyPetrov.jpg-1632424519840.jpg"
   },
   {
     "first_name": "Anatoly1",
