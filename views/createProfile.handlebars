@@ -44,21 +44,23 @@
 
                 <div class="custom-file my-4">
                   <label class="custom-file-label" for="profilePicture">Click to upload a profile picture:</label>
-                  <input type="file" class="custom-file-input mx-2 float-right" id="profilePicture">
+                  <input type="file" class="custom-file-input mx-2 float-right" id="profilePicture"
+                    name="profilePicture">
                 </div>
 
                 <div class="row">
                   <div class='col-md-6'>
                     <div class="mb-4">
                       <label for="age" class="form-label">Age</label>
-                      <input type="number" class="form-control" min="18" max="100" id="age" placeholder="Age" required>
+                      <input type="number" class="form-control" min="18" max="100" id="age" name="age" placeholder="Age"
+                        required>
                     </div>
                   </div>
 
                   <div class='col-md-6'>
                     <div class="mb-4">
                       <label for="gender" class="form-label">Gender</label>
-                      <select class="form-select" id="gender" required>
+                      <select class="form-select" id="gender" name="gender" required>
                         <option disabled selected value> Select an option</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -71,7 +73,8 @@
 
                 <div class="form-group">
                   <label>Location:</label>
-                  <input type="text" class="form-control" id="search_input" placeholder="Enter a city" required />
+                  <input type="text" class="form-control" id="search_input" placeholder="Enter a city" name="location"
+                    required />
                 </div>
 
 
@@ -79,21 +82,23 @@
                   <div class='col-md-6'>
                     <div class="mb-3">
                       {{!-- <label for="city"> City: </label> --}}
-                      <input class="form-control" type="text" id="city" disabled required placeholder="City" />
+                      <input class="form-control" type="text" id="city" name="city" disabled required
+                        placeholder="City" />
                     </div>
                   </div>
 
                   <div class='col-md-6'>
                     <div class="mb-3">
                       {{!-- <label for="country"> Country: </label> --}}
-                      <input class="form-control" type="text" id="country" disabled required placeholder="Country" />
+                      <input class="form-control" type="text" id="country" name="country" disabled required
+                        placeholder="Country" />
                     </div>
                   </div>
                 </div>
 
                 <div class="mb-3">
                   <label for="interest" class="form-label">Select Interest:</label>
-                  <select class="form-select" id="interest" required>
+                  <select class="form-select" id="interest" name="interest" required>
                     <option value="1"> Adventure </option>
                     <option value="2"> Sports </option>
                     <option value="3"> Food </option>
@@ -106,7 +111,7 @@
 
                 <div class="form-group mb-3">
                   <label for="bio">Your bio</label>
-                  <textarea class="form-control" id="bio"></textarea>
+                  <textarea class="form-control" id="bio" name="bio"></textarea>
                 </div>
 
                 <div class="input-group mb-3">
