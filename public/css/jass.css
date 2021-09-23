@@ -888,7 +888,7 @@ a:hover {
 }
 
 .text-danger {
-  color: #e64c66 !important;
+  color: #77C9D4 !important;
 }
 
 .text-default {
@@ -925,7 +925,7 @@ a:hover {
 }
 
 .bg-danger {
-  background-color: #e64c66 !important;
+  background-color: #77C9D4 !important;
 }
 
 .bg-light {
@@ -1014,16 +1014,16 @@ a:hover {
 }
 
 .btn.btn-primary:hover {
-  background-color: #57779a;
+  background-color: #015249;
 }
 
 .btn.btn-danger {
-  background-color: #e64c66;
+  background-color: #77C9D4;
   color: #ffffff;
 }
 
 .btn.btn-danger:hover {
-  background-color: #ee8294;
+  background-color: #A5A5Af;
 }
 
 .btn.btn-info {
@@ -1706,9 +1706,8 @@ form [type='radio'] {
 
 .homeimg {
   position:absolute;
-  width: 45%;
-  height: 75%;
-  right: 5rem;
+  width: 35%;
+  right: 10rem;
   top: 4rem;
   z-index: -10000;
   opacity: 90%;
@@ -1719,8 +1718,8 @@ form [type='radio'] {
   font-size: 30px;
 }
 
-.footer {
+/* .footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-}
+} */
