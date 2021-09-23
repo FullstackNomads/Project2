@@ -49,11 +49,24 @@ const searchUsersFormHandler = async (event) => {
   const country = $('#country').val();
   const gender = $("#gender").val();
 
-  const interests = [];
-  let checkBoxes = document.querySelectorAll(`.interest`)
-  for (let i = 0; i < checkBoxes.length; i++) {
-    if (checkBoxes[i].checked) {
-      interests.push(checkBoxes[i].value)
+
+  // INTEREST CHECKBOX LOGIC
+  // const interests = [];
+  // let checkBoxes = document.querySelectorAll(`.interest`)
+  // for (let i = 0; i < checkBoxes.length; i++) {
+  //   if (checkBoxes[i].checked) {
+  //     interests.push(checkBoxes[i].value)
+  //   }
+  //   continue;
+  // }
+
+
+  // INTEREST MULTISELECT LOGIC
+  let interests = []
+  let interestsSelection = document.getElementById(`interests`)
+  for (let option of interestsSelection) {
+    if (option.selected) {
+      interests.push(option.value)
     }
     continue;
   }

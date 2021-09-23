@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 const multer = require(`multer`);
+const { checkFileType } = require(`./multerS3`)
 const upload = multer({
   limits: {
     fileSize: 2000000, //MAX IMAGE SIZE 2MB
@@ -14,19 +15,6 @@ const upload = multer({
   }
 });
 
-function checkFileType(file, cb) {
-  // ALLOWED EXTENSIONS
-  const filetypes = /jpeg|jpg|png|gif/;
-  // check ext
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = filetypes.test(file.mimetype);
-
-  if (mimetype && extname) {
-    return cb(null, true);
-  } else {
-    cb('Error: Images Only!');
-  }
-}
 
 // Database connection
 const sequelize = require('./config/connection');

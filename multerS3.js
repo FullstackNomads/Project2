@@ -66,7 +66,7 @@ let uploadFile = (file) => {
   return s3.upload(uploadParams).promise()
 }
 
-module.exports = { uploadFile };
+module.exports = { uploadFile, checkFileType };
 
 // function getFileStream(fileKey) {
 //   const downloadParams = {
