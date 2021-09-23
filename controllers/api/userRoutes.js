@@ -2,11 +2,14 @@ const router = require('express').Router();
 const { User, UserInterest, UserEvent } = require('../../models');
 const withAuth = require('../../utils/auth');
 const { Op } = require(`sequelize`)
+const { uploadFile } = require(`../../multerS3`)
 
 router.post('/', async (req, res) => {
   console.log(`POST USER "/" ROUTE SLAPPED`)
   console.log(req.body)
   try {
+
+    return;
     const userData = await User.create(req.body) //create a new user by just passing the entire req.body
       .then((user) => {
         // If there are interests, we need to create an array of objects that we can pass to bulkCreate() to make entries in the UserInterest junction table. 
@@ -235,13 +238,13 @@ router.put('/:id', async (req, res) => {
           id: req.params.id,
         },
       });
-      req.session.save(() => {
-        req.session.user_id = req.params.id;
-        req.session.logged_in = true;
-        req.session.is_active = false;
-  
-        res.json({ message: 'Your account has been disabled' });
-      });
+    req.session.save(() => {
+      req.session.user_id = req.params.id;
+      req.session.logged_in = true;
+      req.session.is_active = false;
+
+      res.json({ message: 'Your account has been disabled' });
+    });
   } catch (err) {
     res.status(500).json(err);
   };
@@ -259,13 +262,13 @@ router.put('/reactivate/:id', async (req, res) => {
           id: req.params.id,
         },
       });
-      req.session.save(() => {
-        req.session.user_id = req.params.id;
-        req.session.logged_in = true;
-        req.session.is_active = true;
-  
-        res.json({ message: 'Your account has been reactivated' });
-      });
+    req.session.save(() => {
+      req.session.user_id = req.params.id;
+      req.session.logged_in = true;
+      req.session.is_active = true;
+
+      res.json({ message: 'Your account has been reactivated' });
+    });
   } catch (err) {
     res.status(500).json(err);
   };
