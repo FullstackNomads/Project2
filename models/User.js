@@ -8,7 +8,7 @@ class User extends Model {
   }
 }
 
-// THIS MODEL TRACKS ALL CURRENT USERS SAVED IN THE DATABASE, the checkPassword function above is what provides for login validation and is a prototype method accessable to all user instances, called by:
+// THIS MODEL TRACKS ALL CURRENT USERS SAVED IN THE DATABASE, the checkPassword function above is what provides for login validation and is a prototype method accessible to all user instances, called by:
 //  User.checkPassword()
 
 User.init(

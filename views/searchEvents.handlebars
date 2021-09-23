@@ -1,16 +1,26 @@
 <h1>Try new experiences</h1>
 <div class="container">
 
-  <form class="row gy-2 mb-4 gx-3 align-items-center">
-    <div class="col-12">
-      <label for="autoSizingInput">Location</label>
-      <input type="text" class="form-control" id="autoSizingInput" placeholder="City name">
-      input type="text" class="form-control" id="autoSizingInput" placeholder="Country Name">
-    </div>
-    <div class="col-12">
-      <label for="autoSizingInput">Point of interest</label>
-      <input type="text" class="form-control" id="autoSizingInput" placeholder="Point of interest">
-    </div>
+  <form class="row gy-2 mb-4 gx-3 align-items-center" id="search-events">
+    <div class="row">
+        <div class="col-lg-12">
+        <div class="form-group">
+          <label>Location:</label>
+          <input type="text" class="form-control" id="search_input" placeholder="Type city..." />
+        </div>
+        
+     </div>
+
+      <div class="form-group">
+        <label for="city"> City: </label>
+        <input class="form-control" type="text" id="city" disabled required placeholder="Please fill in location" />
+      </div>
+
+      <div class="mb-3">
+        <label for="country"> Country: </label>
+        <input class="form-control" type="text" id="country" disabled required placeholder="Please fill in location" />
+      </div>
+
 
     <div class="col-12">
       <label for="autoSizingInput">Select your interests</label>
@@ -22,7 +32,6 @@
         <option value="nightlife">Nightlife</option>
         <option value="artMuseum">Arts and Museums</option>
         <option value="food">Food and Drinks</option>
-
       </select>
     </div>
 
@@ -34,8 +43,28 @@
 
   <div class="container">
     <h2>Cannot find what you are looking for?</h2>
-    <button type="button" class="btn btn-primary">Create Your Own Experience!</button>
+    <a href="/createEvent" type="button" class="btn btn-primary">Create Your Own Experience!</a>
 
   </div>
 
 </div>
+
+
+<script id="events-template" type="text/x-handlebars-template">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <a href="/events/\{{id}}">
+        <h5 class="card-title">\{{event_name}}</h5>
+      </a>
+      <h6 class="card-subtitle mb-2 text-muted">\{{point_of_interest}}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">\{{date_time}}</h6>
+      <p class="card-text">\{{description}}
+    </div>
+  </div>
+</script>
+
+<div id="results">
+</div>
+
+
+<script src="/js/searchEvents.js"></script>

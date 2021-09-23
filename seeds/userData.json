@@ -76,5 +76,44 @@
     "country_name": "Russia",
     "latitude": 39.9075,
     "longitude": 116.39723
+  },
+  {
+    "first_name": "Anatoly1",
+    "last_name": "Petrov1",
+    "bio": "I love techno",
+    "age": 22,
+    "email": "anatoly1@hotmail.com",
+    "password": "password12345",
+    "gender": "male",
+    "city_name": "Kabul",
+    "country_name": "Afganistan",
+    "latitude": 39.9075,
+    "longitude": 116.39723
+  },
+  {
+    "first_name": "Anatoly2",
+    "last_name": "Petrov2",
+    "bio": "I love techno",
+    "age": 22,
+    "email": "anatoly2@hotmail.com",
+    "password": "password12345",
+    "gender": "male",
+    "city_name": "Kabul",
+    "country_name": "Afganistan",
+    "latitude": 39.9075,
+    "longitude": 116.39723
+  },
+  {
+    "first_name": "Anatoly3",
+    "last_name": "Petrov3",
+    "bio": "I love techno",
+    "age": 22,
+    "email": "anatoly3@hotmail.com",
+    "password": "password12345",
+    "gender": "male",
+    "city_name": "Kabul",
+    "country_name": "Afganistan",
+    "latitude": 39.9075,
+    "longitude": 116.39723
   }
 ]

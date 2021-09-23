@@ -1,41 +1,26 @@
-<h1>EVENT</h1>
-
+<h1>{{event_name}}</h1>
 
 <div class="container">
   <div class="row">
     <div class="col">
-      <svg class="bd-placeholder-img img-thumbnail" width="200" height="200" xmlns="http://www.w3.org/2000/svg"
-        role="img"
-        aria-label="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera: 200x200"
-        preserveAspectRatio="xMidYMid slice" focusable="false">
-        <title>A generic square placeholder image with a white border around it, making it resemble a photograph taken
-          with an old instant camera</title>
-        <rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6"
-          dy=".3em">200x200</text>
-      </svg>
+      <h5>Event created by <a href="/user/{{creator_id}}">{{creatorName}}</a></h5>
     </div>
     <div class="col">
 
       <div class="row">
         <div class="col">
-          Name: {{event_name}}
+          Event Name: {{event_name}}
         </div>
       </div>
       <div class="row">
         <div class="col">
-          Date: {{date_time}}}
+          Date: {{date_time}}
         </div>
       </div>
       <div class="row">
         <div class="col">
           Location:
-          {{street_number}}
-          {{street_name}}
-          {{unit_number}}
-          {{city_name}}
-          {{state_province}}
-          {{postal_code}}
-          {{country}}
+          {{location}}
         </div>
       </div>
       <div class="row">
@@ -48,6 +33,31 @@
           Description: {{description}}
         </div>
       </div>
-
+      <button type="button" class="btn btn-primary" id="join-event" data-event_id="{{id}}">Join Event!</button>
     </div>
   </div>
+
+  <hr>
+
+  <h5 class="display-5 mb-5">People attending {{event_name}}</h5>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+    <!-- Loop over each object in the events array -->
+    {{#each attendees as |attendee|}}
+    <div class="col event-list">
+      <div class="card shadow-sm p-4">
+
+        <div class="card-body">
+          <h5 class="card-title"><a href="/user/{{attendee.id}}">{{attendee.first_name}} {{attendee.last_name}}</a></h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{attendee.gender}}</h6>
+          <p class="card-text">{{attendee.bio}}</p>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+
+  </div>
+
+</div>
+<script src="/js/joinEvent.js"></script>
