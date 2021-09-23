@@ -58,7 +58,7 @@ const searchUsersFormHandler = async (event) => {
   //     interests.push(checkBoxes[i].value)
   //   }
   //   continue;
-  // }
+  // };
 
 
   // INTEREST MULTISELECT LOGIC
@@ -69,7 +69,7 @@ const searchUsersFormHandler = async (event) => {
       interests.push(option.value)
     }
     continue;
-  }
+  };
 
   console.log(city, country, gender);
   console.log(interests);
