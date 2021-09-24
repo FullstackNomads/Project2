@@ -85,7 +85,7 @@
 <body class="text-center">
 
   <main class="form-signin">
-
+    <img src="/images/logo.png" alt="" width="85" height="60" class="d-inline-block align-text-top my-3">
     <div class="card p-3">
       <div class="card-body">
 
@@ -100,14 +100,16 @@
             <input type="password" name="password" id="password-login" class="form-control"
               placeholder="Enter Password">
             <label for="password-login">Password</label>
+            
           </div>
 
           <button class="w-100 btn btn-lg btn-secondary" type="submit">Login</button>
+          <p class="text-danger d-none my-3 small" id="errorMsg">Incorrect email or password. Try again.</p>
           <p class="text-center mt-4">Don't have account? <a href="/createProfile" id="createAccount">Sign up here</a>
           </p>
           <p class="mt-5 mb-3 text-muted">&copy; 2021 Wandir</p>
 
-          <div class="modal fade" id="failedLoginModal" tabindex="-1" role="dialog"
+          {{!-- <div class="modal fade" id="failedLoginModal" tabindex="-1" role="dialog"
             aria-labelledby="failedLoginModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -126,7 +128,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
 
         </form>
       </div>

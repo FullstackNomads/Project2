@@ -1,39 +1,21 @@
-<h1>{{event_name}}</h1>
 
-<div class="container">
+<div class="container my-5">
   <div class="row">
     <div class="col">
-      <h5>Event created by <a href="/user/{{creator_id}}">{{creatorName}}</a></h5>
-    </div>
-    <div class="col">
-
       <div class="row">
-        <div class="col">
-          Event Name: {{event_name}}
+        <div class="col-md-9">
+            <h2>{{event_name}}</h2>
+        </div>
+        <div class="col-md-3">
+          <button type="button" class="btn btn-primary" id="join-event" data-event_id="{{id}}">Join Event!</button>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          Date: {{date_time}}
-        </div>
+      <h5 class="p-0">Event created by <a href="/user/{{creator_id}}">{{creatorName}}</a></h5>
+      <p class="text-muted m-0"> Date: {{date_time}}</p>
+      <p class="text-muted m-0"> Location: {{location}}</p>
+      <p class="text-muted m-0"> Interest: {{interest}}</p>
+      <p class="text-muted m-0"> Description: {{description}}</p>
       </div>
-      <div class="row">
-        <div class="col">
-          Location:
-          {{location}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          Interest: {{interest}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          Description: {{description}}
-        </div>
-      </div>
-      <button type="button" class="btn btn-primary" id="join-event" data-event_id="{{id}}">Join Event!</button>
     </div>
   </div>
 
