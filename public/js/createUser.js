@@ -52,11 +52,10 @@ const signupFormHandler = async (event) => {
     // console.log(profilePicture);
 
     const profile_picture = document.querySelector(`#profilePicture`).files[0];
-    fd.append("profile_picture", profile_picture)
 
-
-    // Added temporarily to prevent creating a ton of new users while testing profile picture functionality
-    // return;
+    if (profile_picture) {
+      fd.append("profile_picture", profile_picture)
+    };
 
     const first_name = document.querySelector('#firstName-signup').value.trim();
     fd.append('first_name', first_name)

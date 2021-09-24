@@ -31,22 +31,22 @@ const checkFileType = (file, cb) => {
 };
 
 
-const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: bucketName,
-    metadata: function (req, file, cb) {
-      cb(null, { fieldName: file.fieldname });
-    },
-    key: function (req, file, cb) {
-      cb(null, Date.now().toString())
-    }
-  }),
-  limits: { fileSize: 1000000 },
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
-  }
-}).single('myImage');
+// const upload = multer({
+//   storage: multerS3({
+//     s3: s3,
+//     bucket: bucketName,
+//     metadata: function (req, file, cb) {
+//       cb(null, { fieldName: file.fieldname });
+//     },
+//     key: function (req, file, cb) {
+//       cb(null, Date.now().toString())
+//     }
+//   }),
+//   limits: { fileSize: 1000000 },
+//   fileFilter: function (req, file, cb) {
+//     checkFileType(file, cb);
+//   }
+// }).single('myImage');
 
 
 let uploadFile = (file) => {
