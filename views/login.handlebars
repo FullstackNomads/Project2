@@ -18,8 +18,6 @@
     crossorigin="anonymous"></script>
 
 
-
-
   <style>
     html,
     body {
@@ -27,71 +25,35 @@
       height: 100%;
       background-size: cover;
     }
-
     body {
       display: flex;
       align-items: center;
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color: #f5f5f5;
     }
-
     .form-signin {
       width: 100%;
       max-width: 430px;
       padding: 15px;
       margin: auto;
     }
-
-    .form-signin .checkbox {
-      font-weight: 400;
-    }
-
     .form-signin .form-floating:focus-within {
       z-index: 2;
     }
 
-    .form-signin input[type="email"] {
-      margin-bottom: -1px;
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-
-    .form-signin input[type="password"] {
+      .form-signin input[type="password"] {
       margin-bottom: 10px;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
-
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
   </style>
-
-
-  <!-- Custom styles for this template -->
 </head>
 
 <body class="text-center">
-
   <main class="form-signin">
     <img src="/images/logo.png" alt="" width="85" height="60" class="d-inline-block align-text-top my-3">
     <div class="card p-3">
       <div class="card-body">
-
         <form action="" class="form login-form" method="post" name="login">
           <h1 class="h3 mb-3 fw-normal">Login</h1>
-
           <div class="form-floating mb-3">
             <input type="form-input" name="email" class="form-control" id="email-login" placeholder="Enter email">
             <label for="email-login">Email address</label>
@@ -99,47 +61,17 @@
           <div class="form-floating">
             <input type="password" name="password" id="password-login" class="form-control"
               placeholder="Enter Password">
-            <label for="password-login">Password</label>
-            
+            <label for="password-login">Password</label>     
           </div>
-
           <button class="w-100 btn btn-lg btn-secondary" type="submit">Login</button>
           <p class="text-danger d-none my-3 small" id="errorMsg">Incorrect email or password. Try again.</p>
           <p class="text-center mt-4">Don't have account? <a href="/createProfile" id="createAccount">Sign up here</a>
           </p>
           <p class="mt-5 mb-3 text-muted">&copy; 2021 Wandir</p>
-
-          {{!-- <div class="modal fade" id="failedLoginModal" tabindex="-1" role="dialog"
-            aria-labelledby="failedLoginModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="failedLoginModalLabel">Login Failed</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                    style="border:0px solid #fff;">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  Incorrect email or password, please try again.
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div> --}}
-
         </form>
       </div>
     </div>
-
-    </form>
-    </div>
-    </div>
   </main>
-
-
 
   <script src="/js/login.js"></script>
 

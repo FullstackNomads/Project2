@@ -1,10 +1,9 @@
-
 <div class="container my-5">
   <div class="row">
     <div class="col">
       <div class="row">
         <div class="col-md-9">
-            <h2>{{event_name}}</h2>
+          <h2>{{event_name}}</h2>
         </div>
         <div class="col-md-3">
           <button type="button" class="btn btn-primary" id="join-event" data-event_id="{{id}}">Join Event!</button>
@@ -15,41 +14,35 @@
       <p class="text-muted m-0"> Location: {{location}}</p>
       <p class="text-muted m-0"> Interest: {{interest}}</p>
       <p class="text-muted m-0"> Description: {{description}}</p>
-      </div>
     </div>
   </div>
-
-  <hr>
-
-  <h3 class="mb-5">People attending {{event_name}}</h3>
-
-
-
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-    <!-- Loop over each object in the events array -->
-    {{#each attendees as |attendee|}}
-
-    <div class="col justify-content-center mx-auto">
-      <div class="card  text-center shadow-sm p-4 rounded justify-content-center">
-        <div class="center-text border-bottom py-4">
-          <img class="card-img-top border-bottom rounded-circle" style="width: 13rem;" src="{{profile_picture}}"
-            width="100">
-        </div>
-        <div class="card-body">
-          <a href="/user/{{attendee.id}}">
-            <h5 class="card-title">{{attendee.first_name}} {{attendee.last_name}}</h5>
-          </a>
-          <h6 class="card-subtitle mb-2 text-muted">{{attendee.age}} years old</h6>
-          <h6 class="card-subtitle mb-2 text-muted text-capitalize">{{attendee.gender}}</h6>
-          <h6 class="card-subtitle mb-2 text-muted">From {{city_name}}, {{country_name}}</h6>
-        </div>
-      </div>
-    </div>
-
-    {{/each}}
-
-  </div>
-
 </div>
+
+<hr>
+
+<h3 class="mb-5">People attending {{event_name}}</h3>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+  <!-- Loop over each object in the events array -->
+  {{#each attendees as |attendee|}}
+  <div class="col justify-content-center mx-auto">
+    <div class="card  text-center shadow-sm p-4 rounded justify-content-center">
+      <div class="center-text border-bottom py-4">
+        <img class="card-img-top border-bottom rounded-circle" style="width: 13rem;" src="{{profile_picture}}"
+          width="100">
+      </div>
+      <div class="card-body">
+        <a href="/user/{{attendee.id}}">
+          <h5 class="card-title">{{attendee.first_name}} {{attendee.last_name}}</h5>
+        </a>
+        <h6 class="card-subtitle mb-2 text-muted">{{attendee.age}} years old</h6>
+        <h6 class="card-subtitle mb-2 text-muted text-capitalize">{{attendee.gender}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">From {{city_name}}, {{country_name}}</h6>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+
+
 <script src="/js/joinEvent.js"></script>

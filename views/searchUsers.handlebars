@@ -4,73 +4,29 @@
   </div>
 </div>
 
-
 <div class="container my-5">
   <div class="card shadow-lg">
     <div class="card-body">
       <div class="row">
         <div class="col-md-10 mx-auto">
-
           <form class="row gy-2 mb-4 gx-3 align-items-center" id="search-profile">
             <div class="col-lg-12">
               <div class="form-group">
                 <label>Location:</label>
                 <input type="text" class="form-control" id="search_input" placeholder="Enter a city" />
               </div>
-
-
               <div class="row">
                 <div class='col-md-6'>
                   <div class="mb-3">
-                    {{!-- <label for="city"> City: </label> --}}
                     <input class="form-control" type="text" id="city" disabled required placeholder="City" />
                   </div>
                 </div>
                 <div class='col-md-6'>
                   <div class="mb-3">
-                    {{!-- <label for="country"> Country: </label> --}}
                     <input class="form-control" type="text" id="country" disabled required placeholder="Country" />
                   </div>
                 </div>
               </div>
-
-
-
-              {{!-- <div class="mb-3">
-                <label class="form-label" for="filterInterests">Filter interests</label>
-                <div class="card p-2" id="filterInterests">
-                  <div class="form-check">
-                    <input class="form-check-input interest" type="checkbox" value="1" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault"> Adventure </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input interest" type="checkbox" value="2" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault"> Sports </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input interest" type="checkbox" value="3" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault"> Food </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input interest" type="checkbox" value="4" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault"> Arts and Museums </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input interest" type="checkbox" value="5" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault"> History </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input interest" type="checkbox" value="6" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault"> Nightlife </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input interest" type="checkbox" value="7" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault"> Wellness </label>
-                  </div>
-                </div>
-              </div> --}}
-
-
               <div class="col-12">
                 <label for="autoSizingInput">Interests</label>
                 <select class="form-select" id="interests" multiple>
@@ -83,118 +39,32 @@
                   <option value="7">Wellness</option>
                 </select>
               </div>
-
               <div class="col-12">
                 <label for="autoSizingInput">Gender</label>
-
                 <select class="form-select" id="gender">
                   <option disabled selected value> Select an option</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                   <option value="other">Other</option>
-
                 </select>
               </div>
-
               <div class="col-md-12 text-center my-3">
                 <button type="submit" class="btn btn-primary">Search</button>
               </div>
           </form>
-
         </div>
       </div>
     </div>
   </div>
-
-</div>
 </div>
 
+<br>
 
-
-
-{{!-- <div class="container">
-
-  <form class="row gy-2 mb-4 gx-3 align-items-center" id="search-profile">
-    <div class="col-lg-12">
-      <div class="form-group">
-        <label>Location:</label>
-        <input type="text" class="form-control" id="search_input" placeholder="Type city..." />
-      </div>
-
-    </div>
-
-    <div class="form-group">
-      <label for="city"> City: </label>
-      <input class="form-control" type="text" id="city" disabled placeholder="Please fill in location" />
-    </div>
-
-    <div class="mb-3">
-      <label for="country"> Country: </label>
-      <input class="form-control" type="text" id="country" disabled placeholder="Please fill in location" />
-    </div>
-
-
-    <div class="mb-3">
-      <label class="form-label" for="filterInterests">Filter interests</label>
-      <div class="card p-2" id="filterInterests">
-        <div class="form-check">
-          <input class="form-check-input interest" type="checkbox" value="1" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault"> Adventure </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input interest" type="checkbox" value="2" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault"> Sports </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input interest" type="checkbox" value="3" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault"> Food </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input interest" type="checkbox" value="4" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault"> Arts and Museums </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input interest" type="checkbox" value="5" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault"> History </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input interest" type="checkbox" value="6" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault"> Nightlife </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input interest" type="checkbox" value="7" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault"> Wellness </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12">
-      <label for="autoSizingInput">Gender</label>
-
-      <select class="form-select" id="gender">
-        <option selected value> Select an option</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-      </select>
-    </div>
-
-    <div class="container-fluid pb-4">
-      <button type="submit" class="btn btn-primary m-1 pb-2 col-sm-7 col-lg-3">Search</button>
-      <button type="reset" class="btn btn-danger m-1 col-sm-7 col-lg-3">Reset Form</button>
-    </div>
-  </form> --}}
-
-
-  </form>
-
-
-  <br>
-  <script id="users-template" type="text/x-handlebars-template">
+<script id="users-template" type="text/x-handlebars-template">
   <div class="col justify-content-center mx-auto">
     <div class="card  text-center shadow-sm p-4 rounded justify-content-center">
       <div class="center-text border-bottom py-4">
-        <img class="card-img-top border-bottom rounded-circle" style="width: 13rem;" src=\{{profile_picture}} width="100">
+        <img class="card-img-top border-bottom rounded-circle" src=\{{profile_picture}} width="100%">
       </div>
       <div class="card-body">
           <a href="/user/\{{id}}"><h5 class="card-title">\{{first_name}} \{{last_name}}</h5></a>
@@ -206,40 +76,19 @@
       </div>
     </div> 
    </div>
-
-{{!-- 
-  <div class="container mt-5 mb-5 d-flex justify-content-center">
-    <div class="card rounded">
-        <div class=" d-block justify-content-center">
-            <div class="area1 p-3 bg-info"> </div>
-            <div class="area2 p-3 text-center px-3">
-                <div class="image mr-3"> <img src="https://i.imgur.com/ZSkeqnd.jpg" class="rounded-circle" width="100" />
-                   <div class="card-body">
-          <a href="/user/\{{id}}"><h5 class="card-title">\{{first_name}} \{{last_name}}</h5></a>
-          <h6 class="card-subtitle mb-2 text-muted">\{{age}} years old</h6>
-          <h6 class="card-subtitle mb-2 text-muted">\{{gender}}</h6>
-          <h6 class="card-subtitle mb-2 text-muted">From \{{city_name}}, \{{country_name}}</h6>
-      </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div> --}}
 </div>
 </script>
 
-
-
-  <script id="nousers-template" type="text/x-handlebars-template">
+<script id="nousers-template" type="text/x-handlebars-template">
   <div class="container text-center my-4">
     <h2>Sorry, no users found!</h2>
   </div>
 </script>
 
-  <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="results">
-    </div>
+<div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="results">
   </div>
+</div>
 
 
-  <script src="/js/searchUsers.js"></script>
+<script src="/js/searchUsers.js"></script>
