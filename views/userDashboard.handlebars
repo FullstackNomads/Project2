@@ -1,13 +1,19 @@
 <img class="dashimg" src="/images/dashboard1.png">
 
-
 <div class="row">
   <div class="col-8 mt-5">
-    <h1 class="display-6 mt-2">Your next  <span class="text-primary">adventure awaits!</span></h1>
+    <h1 class="display-5 mt-2">Your next  <span class="text-primary">adventure awaits!</span></h1>
     <p class="text-muted">Create a new experience and begin meeting new people along the way.</p>
-    <a href="/createEvent" class="btn btn-lg btn-primary fw-bold">Start here</a>
-
-  </div>
-  
+    <a href="/createEvent" class="btn btn-lg btn-primary fw-bold mb-5">Start here</a>
+  </div> 
 </div>
 
+
+{{#if userevents }}
+<div class="row row-cols-md-1 g-3" id="results">
+  <h3 class="display-6 mt-5">Events that you have joined </h1>
+  {{#each userevents as |event|}}
+   <p class="ml-2 mb-0 mt-1">╰┈➤ <a href="/events/{{event.id}}">{{event.event_name}}</a> in {{event.city}}, {{event.country}}</p>
+  {{/each}}
+</div>
+{{/if}}
