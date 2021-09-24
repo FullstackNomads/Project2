@@ -36,7 +36,7 @@
     "creator_id": 1,
     "event_name": "Touring the Sherlock Holmes Museum",
     "date_time": "October 30, 2021 12:00:00",
-    "description": "I will be touring the London Sherlock Holmes museum if you would like to tag along!.",
+    "description": "I will be touring the London Sherlock Holmes museum if you would like to tag along!",
     "point_of_interest": "Dockweiler State Beach",
     "city": "London",
     "country": "United Kingdom",
@@ -63,6 +63,72 @@
     "city": "Athens",
     "country": "Greece",
     "location": "Kopaida Airfield, Kastro Viotias 323 00, Greece",
+    "interest_id": 1
+  },
+  {
+    "creator_id": 7,
+    "event_name": "Pyramids Half Marathon",
+    "date_time": "December 11, 2021 12:00:00",
+    "description": "The third annual Pyramids Half Marathon takes place on Saturday, December 11th, inviting runners from around the world to run at the most iconic of locations: the Great Pyramids of Giza.",
+    "point_of_interest": "Great Pyramids",
+    "city": "Giza",
+    "country": "Egypt",
+    "location": "Giza Necropolis Al Haram, Egypt",
+    "interest_id": 2
+  },
+  {
+    "creator_id": 8,
+    "event_name": "Tour - Pelourinho Historic Center",
+    "date_time": "September 28, 2021 13:00:00",
+    "description": "Walking tour of the historic center of Salvador de Bahia in Brazil, known as the Pelourinho or Pelo, a historic neighborhood in western Salvador, Bahia.",
+    "point_of_interest": "Hotel Fasano Salvador",
+    "city": "Salvador",
+    "country": "Brazil",
+    "location": "Praça Castro Alves, 5 - Centro, Salvador - BA, Brazil",
+    "interest_id": 5
+  },
+  {
+    "creator_id": 9,
+    "event_name": "Chicago Food Truck Festival - Fall Festival",
+    "date_time": "October 02, 2021 11:00:00",
+    "description": "It is the return of the Chicago Food Truck Festival gathering of foodies and mobile Gourmet Chefs! Welcome to Season 8, Series of Seasonal Gourmet Eats.",
+    "point_of_interest": "LaBagh Woods",
+    "city": "Chicago",
+    "country": "United States",
+    "location": "West Foster Avenue, N Cicero Ave, Chicago, IL, USA",
+    "interest_id": 3
+  },
+  {
+    "creator_id": 12,
+    "event_name": "Touring the National Museum of Ireland - Decorative Arts & History",
+    "date_time": "October 31, 2021 13:00:00",
+    "description": "I will be touring the National Museum of Ireland - Decorative Arts & History if you would like to tag along.",
+    "point_of_interest": "National Museum of Ireland",
+    "city": "Dublin",
+    "country": "Ireland",
+    "location": "Collins Barracks, Benburb St, Stoneybatter, Dublin, Ireland",
+    "interest_id": 4
+  },
+  {
+    "creator_id": 8,
+    "event_name": "Drinks at OPIA Lounge & Bar",
+    "date_time": "October 21, 2021 21:00:00",
+    "description": "Having some drinks at OPIA Lounge & Bar.",
+    "point_of_interest": "OPIA Lounge & Bar",
+    "city": "Cairo",
+    "country": "Egypt",
+    "location": "1115 Nile Corniche، Floor 36th، Cairo، Cairo Governorate, Egypt",
+    "interest_id": 6
+  },
+  {
+    "creator_id": 9,
+    "event_name": "Rock Climbing at Idanre Hills",
+    "date_time": "October 22, 2021 08:00:00",
+    "description": "I will be going rock climbing, in the morning of October 22nd at Idanre Hills.",
+    "point_of_interest": "Idanre Hills",
+    "city": "Idanre",
+    "country": "Nigeria",
+    "location": "Idanre Hills, 340108, Nigeria",
     "interest_id": 1
   }
 ]
