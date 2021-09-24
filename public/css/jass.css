@@ -1730,3 +1730,7 @@ form [type='radio'] {
 .img-about{
   opacity: 80%;
 }
+
+a {
+  color: #77C9D4;
+}
