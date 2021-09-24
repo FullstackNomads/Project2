@@ -54,14 +54,25 @@ const searchEventsFormHandler = async (event) => {
     const city = document.querySelector('#city').value.trim();
     const country = $('#country').val();
 
-    const interests = [];
-    let checkBoxes = document.querySelectorAll(`.interest`)
-    for (let i = 0; i < checkBoxes.length; i++) {
-      if (checkBoxes[i].checked) {
-        interests.push(checkBoxes[i].value)
+    // INTEREST CHECKBOX LOGIC
+    // const interests = [];
+    // let checkBoxes = document.querySelectorAll(`.interest`)
+    // for (let i = 0; i < checkBoxes.length; i++) {
+    //   if (checkBoxes[i].checked) {
+    //     interests.push(checkBoxes[i].value)
+    //   }
+    //   continue;
+    // }
+
+    // INTEREST MULTISELECT LOGIC
+    let interests = []
+    let interestsSelection = document.getElementById(`interests`)
+    for (let option of interestsSelection) {
+      if (option.selected) {
+        interests.push(option.value)
       }
       continue;
-    }
+    };
 
     console.log(city, country);
     console.log(interests);
@@ -86,9 +97,6 @@ const searchEventsFormHandler = async (event) => {
       method: 'GET'
     });
     const results = await response.json();
-    console.log(`\n********RESULTS********\n`)
-    console.log(results)
-    console.log(`LENGTH OF RESULTS IS: ${results.length}`)
 
     var source = $("#events-template").html();
     var template = Handlebars.compile(source);
