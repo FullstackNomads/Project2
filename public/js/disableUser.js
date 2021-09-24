@@ -7,7 +7,7 @@ const disableAccountButtonHandler = async (user) => {
         });
 
         if (response.ok) {
-            document.location.replace('/login');
+            document.location.replace('/reactivateAccount');
         } else {
             alert('Failed to disable user');
         }

@@ -2,6 +2,7 @@ const router = require('express').Router();
 const session = require('express-session');
 const { Event, UserEvent } = require('../../models');
 const withAuth = require('../../utils/auth');
+const { format_date_long } = require(`../../utils/helpers`)
 const { Op } = require(`sequelize`)
 
 
@@ -61,11 +62,14 @@ router.get('/search', async (req, res) => {
       });
       let eventsWithInterest = eventsWithInterestData.map((event) => event.get({ plain: true }));
       if (!eventsWithInterest.length) {
-        res.status(404).json({ message: 'No event found' });
+        console.log(`LINE 64 END REQ`);
+        res.status(404).send();
         return;
       };
 
-      console.log(eventsWithInterest);
+      //FORMAT DATES IN RESULTS
+      eventsWithInterest.forEach((event) => event.date_time = format_date_long(event.date_time));
+
 
       if (parameters.city) {
         console.log(`\n\nCITY INCLUDED\n\n`);
@@ -96,10 +100,12 @@ router.get('/search', async (req, res) => {
       };
 
       if (!eventsWithInterest.length) {
-        res.status(404).json({ message: 'No event found' });
+        console.log(`LINE 100 END REQ`);
+        res.status(404).json();
         return;
       };
 
+      console.log(`LINE 105 END REQ (SUCCESS)`);
       console.log(eventsWithInterest);
       res.json(eventsWithInterest);
       return;
@@ -120,10 +126,14 @@ router.get('/search', async (req, res) => {
     })
       .then(eventsData => {
         if (!eventsData) {
-          res.status(404).json({ message: 'No event found' });
+          console.log(`LINE 126 END REQ`);
+          res.status(404).json();
           return;
         }
+        console.log(`LINE 130 END REQ`);
         const events = eventsData.map((event) => event.get({ plain: true }));
+        // FORMAT DATES
+        events.forEach((event) => event.date_time = format_date_long(event.date_time));
         console.log(events);
         res.json(events);
       })

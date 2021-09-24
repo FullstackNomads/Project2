@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 text-center">
-    <h1 class="display-2"> Meet New People</h1>
+    <h1 class="display-5"> Meet New People</h1>
   </div>
 </div>
 
@@ -35,17 +35,52 @@
               </div>
 
 
+
+              {{!-- <div class="mb-3">
+                <label class="form-label" for="filterInterests">Filter interests</label>
+                <div class="card p-2" id="filterInterests">
+                  <div class="form-check">
+                    <input class="form-check-input interest" type="checkbox" value="1" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault"> Adventure </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input interest" type="checkbox" value="2" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault"> Sports </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input interest" type="checkbox" value="3" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault"> Food </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input interest" type="checkbox" value="4" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault"> Arts and Museums </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input interest" type="checkbox" value="5" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault"> History </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input interest" type="checkbox" value="6" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault"> Nightlife </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input interest" type="checkbox" value="7" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault"> Wellness </label>
+                  </div>
+                </div>
+              </div> --}}
+
+
               <div class="col-12">
                 <label for="autoSizingInput">Interests</label>
-
                 <select class="form-select" id="interests" multiple>
-                  <option value="sports">Sports</option>
-                  <option value="adventure">Adventure</option>
-                  <option value="wellness">Wellness</option>
-                  <option value="nightlife">Nightlife</option>
-                  <option value="artMuseum">Arts and Museums</option>
-                  <option value="food">Food and Drinks</option>
-
+                  <option value="1">Adventure</option>
+                  <option value="2">Sports</option>
+                  <option value="3">Food and Drinks</option>
+                  <option value="4">Arts and Museums</option>
+                  <option value="5">History</option>
+                  <option value="6">Nightlife</option>
+                  <option value="7">Wellness</option>
                 </select>
               </div>
 
@@ -61,7 +96,7 @@
                 </select>
               </div>
 
-              <div class="col-12 my-3">
+              <div class="col-md-12 text-center my-3">
                 <button type="submit" class="btn btn-primary">Search</button>
               </div>
           </form>
@@ -153,20 +188,18 @@
 
   </form>
 
-  <hr>
+
   <br>
   <script id="users-template" type="text/x-handlebars-template">
   <div class="col justify-content-center mx-auto">
     <div class="card  text-center shadow-sm p-4 rounded justify-content-center">
       <div class="center-text border-bottom py-4">
-        <img class="card-img-top border-bottom rounded-circle" style="width: 13rem;" src="https://via.placeholder.com/150
-
-C/O https://placeholder.com/" width="100">
+        <img class="card-img-top border-bottom rounded-circle" style="width: 13rem;" src=\{{profile_picture}} width="100">
       </div>
       <div class="card-body">
           <a href="/user/\{{id}}"><h5 class="card-title">\{{first_name}} \{{last_name}}</h5></a>
           <h6 class="card-subtitle mb-2 text-muted">\{{age}} years old</h6>
-          <h6 class="card-subtitle mb-2 text-muted">\{{gender}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted text-capitalize">\{{gender}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">From \{{city_name}}, \{{country_name}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">\{{interest}}</h6>
           <p class="card-text d-none">\{{bio}}.</p>

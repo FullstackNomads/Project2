@@ -1,39 +1,21 @@
-<h1>{{event_name}}</h1>
 
-<div class="container">
+<div class="container my-5">
   <div class="row">
     <div class="col">
-      <h5>Event created by <a href="/user/{{creator_id}}">{{creatorName}}</a></h5>
-    </div>
-    <div class="col">
-
       <div class="row">
-        <div class="col">
-          Event Name: {{event_name}}
+        <div class="col-md-9">
+            <h2>{{event_name}}</h2>
+        </div>
+        <div class="col-md-3">
+          <button type="button" class="btn btn-primary" id="join-event" data-event_id="{{id}}">Join Event!</button>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          Date: {{date_time}}
-        </div>
+      <h5 class="p-0">Event created by <a href="/user/{{creator_id}}">{{creatorName}}</a></h5>
+      <p class="text-muted m-0"> Date: {{date_time}}</p>
+      <p class="text-muted m-0"> Location: {{location}}</p>
+      <p class="text-muted m-0"> Interest: {{interest}}</p>
+      <p class="text-muted m-0"> Description: {{description}}</p>
       </div>
-      <div class="row">
-        <div class="col">
-          Location:
-          {{location}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          Interest: {{interest_id}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          Description: {{description}}
-        </div>
-      </div>
-      <button type="button" class="btn btn-primary" id="join-event" data-event_id="{{id}}">Join Event!</button>
     </div>
   </div>
 
@@ -51,15 +33,15 @@
     <div class="col justify-content-center mx-auto">
       <div class="card  text-center shadow-sm p-4 rounded justify-content-center">
         <div class="center-text border-bottom py-4">
-          <img class="card-img-top border-bottom rounded-circle" style="width: 13rem;"
-            src="https://i.imgur.com/ZSkeqnd.jpg" width="100">
+          <img class="card-img-top border-bottom rounded-circle" style="width: 13rem;" src="{{profile_picture}}"
+            width="100">
         </div>
         <div class="card-body">
           <a href="/user/{{attendee.id}}">
             <h5 class="card-title">{{attendee.first_name}} {{attendee.last_name}}</h5>
           </a>
           <h6 class="card-subtitle mb-2 text-muted">{{attendee.age}} years old</h6>
-          <h6 class="card-subtitle mb-2 text-muted">{{attendee.gender}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted text-capitalize">{{attendee.gender}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">From {{city_name}}, {{country_name}}</h6>
         </div>
       </div>

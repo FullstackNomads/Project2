@@ -30,7 +30,7 @@ Event.init(
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     point_of_interest: {

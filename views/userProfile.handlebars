@@ -1,9 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 img justify-content-center text-center">
-      <img src="https://via.placeholder.com/150
-
-C/O https://placeholder.com/" alt="" class="img-rounded">
+      <img src={{profile_picture}} alt="profile picture" class="img-fluid rounded-circle">
 
       {{#unless sameUser}}
       <div class="row mt-3">
@@ -25,7 +23,7 @@ C/O https://placeholder.com/" alt="" class="img-rounded">
       {{/if}}
 
     </div>
-    <div class="col-md-6 details">
+    <div class="col-md-6 details mb-3">
       <blockquote>
         <h2>{{first_name}} {{last_name}}</h2>
         <small><cite title="Source Title">From {{city_name}}, {{country_name}} <i
@@ -33,8 +31,9 @@ C/O https://placeholder.com/" alt="" class="img-rounded">
       </blockquote>
       <h6 class="card-subtitle mb-2 ">{{age}} years old</h6>
       <h6 class="card-subtitle mb-2 text-capitalize">{{gender}}</h6>
+      <h6 class="card-subtitle mb-2 ">Interests: {{interests}}</h6>
       <h6 class="card-subtitle mb-2 ">{{interest}}</h6>
-      <p class="card-text">{{bio}}</p>
+      <p class="card-text  my-2">{{bio}}</p>
       <p class="card-text"><small class="text-muted"> This user has created {{#if events}} {{events.length}} {{else}} 0
           {{/if}} events. </small></p>
     </div>
