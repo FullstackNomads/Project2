@@ -14,8 +14,9 @@
       {{#if sameUser}}
       <div class="row mt-3">
         <div class="col-12">
-          <button type="button" class="btn btn-danger" id="disableAccountButton" data-id="{{id}}">Disable
-            Account</button>
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Upload New Photo
+          </button>
         </div>
       </div>
       {{/if}}
@@ -32,6 +33,14 @@
       <h6 class="card-subtitle mb-2 ">Interests: {{interests}}</h6>
       <h6 class="card-subtitle mb-2 ">{{interest}}</h6>
       <p class="card-text  my-2">{{bio}}</p>
+      {{#if sameUser}}
+      <div class="row mt-3">
+        <div class="col-12">
+          <button type="button" class="btn btn-danger" id="disableAccountButton" data-id="{{id}}">Disable
+            Account</button>
+        </div>
+      </div>
+      {{/if}}
       <p class="card-text"><small class="text-muted"> This user has created {{#if events}} {{events.length}} {{else}} 0
           {{/if}} events. </small></p>
     </div>
@@ -69,6 +78,35 @@
   </div>
 </div>
 
+<!-- Button trigger modal -->
+{{!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> --}}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Wandir Photo Upload</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="custom-file my-4">
+            <label class="custom-file-label" for="profile-picture-upload">Click to upload a profile picture:</label>
+            <input type="file" class="custom-file-input mx-2 float-right" id="profile-picture-upload"
+              name="profile-picture-upload">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn btn-danger mx-1" id="profile-picture-submit">Upload Photo!</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {{#if sameUser}}
 <script src="/js/deleteEvent.js"></script>
