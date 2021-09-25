@@ -5,33 +5,27 @@
 </div>
 
 <div class="container my-5">
-  <div class="card shadow-lg">
+  <div class="card shadow-lg pb-2">
     <div class="card-body">
-
       <form class="container" id="search-events">
         <div class="row">
-          <div class="col-lg-12">
+          <div class="col-lg-10 mx-auto mt-4">
             <div class="form-group">
               <label>Location:</label>
               <input type="text" class="form-control" id="search_input" placeholder="Enter a city" />
             </div>
-
-
-            <div class="row">
+            <div class="row mt-2">
               <div class='col-md-6'>
                 <div class="mb-3">
-                  {{!-- <label for="city"> City: </label> --}}
                   <input class="form-control" type="text" id="city" disabled required placeholder="City" />
                 </div>
               </div>
               <div class='col-md-6'>
                 <div class="mb-3">
-                  {{!-- <label for="country"> Country: </label> --}}
                   <input class="form-control" type="text" id="country" disabled required placeholder="Country" />
                 </div>
               </div>
             </div>
-
             <div class="col-12">
               <label for="autoSizingInput">Interests</label>
               <select class="form-select" id="interests" multiple>
@@ -44,49 +38,13 @@
                 <option value="7">Wellness</option>
               </select>
             </div>
-
-            {{!-- <div class="mb-3">
-              <label class="form-label" for="filterInterests">Filter interests</label>
-              <div class="card p-2" id="filterInterests">
-                <div class="form-check">
-                  <input class="form-check-input interest" type="checkbox" value="1" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault"> Adventure </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input interest" type="checkbox" value="2" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault"> Sports </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input interest" type="checkbox" value="3" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault"> Food </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input interest" type="checkbox" value="4" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault"> Arts and Museums </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input interest" type="checkbox" value="5" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault"> History </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input interest" type="checkbox" value="6" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault"> Nightlife </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input interest" type="checkbox" value="7" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault"> Wellness </label>
-                </div>
-              </div>
-            </div> --}}
-
-            <div class="container-fluid text-center pb-4">
+            <div class="container-fluid text-center pb-4 mt-4">
               <button type="submit" class="btn btn-primary m-1 pb-2 col-sm-7 col-lg-3">Search</button>
               <button type="reset" class="btn btn-danger m-1 col-sm-7 col-lg-3">Reset Form</button>
             </div>
+          </div>
       </form>
-
-      <hr>
-
+      <hr class="w-75 mx-auto">
       <div class="container text-center my-5">
         <h4>Cannot find what you are looking for?</h4>
         <a href="/createEvent" class="">Create Your Own Experience!</a>
@@ -94,10 +52,6 @@
     </div>
   </div>
 </div>
-</div>
-</div>
-
-
 
 <script id="events-template" type="text/x-handlebars-template">
  <div class="col event-list" data-id="{{event.id}}">
@@ -111,9 +65,8 @@
           </div>
         </div>
       </div>
-    </div>
+  </div>
 </script>
-
 
 <script id="noevents-template" type="text/x-handlebars-template">
   <div class="container text-center mt-4">

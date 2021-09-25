@@ -40,3 +40,29 @@ const delButtonHandler = async (event) => {
 for (i = 0; i < userCreatedEventCards.length; i++) {
     userCreatedEventCards[i].addEventListener('click', delButtonHandler);
 };
+
+const uploadProfilePhoto = async (event) => {
+    event.preventDefault();
+    console.log(`uploadProfilePhoto FIRED`)
+    const fd = new FormData();
+
+    const profile_picture = document.querySelector(`#profile-picture-upload`).files[0];
+
+    if (profile_picture) {
+        fd.append("profile_picture", profile_picture)
+    } else {
+        return;
+    }
+
+    console.log(fd.getAll("profile_picture"))
+
+    const response = await fetch('/api/users/image', {
+        method: 'POST',
+        body: fd,
+    });
+
+    location.reload();
+
+}
+
+document.querySelector(`#profile-picture-submit`).addEventListener(`click`, uploadProfilePhoto);

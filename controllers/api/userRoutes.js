@@ -71,6 +71,31 @@ router.post('/', async (req, res) => {
 });
 
 
+router.post('/image', withAuth, async (req, res) => {
+  console.log(`POST USER "/image" ROUTE SLAPPED`);
+  console.log(req.file);
+
+  const result = await uploadFile(req.file);
+  console.log(result);
+  console.log(result.Location);
+  const newProfilePhoto = result.Location;
+
+
+  await User.update(
+    {
+      profile_picture: newProfilePhoto
+    },
+    {
+      where: {
+        id: req.session.user_id
+      },
+    });
+
+  res.redirect('/user');
+
+
+})
+
 
 router.get('/search', withAuth, async (req, res) => {
   console.log(`GET USER "/search" ROUTE SLAPPED`);

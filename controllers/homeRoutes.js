@@ -16,9 +16,7 @@ router.get('/', async (req, res) => {
   console.log(`HOMEPAGE "/" ROUTE SLAPPED`)
   console.log(req.session.logged_in)
   if (req.session.logged_in) {
-    res.render('userDashboard', {
-      logged_in: req.session.logged_in
-    });
+    res.redirect('/userDashboard');
   } else {
     res.render('homepage', {
       logged_in: req.session.logged_in
@@ -179,8 +177,35 @@ router.get('/userDashboard', async (req, res) => {
     return;
   }
 
+  const userEventData = await UserEvent.findAll({
+    where: {
+      user_id: req.session.user_id
+    }
+  });
+
+  console.log(userEventData);
+  if (!userEventData.length) {
+    res.render('userDashboard', {
+      logged_in: req.session.logged_in,
+    })
+    return;
+  }
+  let userevents = userEventData.map((uevent) => uevent.get({ plain: true }));
+
+  // For each event that the user has joined, find the event information and add it to userevents variable 
+  for (let i = 0; i < userevents.length; i++) {
+    let item = userevents[i];
+    let event_id = item.event_id;
+    const e_details = await Event.findByPk(event_id); // find it by the event id
+    item["event_name"] = e_details.event_name;
+    item["city"] = e_details.city;
+    item["id"] = event_id;
+    item["country"] = e_details.country;
+  }
+
   res.render('userDashboard', {
-    logged_in: req.session.logged_in
+    logged_in: req.session.logged_in,
+    userevents: userevents // pass the information to handlebar
   });
 });
 
@@ -476,10 +501,10 @@ router.get('/reactivateAccount', async (req, res) => {
 
     const user = userData.get({ plain: true });
 
-  res.render('reactivateAccount', {
-    ...user,
-    logged_in: req.session.logged_in
-  });
+    res.render('reactivateAccount', {
+      ...user,
+      logged_in: req.session.logged_in
+    });
   } catch (err) {
     res.status(500).json(err);
   }
