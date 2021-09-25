@@ -5,6 +5,15 @@
 ## Description
 An app for solo travelers embarking on a trip that helps them connect and meet with other people around the world.
 
+Technologies used:
+- Node.js and Express.js to create a RESTful API
+- Handlebars.js as the template engine
+- MySQL and Sequelize ORM for the database
+- Bcrypt to hash user passwords
+- Dotenv to store and load environment variables
+- AWS SDK and Multer allowing users to upload and update their profile pictures
+- Google Maps Location API to autocomplete location entries
+
 ## Table of Contents
 * [Usage](#usage)
 * [Deployment](#deployment)
