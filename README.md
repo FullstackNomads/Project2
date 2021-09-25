@@ -14,6 +14,8 @@ Technologies used:
 - AWS SDK and Multer allowing users to upload and update their profile pictures
 - Google Maps Location API to autocomplete location entries
 
+![image](https://user-images.githubusercontent.com/80494962/134754378-1ec30c5c-78b8-4279-817e-00fd55b6b3cd.png)
+
 ## Table of Contents
 * [Usage](#usage)
 * [Deployment](#deployment)
