@@ -91,7 +91,7 @@ router.post('/image', withAuth, async (req, res) => {
       },
     });
 
-  res.redirect(req.get('referer'));
+  res.redirect('/user');
 
 
 })
