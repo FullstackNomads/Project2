@@ -9,14 +9,14 @@
   <div class="card shadow-lg">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-10 mx-auto">
+        <div class="col-md-10 mx-auto mt-4">
           <form class="row gy-2 mb-4 gx-3 align-items-center" id="search-profile">
             <div class="col-lg-12">
               <div class="form-group">
                 <label>Location:</label>
                 <input type="text" class="form-control" id="search_input" placeholder="Enter a city" />
               </div>
-              <div class="row">
+              <div class="row mt-2">
                 <div class='col-md-6'>
                   <div class="mb-3">
                     <input class="form-control" type="text" id="city" disabled required placeholder="City" />
@@ -40,7 +40,7 @@
                   <option value="7">Wellness</option>
                 </select>
               </div>
-              <div class="col-12">
+              <div class="col-12 mt-2">
                 <label for="autoSizingInput">Gender</label>
                 <select class="form-select" id="gender">
                   <option disabled selected value> Select an option</option>
@@ -66,7 +66,7 @@
   <div class="col justify-content-center mx-auto">
     <div class="card  text-center shadow-sm p-4 rounded justify-content-center">
       <div class="center-text border-bottom py-4">
-        <img class="card-img-top border-bottom rounded-circle" src=\{{profile_picture}} width="100%" id="profile-picture">
+        <img class="card-img-top border-bottom rounded-circle img-fluid" src=\{{profile_picture}} width="100%" id="profile-picture">
       </div>
       <div class="card-body">
           <a href="/user/\{{id}}"><h5 class="card-title">\{{first_name}} \{{last_name}}</h5></a>

@@ -14,7 +14,7 @@
 
 {{#if userevents }}
 <div class="row row-cols-md-1 g-3 mb-4" id="results">
-  <h3 class="display-6 mt-3">Events that you have joined </h1>
+  <h3 class="display-6 mt-2">Events that you have joined </h1>
   {{#each userevents as |event|}}
    <p class="mb-2 mt-1">╰┈➤ <a href="/events/{{event.id}}">{{event.event_name}}</a> in {{event.city}}, {{event.country}}</p>
   {{/each}}
