@@ -154,6 +154,11 @@ router.delete('/:id', withAuth, async (req, res) => {
     return res.status(405).json({ message: 'You may only delete events that you have created.' })
   }
   try {
+    await UserEvent.destroy({
+      where: {
+        event_id: req.params.id,
+      }
+    })
     const eventData = await Event.destroy({
       where: {
         id: req.params.id,
@@ -164,6 +169,7 @@ router.delete('/:id', withAuth, async (req, res) => {
       res.status(404).json({ message: 'No event found with this id!' });
       return;
     }
+
 
     res.status(200).json(eventData);
   } catch (err) {
