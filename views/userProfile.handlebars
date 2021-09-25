@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="css/profilePictures.css">
+<link rel="stylesheet" href="../css/profilePictures.css">
 <div class="container">
   <div class="row">
     <div class="offset-md-2 col-md-3 img justify-content-center text-center">
@@ -7,14 +8,14 @@
       {{#unless sameUser}}
       <div class="row mt-3">
         <div class="col-12">
-          <a href="/messages/{{id}}" class="btn btn-primary">Message</a>
+          <a href="/messages/{{id}}" class="btn btn-primary mb-2">Message</a>
         </div>
       </div>
       {{/unless}}
       {{#if sameUser}}
       <div class="row mt-3">
         <div class="col-12">
-          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Upload New Photo
           </button>
         </div>
