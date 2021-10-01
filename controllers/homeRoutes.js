@@ -148,7 +148,8 @@ router.get('/events/:id', async (req, res) => {
       logged_in: req.session.logged_in,
       creatorName: `${creatorData.first_name} ${creatorData.last_name}`,
       attendees: attendeeProfileObjects,
-      interest: interest
+      interest: interest,
+      is_active: req.session.is_active
     });
     console.log('Single event successfully loaded')
   } catch (err) {
